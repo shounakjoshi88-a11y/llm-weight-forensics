@@ -26,6 +26,7 @@ from pathlib import Path
 import torch
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse, StreamingResponse
+from fastapi.staticfiles import StaticFiles
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -123,7 +124,7 @@ def stream(prompt: str, max_tokens: int):
         # Paced so the read is watchable rather than a single blur.
         for p, tid in enumerate(toks):
             yield sse(payload("read", p, _tok.decode([tid]), tid, p, p))
-            time.sleep(0.07)
+            time.sleep(0.13)
 
         # phase 2: generation, one token at a time
         nxt = int(out.logits[0, -1].argmax())
@@ -167,6 +168,12 @@ def stream_ep(prompt: str = "The capital of France is", max_tokens: int = 40):
 def index():
     return (Path(__file__).parent / "static" / "index.html").read_text(
         encoding="utf-8")
+
+
+# vendored three.js, OrbitControls and GSAP, served locally so the page works
+# with no network access
+app.mount("/assets", StaticFiles(directory=Path(__file__).parent / "static"),
+          name="assets")
 
 
 def main():

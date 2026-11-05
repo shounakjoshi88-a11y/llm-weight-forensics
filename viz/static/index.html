@@ -32,13 +32,14 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    -webkit-font-smoothing: antialiased;
   }
 
   header {
     display: flex;
     align-items: center;
-    gap: 14px;
-    padding: 16px 22px 14px;
+    gap: 13px;
+    padding: 15px 22px 13px;
     border-bottom: 1px solid var(--line);
     background: var(--paper-2);
   }
@@ -62,26 +63,24 @@
     padding-top: 3px;
   }
   header .grow { flex: 1; }
-  .status {
-    display: flex; align-items: center; gap: 7px;
-    color: var(--muted); font-size: 12px;
-  }
+  .status { display: flex; align-items: center; gap: 7px; color: var(--muted); font-size: 12px; }
   .dot {
     width: 7px; height: 7px; border-radius: 50%;
     background: var(--clay);
     box-shadow: 0 0 0 3px rgba(217,119,87,.16);
   }
   .dot.off { background: #C4BEAE; box-shadow: 0 0 0 3px rgba(0,0,0,.04); }
+  .dot.busy { animation: breathe 1.4s ease-in-out infinite; }
+  @keyframes breathe { 0%,100% { opacity: 1; } 50% { opacity: .35; } }
 
   .controls {
     display: flex; align-items: center; gap: 10px;
-    padding: 12px 22px;
+    padding: 11px 22px;
     border-bottom: 1px solid var(--line);
     background: var(--paper-2);
   }
   input[type=text] {
-    flex: 1;
-    min-width: 120px;
+    flex: 1; min-width: 120px;
     background: #fff;
     border: 1px solid var(--line);
     color: var(--ink);
@@ -92,117 +91,115 @@
     outline: none;
     transition: border-color .15s, box-shadow .15s;
   }
-  input[type=text]:focus {
-    border-color: #C9A88F;
-    box-shadow: 0 0 0 3px rgba(217,119,87,.12);
-  }
+  input[type=text]:focus { border-color: #C9A88F; box-shadow: 0 0 0 3px rgba(217,119,87,.12); }
   button {
-    font-family: var(--sans);
-    font-size: 13px;
-    border-radius: 9px;
-    padding: 10px 16px;
+    font-family: var(--sans); font-size: 13px;
+    border-radius: 9px; padding: 10px 16px;
     cursor: pointer;
     border: 1px solid var(--line);
-    background: #fff;
-    color: var(--ink);
+    background: #fff; color: var(--ink);
     transition: background .15s, border-color .15s, opacity .15s;
   }
   button:hover { background: var(--paper-3); }
   button:disabled { opacity: .4; cursor: default; }
-  button.primary {
-    background: var(--clay);
-    border-color: var(--clay);
-    color: #fff;
-    font-weight: 500;
-  }
+  button.primary { background: var(--clay); border-color: var(--clay); color: #fff; font-weight: 500; }
   button.primary:hover { background: var(--clay-deep); border-color: var(--clay-deep); }
   button.ghost { color: var(--muted); }
   .toggle {
     display: flex; align-items: center; gap: 7px;
     color: var(--ink-soft); font-size: 12.5px;
-    padding: 0 4px; user-select: none; cursor: pointer;
+    padding: 0 2px; user-select: none; cursor: pointer; white-space: nowrap;
   }
   .toggle input { accent-color: var(--clay); width: 14px; height: 14px; }
 
   main {
-    flex: 1;
-    min-height: 0;
+    flex: 1; min-height: 0;
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 320px;
+    grid-template-columns: minmax(0, 1fr) 326px;
     gap: 16px;
     padding: 16px 22px 20px;
   }
 
   .stage {
-    position: relative;
-    min-width: 0;
-    min-height: 0;
+    position: relative; min-width: 0; min-height: 0;
     border: 1px solid var(--line);
     border-radius: 14px;
-    background: var(--paper);
     overflow: hidden;
-    box-shadow: 0 1px 0 rgba(255,255,255,.7) inset;
+    background: radial-gradient(120% 90% at 50% 40%, #FBF9F2 0%, #F2EEE3 62%, #EBE6D8 100%);
+    box-shadow: 0 1px 0 rgba(255,255,255,.75) inset;
+    cursor: grab;
   }
-  #net { position: absolute; inset: 0; display: block; }
+  .stage:active { cursor: grabbing; }
+  .stage canvas { display: block; position: absolute; inset: 0; z-index: 0; }
 
-  .legend {
-    display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px;
-    color: var(--muted);
-    font-size: 11px;
-    background: var(--paper-3);
-    border: 1px solid var(--line-soft);
-    border-radius: 9px;
-    padding: 9px 11px;
-    margin-bottom: 13px;
+  .labels { position: absolute; inset: 0; pointer-events: none; overflow: hidden; z-index: 2; }
+  .lay {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .04em;
+    color: rgba(70,64,54,.42);
+    white-space: nowrap;
+    transition: color .2s;
   }
-  .legend .key { display: flex; align-items: center; gap: 6px; }
-  .sw { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
-  .sw.pos { background: var(--clay); box-shadow: 0 0 6px rgba(217,119,87,.8); }
-  .sw.neg { background: var(--blue); box-shadow: 0 0 6px rgba(92,124,138,.7); }
+  .lay.on { color: var(--clay-deep); font-weight: 600; }
+
+  .hint {
+    position: absolute; left: 15px; bottom: 13px;
+    font-size: 11px; color: var(--muted);
+    background: rgba(251,249,243,.78);
+    border: 1px solid var(--line-soft);
+    border-radius: 8px;
+    padding: 6px 10px;
+    backdrop-filter: blur(6px);
+    pointer-events: none;
+    z-index: 3;
+  }
+  .phase-chip {
+    position: absolute; left: 15px; top: 13px;
+    display: flex; align-items: center; gap: 7px;
+    font-size: 11px; color: var(--ink-soft);
+    background: rgba(251,249,243,.78);
+    border: 1px solid var(--line-soft);
+    border-radius: 999px;
+    padding: 6px 12px;
+    backdrop-filter: blur(6px);
+    pointer-events: none;
+    z-index: 3;
+  }
+  .phase-chip i { width: 6px; height: 6px; border-radius: 50%; background: #C4BEAE; }
+  .phase-chip.read i { background: var(--blue); }
+  .phase-chip.write i { background: var(--clay); }
 
   .panel {
-    min-height: 0;
-    overflow: auto;
+    min-height: 0; overflow: auto;
     border: 1px solid var(--line);
     border-radius: 14px;
     background: var(--paper-2);
     padding: 16px 16px 14px;
   }
   .label {
-    font-size: 10.5px;
-    letter-spacing: .09em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 6px;
+    font-size: 10.5px; letter-spacing: .09em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 6px;
   }
   .token {
-    font-family: var(--mono);
-    font-size: 22px;
-    color: var(--clay-deep);
-    min-height: 30px;
-    word-break: break-all;
-    line-height: 1.25;
+    font-family: var(--mono); font-size: 21px; color: var(--clay-deep);
+    min-height: 29px; word-break: break-all; line-height: 1.25;
   }
   .meta {
     display: flex; justify-content: space-between;
     color: var(--muted); font-family: var(--mono); font-size: 11.5px;
     margin-top: 4px;
   }
-  .hr { height: 1px; background: var(--line-soft); margin: 15px 0; }
-  .big {
-    font-family: var(--mono);
-    font-size: 17px;
-    color: var(--ink);
-  }
+  .hr { height: 1px; background: var(--line-soft); margin: 14px 0; }
+  .big { font-family: var(--mono); font-size: 17px; color: var(--ink); }
   .big small { color: var(--muted); font-size: 11.5px; margin-left: 6px; }
-  .nlist { margin-top: 9px; display: flex; flex-direction: column; gap: 2px; }
+  .nlist { margin-top: 9px; display: flex; flex-direction: column; gap: 3px; }
   .nrow {
-    display: grid;
-    grid-template-columns: 62px 1fr 52px;
-    align-items: center;
-    gap: 8px;
-    font-family: var(--mono);
-    font-size: 11.5px;
+    display: grid; grid-template-columns: 58px 1fr 50px;
+    align-items: center; gap: 8px;
+    font-family: var(--mono); font-size: 11.5px;
   }
   .nrow .id { color: var(--ink-soft); }
   .nrow .bar { height: 5px; border-radius: 3px; background: var(--paper-3); overflow: hidden; }
@@ -210,21 +207,42 @@
   .nrow.neg .bar i { background: var(--blue); }
   .nrow .val { text-align: right; color: var(--muted); }
   #out {
-    font-family: var(--mono);
-    font-size: 11.5px;
-    line-height: 1.55;
-    color: var(--ink-soft);
-    white-space: pre-wrap;
-    word-break: break-word;
-    max-height: 140px;
-    overflow: auto;
+    font-family: var(--mono); font-size: 11.5px; line-height: 1.55;
+    color: var(--ink-soft); white-space: pre-wrap; word-break: break-word;
+    max-height: 132px; overflow: auto;
   }
-  .note {
-    color: var(--muted);
-    font-size: 11px;
-    line-height: 1.5;
-    margin: 0;
+  .legend {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 9px 14px;
+    color: var(--muted); font-size: 11px;
+    background: var(--paper-3);
+    border: 1px solid var(--line-soft);
+    border-radius: 9px;
+    padding: 9px 11px;
+    margin-bottom: 12px;
   }
+  .legend .key { display: flex; align-items: center; gap: 6px; }
+  .sw { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+  .sw.pos { background: var(--clay); box-shadow: 0 0 6px rgba(217,119,87,.75); }
+  .sw.neg { background: var(--blue); box-shadow: 0 0 6px rgba(92,124,138,.65); }
+  .note { color: var(--muted); font-size: 11px; line-height: 1.55; margin: 0; }
+
+  .boot {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 10px;
+    color: var(--muted); font-size: 12.5px;
+    background: var(--paper);
+    transition: opacity .5s;
+    z-index: 5;
+  }
+  .boot.gone { opacity: 0; pointer-events: none; }
+  .boot .ring {
+    width: 26px; height: 26px; border-radius: 50%;
+    border: 2px solid var(--line);
+    border-top-color: var(--clay);
+    animation: spin 1s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
 
   @media (max-width: 900px) {
     main { grid-template-columns: 1fr; grid-template-rows: minmax(0,1fr) auto; }
@@ -251,8 +269,14 @@
 </div>
 
 <main>
-  <section class="stage">
-    <canvas id="net"></canvas>
+  <section class="stage" id="stage">
+    <div class="labels" id="labels"></div>
+    <div class="phase-chip" id="chip"><i></i><span id="chipText">idle</span></div>
+    <div class="hint">drag to orbit &middot; scroll to zoom &middot; 24 layers</div>
+    <div class="boot" id="boot">
+      <div class="ring"></div>
+      <span id="bootText">loading network</span>
+    </div>
   </section>
 
   <aside class="panel">
@@ -277,527 +301,709 @@
       <span class="key"><i class="sw pos"></i>positive</span>
       <span class="key"><i class="sw neg"></i>negative</span>
       <span class="key">glow = activation</span>
-      <span class="key">columns = layers</span>
+      <span class="key">rings = layers</span>
     </div>
 
     <p class="note">
-      48 of 4,864 MLP neurons per layer, picked by how strongly each one writes
-      to the residual stream. Every value here is a real activation from the
+      48 of 4,864 MLP neurons per layer, picked once by how strongly each one
+      writes into the residual stream. Every value is a real activation from the
       forward pass, streamed as the model reads the prompt and then writes.
     </p>
   </aside>
 </main>
 
-<script>
-(() => {
-  "use strict";
+<script type="importmap">
+{ "imports": { "three": "/assets/vendor/three.module.js" } }
+</script>
+<script src="/assets/vendor/gsap.min.js"></script>
+<script type="module">
+import * as THREE from "three";
+import { OrbitControls } from "/assets/vendor/OrbitControls.js";
 
-  const cv = document.getElementById("net");
-  const ctx = cv.getContext("2d");
+const CLAY = 0xD97757;
+const BLUE = 0x5C7C8A;
+const RING = 0xC9BFA6;
 
-  let L = 24, K = 48;
-  let meta = null;
-  let target = [], disp = [], sgn = [];
-  let lscale = new Float32Array(24), lweight = new Float32Array(24);
-  let gmax = 0;
-  let last = null;
-  let source = null;
-  let outText = "";
+const R = 5.0;          // ring radius
+const SPACING = 1.35;   // distance between layers along z
+const TWIST = 0.085;    // radians per layer
 
-  let W = 0, H = 0, DPR = 1;
-  let worldW = 1, worldH = 1, fit = 1;
+let L = 24, K = 48;
+let meta = null;
+let disp = new Float32Array(L * K);
+let target = new Float32Array(L * K);
+let lscale = new Float32Array(L);
+let gmax = 1;
+let outText = "";
+let source = null;
+let lastMsg = null;
+let hotLayer = -1;
+let focusLayer = -1;
+let lastFly = 0;
 
-  const PADX = 66, PADY = 60, COL = 56, ROW = 17.4, BOTTOM = 60;
+// ------------------------------------------------------------------ scene
 
-  let cam = { x: 0, y: 0, z: 1 };
-  let camT = { x: 0, y: 0, z: 1 };
-  let autoFocus = true;
-  let hotLayer = -1;
-  let dragging = false;
-  let dragMoved = false;
+const stage = document.getElementById("stage");
+const scene = new THREE.Scene();
 
-  const pulses = [];
-  let glowPos = null, glowNeg = null;
+const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 500);
+const HOME = new THREE.Vector3(40, 15, 16);
+camera.position.copy(HOME);
 
-  // ---------------------------------------------------------------- layout
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+renderer.setClearAlpha(0);
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+stage.appendChild(renderer.domElement);
 
-  function layout() {
-    worldW = PADX * 2 + (L - 1) * COL;
-    worldH = PADY * 2 + (K - 1) * ROW + BOTTOM;
-  }
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.075;
+controls.rotateSpeed = 0.62;
+controls.zoomSpeed = 0.85;
+controls.minDistance = 11;
+controls.maxDistance = 95;
+controls.autoRotate = true;
+controls.autoRotateSpeed = 0.12;
 
-  function nodePos(li, j) {
-    return {
-      x: PADX + li * COL,
-      y: PADY + j * ROW + Math.sin(li * 1.31 + j * 0.71) * 2.0,
-    };
-  }
+let baseDist = camera.position.length();
 
-  function makeGlow(r, g, b) {
-    const c = document.createElement("canvas");
-    c.width = c.height = 96;
-    const x = c.getContext("2d");
-    const grd = x.createRadialGradient(48, 48, 0, 48, 48, 48);
-    grd.addColorStop(0.00, `rgba(${r},${g},${b},0.95)`);
-    grd.addColorStop(0.30, `rgba(${r},${g},${b},0.42)`);
-    grd.addColorStop(0.65, `rgba(${r},${g},${b},0.10)`);
-    grd.addColorStop(1.00, `rgba(${r},${g},${b},0)`);
-    x.fillStyle = grd;
-    x.fillRect(0, 0, 96, 96);
-    return c;
-  }
+// ------------------------------------------------------------------ layout
 
-  // ---------------------------------------------------------------- resize
+function layerZ(li) {
+  return (li - (L - 1) / 2) * SPACING;
+}
 
-  function resize() {
-    const r = cv.parentElement.getBoundingClientRect();
-    DPR = Math.min(window.devicePixelRatio || 1, 2);
-    W = Math.max(320, Math.round(r.width));
-    H = Math.max(260, Math.round(r.height));
-    cv.width = Math.round(W * DPR);
-    cv.height = Math.round(H * DPR);
-    cv.style.width = W + "px";
-    cv.style.height = H + "px";
-    layout();
-    fit = Math.min(W / worldW, H / worldH) * 0.96;
-    if (cam.z < fit) cam.z = fit;
-    if (camT.z < fit) camT.z = fit;
-    if (!last) {
-      cam.x = camT.x = worldW / 2;
-      cam.y = camT.y = worldH / 2;
-      cam.z = camT.z = fit;
+function nodePos(li, j, out) {
+  const a = (j / K) * Math.PI * 2 + li * TWIST;
+  const r = R * (1 + 0.045 * Math.sin(li * 1.7 + j * 2.3));
+  out.set(Math.cos(a) * r, Math.sin(a) * r, layerZ(li));
+  return out;
+}
+
+// ------------------------------------------------------------------ points
+
+const pointsGeo = new THREE.BufferGeometry();
+let posAttr, intAttr, signAttr;
+let pointMat = null;
+let points = null;
+
+function buildPoints() {
+  const n = L * K;
+  const pos = new Float32Array(n * 3);
+  const inten = new Float32Array(n);
+  const sgn = new Float32Array(n);
+  const v = new THREE.Vector3();
+  for (let li = 0; li < L; li++) {
+    for (let j = 0; j < K; j++) {
+      const i = li * K + j;
+      nodePos(li, j, v);
+      pos[i * 3] = v.x; pos[i * 3 + 1] = v.y; pos[i * 3 + 2] = v.z;
+      sgn[i] = 1;
     }
   }
+  posAttr = new THREE.BufferAttribute(pos, 3);
+  intAttr = new THREE.BufferAttribute(inten, 1);
+  signAttr = new THREE.BufferAttribute(sgn, 1);
+  pointsGeo.setAttribute("position", posAttr);
+  pointsGeo.setAttribute("aIntensity", intAttr);
+  pointsGeo.setAttribute("aSign", signAttr);
 
-  // ---------------------------------------------------------------- camera
+  pointMat = new THREE.ShaderMaterial({
+    uniforms: {
+      uSize: { value: 1.3 },
+      uPixelRatio: { value: Math.min(window.devicePixelRatio || 1, 2) },
+      uPos: { value: new THREE.Color(CLAY) },
+      uNeg: { value: new THREE.Color(BLUE) }
+    },
+    vertexShader: `
+      attribute float aIntensity;
+      attribute float aSign;
+      uniform float uSize;
+      uniform float uPixelRatio;
+      varying float vIntensity;
+      varying float vSign;
+      varying float vDepth;
 
-  function updateCameraTarget() {
-    if (!autoFocus || dragging) return;
+      void main() {
+        vec4 mv = modelViewMatrix * vec4(position, 1.0);
+        vDepth = -mv.z;
+        vIntensity = aIntensity;
+        vSign = aSign;
+        float grow = 1.0 + 2.6 * aIntensity;
+        gl_PointSize = uSize * uPixelRatio * grow * (270.0 / max(1.0, -mv.z));
+        gl_PointSize = clamp(gl_PointSize, 1.5, 74.0);
+        gl_Position = projectionMatrix * mv;
+      }
+    `,
+    fragmentShader: `
+      uniform vec3 uPos;
+      uniform vec3 uNeg;
+      varying float vIntensity;
+      varying float vSign;
+      varying float vDepth;
 
-    let total = 0, sw = 0, sx = 0, sy = 0, topSum = 0;
-    const items = [];
-    for (let li = 0; li < L; li++) {
-      for (let j = 0; j < K; j++) {
-        const w = target[li][j];
-        const w2 = w * w;
-        total += w2;
-        if (w > 0.10) items.push([w2, li, j]);
+      void main() {
+        vec2 q = gl_PointCoord - vec2(0.5);
+        float d = length(q) * 2.0;
+        if (d > 1.0) discard;
+
+        float halo = pow(max(0.0, 1.0 - d), 3.0);
+        float disc = smoothstep(0.58, 0.28, d);
+
+        vec3 idle = vec3(0.26, 0.23, 0.19);
+        vec3 live = vSign < 0.0 ? uNeg : uPos;
+        vec3 base = mix(idle, live, smoothstep(0.04, 0.55, vIntensity));
+        vec3 col = mix(base, vec3(1.0, 0.97, 0.92), disc * 0.45 * vIntensity);
+
+        float fade = clamp(1.0 - (vDepth - 24.0) / 82.0, 0.30, 1.0);
+        float a = (disc * 0.86 + halo * 0.34) * (0.52 + 0.48 * vIntensity) * fade;
+        if (a < 0.004) discard;
+
+        gl_FragColor = vec4(col, a);
+        #include <colorspace_fragment>
+      }
+    `,
+    transparent: true,
+    depthWrite: false,
+    depthTest: true
+  });
+
+  points = new THREE.Points(pointsGeo, pointMat);
+  points.renderOrder = 2;
+  scene.add(points);
+}
+
+// ------------------------------------------------------------------ rings
+
+let ringGroup = null;
+
+function buildRings() {
+  ringGroup = new THREE.Group();
+  const mat = new THREE.LineBasicMaterial({
+    color: RING, transparent: true, opacity: 0.18, depthWrite: false
+  });
+  const v = new THREE.Vector3();
+  for (let li = 0; li < L; li++) {
+    const pts = [];
+    for (let j = 0; j < K; j++) {
+      pts.push(nodePos(li, j, v).clone());
+    }
+    const g = new THREE.BufferGeometry().setFromPoints(pts);
+    const loop = new THREE.LineLoop(g, mat);
+    loop.renderOrder = 0;
+    ringGroup.add(loop);
+  }
+
+  // faint spine under the tube, gives the eye a straight reference
+  const spineMat = new THREE.LineBasicMaterial({
+    color: 0xD6CCB4, transparent: true, opacity: 0.55, depthWrite: false
+  });
+  const a = new THREE.Vector3(0, -R - 1.05, layerZ(0));
+  const b = new THREE.Vector3(0, -R - 1.05, layerZ(L - 1));
+  ringGroup.add(new THREE.Line(
+    new THREE.BufferGeometry().setFromPoints([a, b]), spineMat));
+
+  scene.add(ringGroup);
+}
+
+// ------------------------------------------------------------------ edges
+
+const TOPK = 4;
+let edgeGeo, edgePos, edgeAlpha, edgeSeg;
+
+function buildEdges() {
+  const maxEdges = (L - 1) * TOPK * TOPK;
+  edgePos = new Float32Array(maxEdges * 2 * 3);
+  edgeAlpha = new Float32Array(maxEdges * 2);
+  edgeGeo = new THREE.BufferGeometry();
+  edgeGeo.setAttribute("position", new THREE.BufferAttribute(edgePos, 3));
+  edgeGeo.setAttribute("aAlpha", new THREE.BufferAttribute(edgeAlpha, 1));
+  edgeGeo.setDrawRange(0, 0);
+
+  const mat = new THREE.ShaderMaterial({
+    uniforms: { uColor: { value: new THREE.Color(0x9A7A5F) } },
+    vertexShader: `
+      attribute float aAlpha;
+      varying float vA;
+      void main() {
+        vA = aAlpha;
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+      }
+    `,
+    fragmentShader: `
+      uniform vec3 uColor;
+      varying float vA;
+      void main() {
+        if (vA < 0.006) discard;
+        gl_FragColor = vec4(uColor, vA);
+        #include <colorspace_fragment>
+      }
+    `,
+    transparent: true,
+    depthWrite: false
+  });
+
+  edgeSeg = new THREE.LineSegments(edgeGeo, mat);
+  edgeSeg.renderOrder = 1;
+  edgeSeg.frustumCulled = false;
+  scene.add(edgeSeg);
+}
+
+const tmpA = new THREE.Vector3(), tmpB = new THREE.Vector3();
+
+function topIndices(li, n) {
+  const base = li * K;
+  const arr = [];
+  for (let j = 0; j < K; j++) arr.push([disp[base + j], j]);
+  arr.sort((a, b) => b[0] - a[0]);
+  return arr.slice(0, n).filter(a => a[0] > 0.24).map(a => a[1]);
+}
+
+function updateEdges() {
+  let v = 0;
+  for (let li = 0; li < L - 1; li++) {
+    const a = topIndices(li, TOPK);
+    const b = topIndices(li + 1, TOPK);
+    if (!a.length || !b.length) continue;
+    for (const i of a) {
+      nodePos(li, i, tmpA);
+      const va = disp[li * K + i];
+      for (const j of b) {
+        const vb = disp[(li + 1) * K + j];
+        const w = Math.min(va, vb);
+        if (w < 0.24) continue;
+        nodePos(li + 1, j, tmpB);
+        edgePos[v * 3] = tmpA.x; edgePos[v * 3 + 1] = tmpA.y; edgePos[v * 3 + 2] = tmpA.z;
+        edgeAlpha[v] = w * 0.52;
+        v++;
+        edgePos[v * 3] = tmpB.x; edgePos[v * 3 + 1] = tmpB.y; edgePos[v * 3 + 2] = tmpB.z;
+        edgeAlpha[v] = w * 0.52;
+        v++;
       }
     }
-    if (!items.length || total <= 1e-9) {
-      camT.x = worldW / 2;
-      camT.y = worldH / 2;
-      camT.z = fit;
-      return;
+  }
+  edgeGeo.setDrawRange(0, v);
+  edgeGeo.attributes.position.needsUpdate = true;
+  edgeGeo.attributes.aAlpha.needsUpdate = true;
+}
+
+// ------------------------------------------------------------------ pulses
+
+const PULSE_POOL = 44;
+const pulsePool = [];
+let pulseTex = null;
+
+function ringTexture() {
+  const s = 128;
+  const c = document.createElement("canvas");
+  c.width = c.height = s;
+  const x = c.getContext("2d");
+  const g = x.createRadialGradient(s / 2, s / 2, s * 0.24, s / 2, s / 2, s * 0.5);
+  g.addColorStop(0.00, "rgba(255,255,255,0)");
+  g.addColorStop(0.52, "rgba(255,255,255,0.75)");
+  g.addColorStop(0.72, "rgba(255,255,255,0.30)");
+  g.addColorStop(1.00, "rgba(255,255,255,0)");
+  x.fillStyle = g;
+  x.beginPath();
+  x.arc(s / 2, s / 2, s / 2, 0, Math.PI * 2);
+  x.fill();
+  const t = new THREE.CanvasTexture(c);
+  t.colorSpace = THREE.SRGBColorSpace;
+  return t;
+}
+
+function buildPulses() {
+  pulseTex = ringTexture();
+  const geo = new THREE.PlaneGeometry(1, 1);
+  for (let i = 0; i < PULSE_POOL; i++) {
+    const mat = new THREE.SpriteMaterial({
+      map: pulseTex, transparent: true, opacity: 0, depthWrite: false,
+      depthTest: true, color: CLAY
+    });
+    const sp = new THREE.Sprite(mat);
+    sp.scale.set(0.01, 0.01, 1);
+    sp.visible = false;
+    sp.renderOrder = 3;
+    scene.add(sp);
+    pulsePool.push({ sp, busy: false, tw: null });
+  }
+}
+
+const pulseV = new THREE.Vector3();
+
+function firePulse(li, j, strength) {
+  const slot = pulsePool.find(p => !p.busy);
+  if (!slot) return;
+  slot.busy = true;
+  nodePos(li, j, pulseV);
+  slot.sp.position.copy(pulseV);
+  slot.sp.material.color.setHex(strength < 0 ? BLUE : CLAY);
+  slot.sp.visible = true;
+  slot.sp.material.opacity = 0.75;
+  const s0 = 0.5, s1 = 1.15 + 0.75 * Math.abs(strength);
+  slot.sp.scale.set(s0, s0, 1);
+  slot.tw = gsap.to(slot.sp.scale, {
+    x: s1, y: s1, duration: 0.75, ease: "power2.out"
+  });
+  gsap.to(slot.sp.material, {
+    opacity: 0, duration: 0.75, ease: "power1.out",
+    onComplete: () => { slot.sp.visible = false; slot.busy = false; }
+  });
+}
+
+function clearPulses() {
+  for (const p of pulsePool) {
+    if (p.tw) p.tw.kill();
+    gsap.killTweensOf(p.sp.material);
+    p.sp.visible = false;
+    p.busy = false;
+  }
+}
+
+// ------------------------------------------------------------------ labels
+
+const labelEls = [];
+
+function buildLabels() {
+  const host = document.getElementById("labels");
+  host.innerHTML = "";
+  labelEls.length = 0;
+  for (let li = 0; li < L; li++) {
+    const el = document.createElement("div");
+    el.className = "lay";
+    el.textContent = String(li);
+    if (li % 2 !== 0) el.style.display = "none";
+    host.appendChild(el);
+    labelEls.push(el);
+  }
+}
+
+const labelV = new THREE.Vector3();
+
+function updateLabels() {
+  const w = stage.clientWidth, h = stage.clientHeight;
+  for (let li = 0; li < L; li++) {
+    const el = labelEls[li];
+    if (li % 2 !== 0 && li !== hotLayer) { el.style.display = "none"; continue; }
+    el.style.display = "";
+    labelV.set(0, -R - 1.45, layerZ(li));
+    labelV.project(camera);
+    if (labelV.z > 1) { el.style.opacity = "0"; continue; }
+    const x = (labelV.x * 0.5 + 0.5) * w;
+    const y = (-labelV.y * 0.5 + 0.5) * h;
+    el.style.left = x.toFixed(1) + "px";
+    el.style.top = y.toFixed(1) + "px";
+    el.style.opacity = "1";
+    el.classList.toggle("on", li === hotLayer);
+  }
+}
+
+// ------------------------------------------------------------------ camera
+
+let camTween = null;
+let autoFocus = true;
+
+function flyTo(targetZ, dist, duration) {
+  const startTarget = controls.target.clone();
+  const startPos = camera.position.clone();
+  const endTarget = new THREE.Vector3(0, 0, targetZ);
+  const dir = startPos.clone().sub(startTarget);
+  if (dir.lengthSq() < 1e-6) dir.set(0, 0.4, 1);
+  dir.normalize();
+  const endPos = endTarget.clone().add(dir.multiplyScalar(dist));
+
+  if (camTween) camTween.kill();
+  const o = { t: 0 };
+  camTween = gsap.to(o, {
+    t: 1, duration, ease: "power2.inOut", overwrite: true,
+    onUpdate: () => {
+      controls.target.lerpVectors(startTarget, endTarget, o.t);
+      camera.position.lerpVectors(startPos, endPos, o.t);
     }
+  });
+}
 
-    items.sort((a, b) => b[0] - a[0]);
-    const top = items.slice(0, 14);
-    for (const item of top) {
-      const p = nodePos(item[1], item[2]);
-      sw += item[0]; sx += item[0] * p.x; sy += item[0] * p.y;
-      topSum += item[0];
+function focusRatio() {
+  let total = 0, top = 0;
+  const vals = [];
+  for (let i = 0; i < disp.length; i++) {
+    const v = disp[i];
+    if (v > 0.05) vals.push(v * v);
+    total += v * v;
+  }
+  if (total <= 1e-9) return 0;
+  vals.sort((a, b) => b - a);
+  for (let i = 0; i < Math.min(18, vals.length); i++) top += vals[i];
+  return Math.min(1, top / total);
+}
+
+function updateFocus() {
+  if (!autoFocus || !meta) return;
+
+  let best = -1, bestE = -1, total = 0;
+  for (let li = 0; li < L; li++) {
+    let s = 0;
+    for (let j = 0; j < K; j++) s += disp[li * K + j];
+    total += s;
+    if (s > bestE) { bestE = s; best = li; }
+  }
+  if (best < 0 || total < 0.35) return;
+
+  const now = performance.now();
+  if (now - lastFly < 1400) return;
+  if (focusLayer >= 0 && Math.abs(best - focusLayer) < 1) return;
+
+  focusLayer = best;
+  lastFly = now;
+  const fr = focusRatio();
+  const z = layerZ(best) * 0.65;
+  const dist = baseDist * (0.97 - 0.12 * fr);
+  flyTo(z, dist, 1.35);
+}
+
+// ------------------------------------------------------------------ data
+
+function onFrame(msg) {
+  if (msg.done) { finish(); return; }
+
+  let frameMax = 0;
+  for (let li = 0; li < L; li++) frameMax = Math.max(frameMax, msg.mx[li] || 0);
+  gmax = gmax > 0 ? gmax * 0.90 + (frameMax || 0) * 0.10 : (frameMax || 1);
+
+  for (let li = 0; li < L; li++) {
+    const lm = Math.max(1e-6, msg.mx[li] || 0);
+    lscale[li] = lscale[li] > 0 ? lscale[li] * 0.86 + lm * 0.14 : lm;
+    const loud = 0.45 + 0.55 * Math.pow(lscale[li] / Math.max(gmax, 1e-6), 0.5);
+    const row = msg.v[li];
+    const base = li * K;
+    for (let j = 0; j < K; j++) {
+      const raw = row[j];
+      const rel = Math.pow(Math.abs(raw) / lscale[li], 0.58);
+      target[base + j] = Math.min(1, rel * loud);
+      signAttr.array[base + j] = raw < 0 ? -1 : 1;
     }
+  }
+  signAttr.needsUpdate = true;
 
-    // how much of the total activity sits in the top 14 neurons: when the
-    // firing is concentrated, push in; when it is spread, stay wide
-    const focus = Math.min(1, topSum / total);
-    const z = Math.min(fit * 3.2, fit * (1 + 2.4 * focus));
+  lastMsg = msg;
+  if (msg.phase === "write") outText += msg.token;
+  document.getElementById("out").textContent = outText || "-";
+  updatePanel(msg);
 
-    camT.z = z;
-    camT.x = sx / sw;
-    camT.y = sy / sw;
+  // pulse the few strongest rising neurons, so the view does not fill with rings
+  const cand = [];
+  for (let i = 0; i < disp.length; i++) {
+    if (target[i] > 0.72 && disp[i] < 0.40) cand.push([target[i], i]);
+  }
+  cand.sort((a, b) => b[0] - a[0]);
+  for (let k = 0; k < Math.min(3, cand.length); k++) {
+    const i = cand[k][1];
+    firePulse(Math.floor(i / K), i % K,
+              signAttr.array[i] * cand[k][0]);
+  }
+}
 
-    const hw = W / (2 * camT.z), hh = H / (2 * camT.z);
-    camT.x = worldW < 2 * hw ? worldW / 2
-      : Math.max(hw, Math.min(worldW - hw, camT.x));
-    camT.y = worldH < 2 * hh ? worldH / 2
-      : Math.max(hh, Math.min(worldH - hh, camT.y));
+function updatePanel(msg) {
+  document.getElementById("tok").textContent = JSON.stringify(msg.token);
+  const phaseEl = document.getElementById("phase");
+  phaseEl.textContent = msg.phase === "read" ? "reading prompt" : "writing";
+  document.getElementById("pos").textContent = "pos " + msg.pos;
+
+  const chip = document.getElementById("chip");
+  chip.className = "phase-chip " + msg.phase;
+  document.getElementById("chipText").textContent =
+    msg.phase === "read" ? "reading prompt" : "writing";
+
+  let best = 0, bestE = -1;
+  for (let li = 0; li < L; li++) {
+    const m = msg.mx[li] || 0;
+    if (m > bestE) { bestE = m; best = li; }
+  }
+  hotLayer = best;
+  document.getElementById("hotLayer").innerHTML =
+    `L${best}<small>${bestE.toFixed(2)} peak</small>`;
+
+  const vals = msg.v[best];
+  const order = Array.from({ length: K }, (_, j) => j)
+    .sort((a, b) => Math.abs(vals[b]) - Math.abs(vals[a]))
+    .slice(0, 8);
+  const maxAbs = Math.max(1e-6, ...order.map(j => Math.abs(vals[j])));
+
+  document.getElementById("nlist").innerHTML = order.map(j => {
+    const v = vals[j];
+    const pct = Math.max(2, (Math.abs(v) / maxAbs) * 100);
+    const id = meta.neurons[best][j];
+    return `<div class="nrow ${v < 0 ? "neg" : ""}">
+      <span class="id">n${id}</span>
+      <span class="bar"><i style="width:${pct.toFixed(1)}%"></i></span>
+      <span class="val">${v >= 0 ? "+" : ""}${v.toFixed(2)}</span>
+    </div>`;
+  }).join("");
+}
+
+// ------------------------------------------------------------------ stream
+
+function setStatus(text, on, busy) {
+  document.getElementById("statusText").textContent = text;
+  document.getElementById("statusDot").className =
+    "dot" + (on ? "" : " off") + (busy ? " busy" : "");
+}
+
+function generate() {
+  if (source) source.close();
+  const prompt = document.getElementById("prompt").value;
+  outText = "";
+  gmax = 0;
+  lscale = new Float32Array(L);
+  disp.fill(0);
+  target.fill(0);
+  hotLayer = -1;
+  focusLayer = -1;
+  clearPulses();
+  document.getElementById("out").textContent = "-";
+  document.getElementById("go").disabled = true;
+  document.getElementById("stop").disabled = false;
+  setStatus("running", true, true);
+
+  if (autoFocus) {
+    controls.autoRotate = false;
+    flyTo(0, baseDist, 1.0);
   }
 
-  function stepCamera() {
-    const k = 0.075;
-    cam.x += (camT.x - cam.x) * k;
-    cam.y += (camT.y - cam.y) * k;
-    cam.z += (camT.z - cam.z) * 0.06;
+  source = new EventSource(
+    `/stream?prompt=${encodeURIComponent(prompt)}&max_tokens=48`);
+  source.onmessage = (ev) => {
+    let msg;
+    try { msg = JSON.parse(ev.data); } catch (_) { return; }
+    onFrame(msg);
+  };
+  source.onerror = () => finish();
+}
+
+function finish() {
+  if (source) { source.close(); source = null; }
+  document.getElementById("go").disabled = false;
+  document.getElementById("stop").disabled = true;
+  setStatus("idle", false, false);
+  document.getElementById("chip").className = "phase-chip";
+  document.getElementById("chipText").textContent = "idle";
+  controls.autoRotate = autoFocus;
+}
+
+// ------------------------------------------------------------------ loop
+
+function resize() {
+  const w = Math.max(320, stage.clientWidth);
+  const h = Math.max(260, stage.clientHeight);
+  renderer.setSize(w, h, false);
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+  if (pointMat) {
+    pointMat.uniforms.uPixelRatio.value =
+      Math.min(window.devicePixelRatio || 1, 2);
   }
+}
 
-  // ---------------------------------------------------------------- drawing
+let lastT = 0;
 
-  function drawBackdrop() {
-    const g = ctx.createLinearGradient(0, 0, 0, H);
-    g.addColorStop(0, "#F7F4EC");
-    g.addColorStop(1, "#EFEBDD");
-    ctx.fillStyle = g;
-    ctx.fillRect(0, 0, W, H);
+function animate(t) {
+  requestAnimationFrame(animate);
+  const dt = lastT ? Math.min(0.05, (t - lastT) / 1000) : 0.016;
+  lastT = t;
 
-    ctx.fillStyle = "rgba(120,110,92,0.10)";
-    const gap = 26;
-    for (let x = gap / 2; x < W; x += gap) {
-      for (let y = gap / 2; y < H; y += gap) {
-        ctx.fillRect(x, y, 1, 1);
-      }
+  if (intAttr) {
+    // ease displayed activation toward the target
+    const k = 1 - Math.pow(0.0008, dt);
+    for (let i = 0; i < disp.length; i++) {
+      disp[i] += (target[i] - disp[i]) * k;
+      intAttr.array[i] = disp[i];
     }
+    intAttr.needsUpdate = true;
   }
 
-  function topIdx(li, n) {
-    const arr = [];
-    for (let j = 0; j < K; j++) arr.push([disp[li][j], j]);
-    arr.sort((a, b) => b[0] - a[0]);
-    return arr.slice(0, n).filter(a => a[0] > 0.30).map(a => a[1]);
-  }
+  updateFocus();
+  if (edgeSeg) updateEdges();
+  controls.update();
+  renderer.render(scene, camera);
+  if (labelEls.length) updateLabels();
+}
 
-  function drawEdges() {
-    ctx.lineCap = "round";
-    for (let li = 0; li < L - 1; li++) {
-      const a = topIdx(li, 5);
-      const b = topIdx(li + 1, 5);
-      if (!a.length || !b.length) continue;
-      for (const i of a) {
-        const p1 = nodePos(li, i);
-        for (const j of b) {
-          const w = Math.min(disp[li][i], disp[li + 1][j]);
-          if (w < 0.30) continue;
-          const p2 = nodePos(li + 1, j);
-          const mx = (p1.x + p2.x) / 2;
-          ctx.beginPath();
-          ctx.moveTo(p1.x, p1.y);
-          ctx.bezierCurveTo(mx, p1.y, mx, p2.y, p2.x, p2.y);
-          ctx.strokeStyle = `rgba(150,118,92,${Math.min(0.30, w * 0.30)})`;
-          ctx.lineWidth = 0.7 / cam.z;
-          ctx.stroke();
-        }
-      }
-    }
-  }
+// ------------------------------------------------------------------ input
 
-  function drawNodes() {
-    const pos = "#D97757", neg = "#5C7C8A";
-    for (let li = 0; li < L; li++) {
-      for (let j = 0; j < K; j++) {
-        const rel = disp[li][j];
-        const p = nodePos(li, j);
-        const a = Math.min(1, rel);
+document.getElementById("auto").addEventListener("change", (e) => {
+  autoFocus = e.target.checked;
+  controls.autoRotate = autoFocus;
+  if (!autoFocus && camTween) camTween.kill();
+});
 
-        if (rel > 0.16) {
-          const g = (6 + 24 * Math.pow(a, 0.8)) / cam.z;
-          ctx.globalAlpha = Math.min(0.92, 0.10 + 0.82 * Math.pow(a, 1.2));
-          ctx.drawImage(sgn[li][j] < 0 ? glowNeg : glowPos,
-                        p.x - g, p.y - g, 2 * g, 2 * g);
-          ctx.globalAlpha = 1;
-        }
+document.getElementById("reset").addEventListener("click", () => {
+  autoFocus = true;
+  document.getElementById("auto").checked = true;
+  controls.autoRotate = true;
+  focusLayer = -1;
+  lastFly = performance.now();
+  flyTo(0, baseDist, 1.2);
+});
 
-        const r = (2.5 + 3.0 * a) / cam.z;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
-        if (rel < 0.05) {
-          ctx.globalAlpha = 0.30;
-          ctx.fillStyle = "rgba(122,112,94,1)";
-        } else {
-          ctx.globalAlpha = 0.18 + 0.82 * a;
-          ctx.fillStyle = sgn[li][j] < 0 ? neg : pos;
-        }
-        ctx.fill();
-        ctx.globalAlpha = 1;
-      }
-    }
-  }
+document.getElementById("go").onclick = generate;
+document.getElementById("stop").onclick = finish;
+document.getElementById("prompt").addEventListener("keydown", (e) => {
+  if (e.key === "Enter") generate();
+});
 
-  function drawPulses(now) {
-    for (let i = pulses.length - 1; i >= 0; i--) {
-      const p = pulses[i];
-      const age = (now - p.t) / 620;
-      if (age >= 1) { pulses.splice(i, 1); continue; }
-      const q = nodePos(p.li, p.j);
-      const r = (2.2 + 15 * age) / cam.z;
-      ctx.beginPath();
-      ctx.arc(q.x, q.y, r, 0, Math.PI * 2);
-      ctx.strokeStyle = `rgba(217,119,87,${0.42 * (1 - age)})`;
-      ctx.lineWidth = 1.1 / cam.z;
-      ctx.stroke();
-    }
-  }
+new ResizeObserver(resize).observe(stage);
 
-  function drawAxis() {
-    const y = H - 18;
-    const g = ctx.createLinearGradient(0, H - 42, 0, H);
-    g.addColorStop(0, "rgba(244,241,233,0)");
-    g.addColorStop(1, "rgba(244,241,233,0.94)");
-    ctx.fillStyle = g;
-    ctx.fillRect(0, H - 42, W, 42);
+// ------------------------------------------------------------------ boot
 
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    ctx.font = '10.5px "JetBrains Mono", Consolas, monospace';
-    for (let li = 0; li < L; li++) {
-      const sx = (PADX + li * COL - cam.x) * cam.z + W / 2;
-      if (sx < 12 || sx > W - 12) continue;
-      ctx.fillStyle = li === hotLayer ? "#B44F2E" : "rgba(70,64,54,0.50)";
-      ctx.fillText(String(li), sx, y);
-    }
-    ctx.textAlign = "left";
-    ctx.fillStyle = "rgba(70,64,54,0.38)";
-    ctx.fillText("layer", 14, y);
-  }
+buildPulses();
+resize();
 
-  function render(now) {
-    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-    drawBackdrop();
+// intro fly-in
+controls.autoRotate = false;
+camera.position.set(64, 40, 60);
+controls.target.set(0, 0, 0);
+gsap.to(camera.position, {
+  x: HOME.x, y: HOME.y, z: HOME.z, duration: 2.2, ease: "power3.out",
+  onUpdate: () => { baseDist = camera.position.distanceTo(controls.target); },
+  onComplete: () => { controls.autoRotate = true; }
+});
+gsap.from(renderer.domElement, { opacity: 0, duration: 0.9, ease: "power1.out" });
 
-    if (!meta) {
-      ctx.fillStyle = "rgba(120,112,96,0.55)";
-      ctx.font = '13px "Inter", system-ui, sans-serif';
-      ctx.textAlign = "center";
-      ctx.fillText("loading network", W / 2, H / 2);
-      requestAnimationFrame(render);
-      return;
-    }
+requestAnimationFrame(animate);
 
-    // ease displayed activation toward the target so firing has weight
-    for (let li = 0; li < L; li++) {
-      const d = disp[li], t = target[li];
-      for (let j = 0; j < K; j++) d[j] += (t[j] - d[j]) * 0.22;
-    }
+// small debug handle, also useful for screenshot checks
+window.__viz = {
+  camera, controls, scene, renderer,
+  get L() { return L; },
+  get K() { return K; },
+  get disp() { return disp; },
+  get hotLayer() { return hotLayer; }
+};
 
-    updateCameraTarget();
-    stepCamera();
-
-    ctx.save();
-    ctx.translate(W / 2, H / 2);
-    ctx.scale(cam.z, cam.z);
-    ctx.translate(-cam.x, -cam.y);
-
-    drawEdges();
-    drawPulses(now);
-    drawNodes();
-
-    ctx.restore();
-    drawAxis();
-    requestAnimationFrame(render);
-  }
-
-  // ---------------------------------------------------------------- data
-
-  function initData() {
-    target = Array.from({ length: L }, () => new Float32Array(K));
-    disp = Array.from({ length: L }, () => new Float32Array(K));
-    sgn = Array.from({ length: L }, () => new Int8Array(K).fill(1));
+fetch("/meta")
+  .then(r => r.json())
+  .then(m => {
+    meta = m;
+    L = m.layers;
+    K = m.per_layer;
+    disp = new Float32Array(L * K);
+    target = new Float32Array(L * K);
     lscale = new Float32Array(L);
-    lweight = new Float32Array(L);
-    gmax = 0;
-  }
 
-  function onFrame(msg) {
-    if (msg.done) { finish(); return; }
+    buildPoints();
+    buildRings();
+    buildEdges();
+    buildLabels();
+    resize();
 
-    let frameMax = 0;
-    for (let li = 0; li < L; li++) frameMax = Math.max(frameMax, msg.mx[li] || 0);
-    gmax = gmax > 0 ? gmax * 0.90 + (frameMax || 0) * 0.10 : (frameMax || 1);
-
-    for (let li = 0; li < L; li++) {
-      const lm = Math.max(1e-6, msg.mx[li] || 0);
-      lscale[li] = lscale[li] > 0 ? lscale[li] * 0.86 + lm * 0.14 : lm;
-      lweight[li] = Math.pow(lscale[li] / Math.max(gmax, 1e-6), 0.5);
-      const loud = 0.40 + 0.60 * lweight[li];
-
-      const row = msg.v[li];
-      for (let j = 0; j < K; j++) {
-        const raw = row[j];
-        sgn[li][j] = raw < 0 ? -1 : 1;
-        const rel = Math.pow(Math.abs(raw) / lscale[li], 0.60);
-        target[li][j] = Math.min(1.2, rel * loud);
-      }
-    }
-
-    // pulse only the few strongest rising nodes, so the view does not fill
-    // with rings
-    const cand = [];
-    for (let li = 0; li < L; li++) {
-      for (let j = 0; j < K; j++) {
-        if (target[li][j] > 0.78 && disp[li][j] < 0.38) {
-          cand.push([target[li][j], li, j]);
-        }
-      }
-    }
-    cand.sort((a, b) => b[0] - a[0]);
-    const now = performance.now();
-    for (let k = 0; k < Math.min(6, cand.length); k++) {
-      pulses.push({ li: cand[k][1], j: cand[k][2], t: now });
-    }
-    if (pulses.length > 120) pulses.splice(0, pulses.length - 120);
-
-    last = msg;
-    if (msg.phase === "write") outText += msg.token;
-    document.getElementById("out").textContent = outText || "-";
-    updatePanel(msg);
-  }
-
-  function updatePanel(msg) {
-    document.getElementById("tok").textContent = JSON.stringify(msg.token);
-    document.getElementById("phase").textContent =
-      msg.phase === "read" ? "reading prompt" : "writing";
-    document.getElementById("pos").textContent = "pos " + msg.pos;
-
-    let best = 0, bestE = -1;
-    for (let li = 0; li < L; li++) {
-      const m = msg.mx[li] || 0;
-      if (m > bestE) { bestE = m; best = li; }
-    }
-    const hot = document.getElementById("hotLayer");
-    hotLayer = best;
-    hot.innerHTML = `L${best}<small>${bestE.toFixed(2)} peak</small>`;
-
-    const vals = msg.v[best];
-    const order = Array.from({ length: K }, (_, j) => j)
-      .sort((a, b) => Math.abs(vals[b]) - Math.abs(vals[a]))
-      .slice(0, 8);
-    const maxAbs = Math.max(1e-6, ...order.map(j => Math.abs(vals[j])));
-
-    document.getElementById("nlist").innerHTML = order.map(j => {
-      const v = vals[j];
-      const pct = Math.max(2, (Math.abs(v) / maxAbs) * 100);
-      const id = meta.neurons[best][j];
-      return `<div class="nrow ${v < 0 ? "neg" : ""}">
-        <span class="id">n${id}</span>
-        <span class="bar"><i style="width:${pct.toFixed(1)}%"></i></span>
-        <span class="val">${v >= 0 ? "+" : ""}${v.toFixed(2)}</span>
-      </div>`;
-    }).join("");
-  }
-
-  // ---------------------------------------------------------------- stream
-
-  function setStatus(text, on) {
-    document.getElementById("statusText").textContent = text;
-    document.getElementById("statusDot").className = "dot" + (on ? "" : " off");
-  }
-
-  function generate() {
-    if (source) source.close();
-    const prompt = document.getElementById("prompt").value;
-    outText = "";
-    gmax = 0;
-    lscale = new Float32Array(L);
-    lweight = new Float32Array(L);
-    pulses.length = 0;
-    for (let li = 0; li < L; li++) {
-      disp[li].fill(0);
-      target[li].fill(0);
-    }
-    document.getElementById("out").textContent = "-";
-    document.getElementById("go").disabled = true;
-    document.getElementById("stop").disabled = false;
-    setStatus("running", true);
-
-    source = new EventSource(
-      `/stream?prompt=${encodeURIComponent(prompt)}&max_tokens=48`);
-    source.onmessage = (ev) => {
-      let msg;
-      try { msg = JSON.parse(ev.data); } catch (_) { return; }
-      onFrame(msg);
-    };
-    source.onerror = () => finish();
-  }
-
-  function finish() {
-    if (source) { source.close(); source = null; }
-    document.getElementById("go").disabled = false;
-    document.getElementById("stop").disabled = true;
-    setStatus("idle", false);
-  }
-
-  // ---------------------------------------------------------------- input
-
-  cv.addEventListener("wheel", (e) => {
-    e.preventDefault();
-    const before = cam.z;
-    cam.z *= Math.exp(-e.deltaY * 0.0014);
-    cam.z = Math.max(fit, Math.min(fit * 4.2, cam.z));
-    camT.z = cam.z;
-
-    const rect = cv.getBoundingClientRect();
-    const mx = e.clientX - rect.left - W / 2;
-    const my = e.clientY - rect.top - H / 2;
-    cam.x += mx / before - mx / cam.z;
-    cam.y += my / before - my / cam.z;
-    camT.x = cam.x; camT.y = cam.y;
-
-    autoFocus = false;
-    document.getElementById("auto").checked = false;
-  }, { passive: false });
-
-  cv.addEventListener("pointerdown", (e) => {
-    dragging = true;
-    dragMoved = false;
-    cv.setPointerCapture(e.pointerId);
-    cv.style.cursor = "grabbing";
+    document.getElementById("boot").classList.add("gone");
+    setStatus("ready · " + m.device, true, false);
+  })
+  .catch(() => {
+    document.getElementById("bootText").textContent = "server offline";
+    setStatus("offline", false, false);
   });
-
-  cv.addEventListener("pointermove", (e) => {
-    if (!dragging) return;
-    dragMoved = true;
-    cam.x -= e.movementX / cam.z;
-    cam.y -= e.movementY / cam.z;
-    camT.x = cam.x;
-    camT.y = cam.y;
-  });
-
-  cv.addEventListener("pointerup", (e) => {
-    dragging = false;
-    cv.style.cursor = "grab";
-    if (dragMoved) {
-      autoFocus = false;
-      document.getElementById("auto").checked = false;
-    }
-  });
-
-  cv.addEventListener("pointercancel", () => { dragging = false; });
-
-  document.getElementById("auto").addEventListener("change", (e) => {
-    autoFocus = e.target.checked;
-  });
-
-  document.getElementById("reset").addEventListener("click", () => {
-    autoFocus = true;
-    document.getElementById("auto").checked = true;
-    camT.x = worldW / 2;
-    camT.y = worldH / 2;
-    camT.z = fit;
-  });
-
-  document.getElementById("go").onclick = generate;
-  document.getElementById("stop").onclick = finish;
-  document.getElementById("prompt").addEventListener("keydown", (e) => {
-    if (e.key === "Enter") generate();
-  });
-
-  cv.style.cursor = "grab";
-
-  // ---------------------------------------------------------------- boot
-
-  glowPos = makeGlow(217, 119, 87);
-  glowNeg = makeGlow(92, 124, 138);
-
-  new ResizeObserver(resize).observe(cv.parentElement);
-  resize();
-  requestAnimationFrame(render);
-
-  fetch("/meta")
-    .then(r => r.json())
-    .then(m => {
-      meta = m;
-      L = m.layers;
-      K = m.per_layer;
-      initData();
-      layout();
-      fit = Math.min(W / worldW, H / worldH) * 0.96;
-      cam.x = camT.x = worldW / 2;
-      cam.y = camT.y = worldH / 2;
-      cam.z = camT.z = fit;
-      setStatus("ready · " + m.device, true);
-    })
-    .catch(() => setStatus("offline", false));
-})();
 </script>
 </body>
 </html>
