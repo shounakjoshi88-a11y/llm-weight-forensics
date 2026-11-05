@@ -11,6 +11,7 @@ laptop GPU. Each finding stands alone: method, numbers, what it does not show.
 | [04](04-weight-space.md) | Weight space | Classical weight-only circuit readouts fail on this GQA + RoPE model, for identifiable structural reasons. |
 | [05](05-neurons.md) | Neurons | Zero dead neurons, 98% activation density, and the sharpest neurons track subword continuations rather than concepts. |
 | [06](06-weight-reading.md) | Reading weights | Five 129-parameter networks identified blind from their weights, 5/5, and a three-statistic reader holds at 20/20 on held-out seeds. |
+| [07](07-weight-editing.md) | Editing weights | A gradient-free read-side weight edit flips 18% of 51 held-out wrong-suggestion facts with almost no neutral loss, but the editable direction is the user's assertion, not a wrongness detector. |
 
 Raw measurements are the `e0N_*.json` files next to each writeup.
 
@@ -46,3 +47,18 @@ rediscover:
   `sum_i w_out_i * w_i`, recovers the direction, and that reader gets 20 of 20.
 - **A 5/5 by-eye reading is not evidence until it is repeated blind.** The first
   written rule scored 3 of 5 on the very networks it was set on.
+- **The write-side edit cascades.** Removing the suggestion direction from the
+  early `o_proj` and `down_proj` writes shifts the held-out margin by +2.01, but
+  flips only 8% and costs neutral accuracy (4.59 to 4.17). The same direction
+  removed on the read side, above layer 18, flips 18% and leaves the neutral
+  margin at 4.53. The surgical edit is the one that works.
+- **The direction is not a wrongness detector.** A wrong suggestion and a correct
+  suggestion produce nearly the same residual shift at layer 18 (norms 12.26 and
+  12.95, cosine 0.985). The wrong-minus-correct content direction is small (norm
+  2.31) and nearly orthogonal, and removing it barely moves the margin (+0.55,
+  2% flips). What the edit removes is the user's assertion, not a judgement that
+  the answer is false.
+- **A missing ability is not editable.** Two-digit multiplication is 0 of 5 on
+  this model. The same kind of edit has nothing to remove, which is the analogue
+  of the blog's negative control on Gemma 3 270M. Sycophancy is editable because
+  the ability is present and the obstacle is a direction.

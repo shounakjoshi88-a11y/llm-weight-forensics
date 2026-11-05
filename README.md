@@ -19,7 +19,7 @@ probe/            instrumentation
   attention.py    induction, sink, previous-token and entropy scores
   corpus.py       public domain text download for neuron analysis
 
-experiments/      one script per experiment, e01 to e11b
+experiments/      one script per experiment, e01 to e12
 findings/         one writeup per finding, raw JSON next to each
 viz/              live neuron visualizer (FastAPI server + Three.js frontend)
 
@@ -202,19 +202,53 @@ angle to within 1.3 degrees, and sometimes the circle radius as a number.
 
 Full writeup: [`findings/06-weight-reading.md`](findings/06-weight-reading.md).
 
+## Editing weights directly
+
+The blog also edits a model with no gradients. Here the target is sycophancy:
+Qwen2.5-0.5B-Instruct knows 76 simple facts, but agrees with a wrong answer when
+the user states one.
+
+The direction is `d = mean h(suggested) - mean h(neutral)` at the answer position
+after layer 18. Two ways to remove it: project it out of the residual (the
+oracle), or make every matrix above layer 18 blind to it (`W <- W (I - d d^T)` on
+q, k, v, gate, up and `lm_head`). The second is a weight edit.
+
+| condition | suggested margin | flips | neutral margin |
+|---|---|---|---|
+| base | -4.74 | 0% | 4.59 |
+| activation steering | -1.44 | 31% | 4.49 |
+| read-side weight edit | -2.66 | 18% | 4.53 |
+| random direction | -4.69 | 0% | 4.57 |
+| write-side weight edit | -2.73 | 8% | 4.17 |
+
+51 held-out facts. The read-side edit flips about one fact in five and leaves the
+neutral margin nearly untouched. The write-side edit cascades and costs knowledge.
+
+The important caveat is what the direction is. A wrong suggestion and a correct
+suggestion move the residual in almost the same direction (cosine 0.985). The
+edit removes the user's assertion, not a judgement that the answer is false. It
+also makes the model ignore correct corrections.
+
+Full writeup: [`findings/07-weight-editing.md`](findings/07-weight-editing.md).
+
 ## What this does and does not show
 
 **Does:** architecture, tokenizer family, quantization recipe, and fine-tune
 lineage are all recoverable from weights alone. Metadata is unnecessary. In a
 small network, the task itself is recoverable too: the label shows up as a
 low-dimensional geometric summary of all the weights, not as any single number.
+A behavioural obstacle can also be partially removed without gradients: a
+read-side weight edit flips 18% of held-out sycophancy facts while leaving the
+neutral margin nearly unchanged.
 
 **Doesn't:** recover training data, predict capabilities, or identify an unknown
 model from scratch. The 5/5 reading result is at 129 parameters; the same
 statistics return noise at 494M, where GQA, RoPE and superposition break the
 clean geometry. Two models independently trained on similar data with similar
 recipes are not separable by these statistics. Nothing in the weights encodes a
-unique identity unless someone embedded one deliberately.
+unique identity unless someone embedded one deliberately. The edit does not
+distinguish a wrong assertion from a correct one, it is partial, and it cannot
+add an ability the model does not have.
 
 ## Note on GGUF metadata
 
