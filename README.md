@@ -17,9 +17,11 @@ probe/            instrumentation
   core.py         model loading, forward-pass capture, logit lens
   ablate.py       zeroing heads and neurons
   attention.py    induction, sink, previous-token and entropy scores
+  corpus.py       public domain text download for neuron analysis
 
-experiments/      one script per experiment, e01 to e07
+experiments/      one script per experiment, e01 to e10
 findings/         one writeup per finding, raw JSON next to each
+viz/              live neuron visualizer (FastAPI server + canvas frontend)
 
 Qwen2.5-0.5B/          494M params, bf16, 942 MB   (base)
 Qwen2.5-0.5B-Instruct/ 494M params, bf16, 942 MB   (SFT of the base)
@@ -114,6 +116,20 @@ comparison. Discrimination is trivial at this level.
 from "same model with reordered neurons", since both score about 0. Any real
 provenance claim needs permutation-invariant matching (Git Re-Basin or weight
 matching) before the cosine means anything.
+
+## Live neuron visualizer
+
+Watches the model think. Every generated token streams the activation of all
+116,736 MLP neurons to the browser, which renders them as a heatmap that flashes
+as the model runs. Click any row to inspect that layer's top neurons.
+
+```bash
+python viz/server.py
+# open http://127.0.0.1:8000
+```
+
+Rows are layers 0 to 23, columns are the top 64 neurons by absolute activation at
+that step, colour is activation magnitude. No build step, no extra dependencies.
 
 ## Inside the network
 

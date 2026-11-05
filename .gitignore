@@ -18,6 +18,9 @@ SmolLM2-135M/
 # Hugging Face download bookkeeping
 .cache/
 
+# Gutenberg corpus cache used by the neuron atlas
+corpus_cache/
+
 # Python
 __pycache__/
 *.py[cod]
@@ -35,3 +38,6 @@ desktop.ini
 # Local analysis output
 out/
 *.out
+
+# 115 MB raw atlas; the .gz is committed instead
+findings/e10_neuron_atlas.json

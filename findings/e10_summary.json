@@ -1,0 +1,969 @@
+{
+  "tokens": 30148,
+  "layers": {
+    "0": {
+      "dead": 0,
+      "median_rms": 0.07053442259238621,
+      "median_freq": 0.932532837999204,
+      "max_selectivity": 96.69851142635129
+    },
+    "1": {
+      "dead": 0,
+      "median_rms": 0.07529331291993582,
+      "median_freq": 0.961489982751758,
+      "max_selectivity": 112.3466297188028
+    },
+    "2": {
+      "dead": 0,
+      "median_rms": 0.09611126073044371,
+      "median_freq": 0.969682897704657,
+      "max_selectivity": 112.85247433150448
+    },
+    "3": {
+      "dead": 0,
+      "median_rms": 0.11278119630368028,
+      "median_freq": 0.976217327849277,
+      "max_selectivity": 107.85759531473853
+    },
+    "4": {
+      "dead": 0,
+      "median_rms": 0.116135442857048,
+      "median_freq": 0.9807947459201274,
+      "max_selectivity": 97.15705495061088
+    },
+    "5": {
+      "dead": 0,
+      "median_rms": 0.12392149334150934,
+      "median_freq": 0.9883906063420459,
+      "max_selectivity": 85.17064769665075
+    },
+    "6": {
+      "dead": 0,
+      "median_rms": 0.1178145807755138,
+      "median_freq": 0.9846092609791695,
+      "max_selectivity": 79.63952068863176
+    },
+    "7": {
+      "dead": 0,
+      "median_rms": 0.12340850009198026,
+      "median_freq": 0.983133209499801,
+      "max_selectivity": 78.56423425542786
+    },
+    "8": {
+      "dead": 0,
+      "median_rms": 0.11278285703623073,
+      "median_freq": 0.9805957277431339,
+      "max_selectivity": 68.33909499637456
+    },
+    "9": {
+      "dead": 0,
+      "median_rms": 0.10828016909227363,
+      "median_freq": 0.9766319490513466,
+      "max_selectivity": 99.54432037834627
+    },
+    "10": {
+      "dead": 0,
+      "median_rms": 0.09836019678356009,
+      "median_freq": 0.9749568793949848,
+      "max_selectivity": 79.59728558198327
+    },
+    "11": {
+      "dead": 0,
+      "median_rms": 0.0984040517680822,
+      "median_freq": 0.9720545309804962,
+      "max_selectivity": 86.3561136370921
+    },
+    "12": {
+      "dead": 0,
+      "median_rms": 0.09778915785345185,
+      "median_freq": 0.974061297598514,
+      "max_selectivity": 69.54325601452439
+    },
+    "13": {
+      "dead": 0,
+      "median_rms": 0.10465854972064823,
+      "median_freq": 0.9745588430409977,
+      "max_selectivity": 58.57583144950257
+    },
+    "14": {
+      "dead": 0,
+      "median_rms": 0.10776216979409717,
+      "median_freq": 0.9769470611649197,
+      "max_selectivity": 69.68744163802302
+    },
+    "15": {
+      "dead": 0,
+      "median_rms": 0.11926368683555644,
+      "median_freq": 0.9828180973862279,
+      "max_selectivity": 95.02422158317694
+    },
+    "16": {
+      "dead": 0,
+      "median_rms": 0.1505808516957965,
+      "median_freq": 0.9861516518508691,
+      "max_selectivity": 111.5291877836514
+    },
+    "17": {
+      "dead": 0,
+      "median_rms": 0.1658036621281784,
+      "median_freq": 0.9890871699615231,
+      "max_selectivity": 128.67528470166542
+    },
+    "18": {
+      "dead": 0,
+      "median_rms": 0.175227814560097,
+      "median_freq": 0.9883574366458803,
+      "max_selectivity": 109.8226907138831
+    },
+    "19": {
+      "dead": 0,
+      "median_rms": 0.22046346332410793,
+      "median_freq": 0.992205121401088,
+      "max_selectivity": 131.76299305149828
+    },
+    "20": {
+      "dead": 0,
+      "median_rms": 0.2573941290959131,
+      "median_freq": 0.9930675335013931,
+      "max_selectivity": 112.08375858889589
+    },
+    "21": {
+      "dead": 0,
+      "median_rms": 0.26823975730308186,
+      "median_freq": 0.9925368183627438,
+      "max_selectivity": 96.59998630081314
+    },
+    "22": {
+      "dead": 0,
+      "median_rms": 0.30477271292030583,
+      "median_freq": 0.9903144487196497,
+      "max_selectivity": 113.63497986173377
+    },
+    "23": {
+      "dead": 0,
+      "median_rms": 0.38770895863878296,
+      "median_freq": 0.9930675335013931,
+      "max_selectivity": 138.64575637293123
+    }
+  },
+  "dead": {
+    "0": 0,
+    "1": 0,
+    "2": 0,
+    "3": 0,
+    "4": 0,
+    "5": 0,
+    "6": 0,
+    "7": 0,
+    "8": 0,
+    "9": 0,
+    "10": 0,
+    "11": 0,
+    "12": 0,
+    "13": 0,
+    "14": 0,
+    "15": 0,
+    "16": 0,
+    "17": 0,
+    "18": 0,
+    "19": 0,
+    "20": 0,
+    "21": 0,
+    "22": 0,
+    "23": 0
+  },
+  "selective": [
+    {
+      "layer": 0,
+      "neuron": 4560,
+      "selectivity": 96.69851142635129,
+      "freq": 0.9032439962849941,
+      "contexts": [
+        " entering a neighbourhood, this truth is so well fixed in the[[ minds]]\nof the surrounding families, that he is considered as",
+        " to Mrs. Philips were now productive of the most interesting\n[[intelligence]]. Every day added something to their knowledge of the\n",
+        " and Lydia, were particularly frequent in these attentions:\ntheir[[ minds]] were more vacant than their sisters\u2019, and when nothing\n"
+      ]
+    },
+    {
+      "layer": 0,
+      "neuron": 4454,
+      "selectivity": 91.87673111967146,
+      "freq": 0.9097120870372828,
+      "contexts": [
+        " not inhuman or unamiable cruelty. It is the[[ custom]] with those\nwho judge grossly to contrast the good",
+        " those others who are loved \u201cby\nallowance\u201d by[[ convention]], and because it is felt to be the right and",
+        " of\nscheme, of time, of subject, of literary[[ convention]], are, of course,\nobvious enough; the"
+      ]
+    },
+    {
+      "layer": 0,
+      "neuron": 4641,
+      "selectivity": 91.56481014392139,
+      "freq": 0.9142895051081332,
+      "contexts": [
+        " yawned again, threw aside her book, and\n[[cast]] her eyes round the room in quest of some amusement;",
+        "clock the two ladies retired to dress, and at half-p[[ast]] six\nElizabeth was summoned to dinner. To the civil",
+        "ollstonecraft protested with better general sense than particular\nt[[aste]] or judgment. Miss Austen, too, drew back"
+      ]
+    },
+    {
+      "layer": 1,
+      "neuron": 1701,
+      "selectivity": 112.3466297188028,
+      "freq": 0.9546238556454822,
+      "contexts": [
+        " your own children in such a way? You take\ndel[[ight]] in vexing me. You have no compassion on my",
+        " that Charlotte Lucas (her egregious papa, though\ndel[[ight]]ful, is just a little on the thither side",
+        " yet\nunusually choice--of Austenians or Jan[[ites]], there would probably be\nfound partisans of the"
+      ]
+    },
+    {
+      "layer": 1,
+      "neuron": 2978,
+      "selectivity": 110.56991042312843,
+      "freq": 0.9407257529521029,
+      "contexts": [
+        " such reflections.\nMr. Darcy replied, with great int[[rep]]idity,--\u201cMiss Elizabeth Bennet!\u201d repeated Miss",
+        " standing in Clarke\u2019s library.\u201dMrs. Bennet was prevented[[ rep]]lying by the entrance of the footman with a\n",
+        " at\nwhom it was all aimed, was still inf[[lex]]ibly studious. In the\ndesperation of her"
+      ]
+    },
+    {
+      "layer": 1,
+      "neuron": 929,
+      "selectivity": 105.40497643651638,
+      "freq": 0.9390340984476582,
+      "contexts": [
+        " was not aware of all the felicity of her\ncontr[[iv]]ance. Breakfast was scarcely over when a servant from N",
+        "ly against the cruelty of settling an estate away from a family[[ of]]\nfive daughters, in favour of a man whom nobody",
+        "\nthe false realism of our own day look merely dead-al[[ive]]. Take almost any\nFrenchman, except the late"
+      ]
+    },
+    {
+      "layer": 2,
+      "neuron": 2607,
+      "selectivity": 112.85247433150448,
+      "freq": 0.9697824067931538,
+      "contexts": [
+        " minutes, you meant it to be a sort of\npan[[eg]]yric, of compliment to yourself; and yet what",
+        " four o\u2019clock, therefore, we may expect this peace[[-making]] gentleman,\u201d\nsaid Mr. Bennet, as he",
+        "ingley moved with alacrity to\nthe pianof[[orte]], and after a polite request that Elizabeth would lead the"
+      ]
+    },
+    {
+      "layer": 2,
+      "neuron": 2186,
+      "selectivity": 100.13569294211868,
+      "freq": 0.9709101764627835,
+      "contexts": [
+        "\nFrenchman, except the late M. de Maup[[ass]]ant, and watch him laboriously\npiling up",
+        " _far greater than anything Addison\never did, almost great[[ enough]] for Fielding or for Swift himself. It has\n",
+        " respect entitled to think well of\nthemselves and mean[[ly]] of others. They were of a respectable family in\n"
+      ]
+    },
+    {
+      "layer": 2,
+      "neuron": 3590,
+      "selectivity": 95.82422858489579,
+      "freq": 0.9658352129494494,
+      "contexts": [
+        " Miss Bingley was by no\nmeans unwilling to pres[[ide]] at his table; nor was Mrs. Hurst,",
+        " kind of schemes, and cheating a person of\ntheir pre[[med]]itated contempt. I have, therefore, made up my",
+        "\nthe playwright has ever been laid upon_ Pride and Pre[[jud]]ice; _and I dare\nsay that, if"
+      ]
+    },
+    {
+      "layer": 3,
+      "neuron": 618,
+      "selectivity": 107.85759531473853,
+      "freq": 0.964674273583654,
+      "contexts": [
+        " with either of which motives his joining them would\ninterf[[ere]]. What could he mean? She was dying to know",
+        ", with either of which motives his joining them would\ninter[[f]]ere. What could he mean? She was dying to",
+        " and made no answer; but Lydia, with perfect\nind[[ifference]], continued to express her admiration of Captain Carter, and"
+      ]
+    },
+    {
+      "layer": 3,
+      "neuron": 4500,
+      "selectivity": 101.66356766793041,
+      "freq": 0.9715072309937641,
+      "contexts": [
+        " credit for more than can be. The\nwisest and[[ best]] of men,--nay, the wisest and",
+        " ball at Netherfield.Lydia was a stout,[[ well]]-grown girl of fifteen, with a fine complexion\n",
+        " was a tall,\nheavy-looking young man of five-and-tw[[enty]]. His air was grave and\nstately, and"
+      ]
+    },
+    {
+      "layer": 3,
+      "neuron": 421,
+      "selectivity": 99.1191686960262,
+      "freq": 0.9838795276635266,
+      "contexts": [
+        " wives, and Elizabeth continued her walk alone, crossing\nfield[[ after]] field at a quick pace, jumping over stiles and",
+        "\u2019s\nimagination is very rapid; it jumps from admiration[[ to]] love, from love\nto matrimony, in",
+        "ently exhibited the full romantic quality. Even Scott\nrequired hill[[ and]] mountain and ballad, even Coleridge metaphysics"
+      ]
+    },
+    {
+      "layer": 4,
+      "neuron": 1921,
+      "selectivity": 97.15705495061088,
+      "freq": 0.9787382247578612,
+      "contexts": [
+        " quarrel. Come as soon as you can on the receipt[[ of]]\n     this. My brother and the gentlemen are to",
+        " form of all heroines, may perhaps consist in the addition[[ to]] her\nplayfulness, her wit, her affectionate",
+        " therefore, nothing to do but to stretch himself on one of[[ the]]\nsofas and go to sleep. Darcy took"
+      ]
+    },
+    {
+      "layer": 4,
+      "neuron": 842,
+      "selectivity": 94.5151912811956,
+      "freq": 0.9786387156693644,
+      "contexts": [
+        " as intruding themselves needlessly long,\nshe urged Jane to[[ borrow]] Mr. Bingley\u2019s carriage immediately, and at",
+        ", and form her\nown judgment of her situation. The[[ note]] was immediately despatched, and\nits contents as",
+        ",\u201d said Mr. Bennet, when Elizabeth had read the[[ note]]\naloud, \u201cif your daughter should have a"
+      ]
+    },
+    {
+      "layer": 4,
+      "neuron": 4485,
+      "selectivity": 89.93320597639268,
+      "freq": 0.9870638184954226,
+      "contexts": [
+        " Mr.\nBingley\u2019s large fortune, the mention of[[ which]] gave animation to their\nmother, was worthless in their",
+        " of\nMiss Austen\u2019s heroes; the only possible competitor[[ being]] Henry Tilney,\nwhose part is so slight and simple",
+        ", nor were\nthe other ladies often absent; the gentlemen[[ being]] out, they had in fact\nnothing to do elsewhere"
+      ]
+    },
+    {
+      "layer": 5,
+      "neuron": 4803,
+      "selectivity": 85.17064769665075,
+      "freq": 0.9915417274777764,
+      "contexts": [
+        " can\nhelp doing so. Their names are, in chronological[[ order]], Elizabeth\nBennet, Diana Vernon, Arg",
+        " much\nmore rational if conversation instead of dancing made the order[[ of]] the\nday.\u201dMiss Bingley made no answer",
+        " spirit can\nhelp doing so. Their names are, in[[ chronological]] order, Elizabeth\nBennet, Diana Vernon,"
+      ]
+    },
+    {
+      "layer": 5,
+      "neuron": 4231,
+      "selectivity": 79.28933030223469,
+      "freq": 0.9821215337667507,
+      "contexts": [
+        " he was thinking of her with some\ncomplacency,[[ when]] thus accosted by Miss Bingley,--",
+        " courses that were to do credit to her\nhousekeeping,[[ when]] an answer arrived which deferred it all. Mr. B",
+        "icity of her\ncontrivance. Breakfast was scarcely over[[ when]] a servant from Netherfield\nbrought the following"
+      ]
+    },
+    {
+      "layer": 5,
+      "neuron": 2611,
+      "selectivity": 75.28232827130233,
+      "freq": 0.9905466365928088,
+      "contexts": [
+        ", which immediately provoking Elizabeth to do it, she\n[[turned]] to him and said,--\u201cDid not you think",
+        " oddity, I think,\u201d said she. \u201cI cannot[[ make]] him out. There\nis something very pompous in",
+        "\nher brother mentioning a ball to Miss Bennet, she[[ turned]] suddenly\ntowards him and said,--\u201cBy"
+      ]
+    },
+    {
+      "layer": 6,
+      "neuron": 1231,
+      "selectivity": 79.63952068863176,
+      "freq": 0.9678253947193843,
+      "contexts": [
+        "\naloud, \u201cif your daughter should have a dangerous[[ fit]] of illness--if she\nshould die--it would",
+        "aloud, \u201cif your daughter should have a dangerous fit[[ of]] illness--if she\nshould die--it would be",
+        " he did not keep it. His answer\nto this sudden[[ attack]] was delightful to her mother\u2019s ear.\u201cI am perfectly"
+      ]
+    },
+    {
+      "layer": 6,
+      "neuron": 3948,
+      "selectivity": 79.53085438440822,
+      "freq": 0.9911105214276237,
+      "contexts": [
+        " inherited property to the amount of nearly a hundred\nthousand[[ pounds]] from his father, who had intended to purchase an estate",
+        "seminaries in town; had a fortune of twenty thousand[[ pounds]]; were in the\nhabit of spending more than they",
+        " in Meryton, and\nhad left her four thousand[[ pounds]].She had a sister married to a Mr. Philips"
+      ]
+    },
+    {
+      "layer": 6,
+      "neuron": 1613,
+      "selectivity": 79.18150179950958,
+      "freq": 0.988456945734377,
+      "contexts": [
+        "thing, in all this dirt! You will not be fit[[ to]] be seen when you get\nthere.\u201d\u201cNo, indeed",
+        "\nthing, in all this dirt! You will not be[[ fit]] to be seen when you get\nthere.\u201d\u201cNo,",
+        " the visit to Hunsford, the Derbyshire tour--[[fit]] in after the\nsame unostentatious,"
+      ]
+    },
+    {
+      "layer": 7,
+      "neuron": 2562,
+      "selectivity": 78.56423425542786,
+      "freq": 0.9751558975719783,
+      "contexts": [
+        "                           George Saintsbury\n                                  and\n                           Illustrations[[ by]]\n                             Hugh Thomson_To J. Comyns Carr",
+        "\n                           George Saintsbury\n                                  and\n                           Illustr[[ations]] by\n                             Hugh Thomson_To J. Comyns",
+        " by\n                           George Saintsbury\n                                  and\n                          [[ Illustr]]ations by\n                             Hugh Thomson_To J. Comyn"
+      ]
+    },
+    {
+      "layer": 7,
+      "neuron": 4483,
+      "selectivity": 71.24329830902768,
+      "freq": 0.989816903277166,
+      "contexts": [
+        "\ncontrivance. Breakfast was scarcely over when a servant[[ from]] Netherfield\nbrought the following note for Elizabeth",
+        "ness) from\nthe gradual transformation of Elizabeth\u2019s own feelings[[ from]] positive\naversion to actual love. I do not",
+        " her daughter read,--\u201cWell, Jane, who is it[[ from]]? What is it about? What does he say?"
+      ]
+    },
+    {
+      "layer": 7,
+      "neuron": 2642,
+      "selectivity": 68.68581670226814,
+      "freq": 0.9949582061828314,
+      "contexts": [
+        " began to fear that\nhe might always be flying about from[[ one]] place to another, and never\nsettled at N",
+        " to fear that\nhe might always be flying about from one[[ place]] to another, and never\nsettled at Nether",
+        " the fire, lest she\nshould suffer from the change of[[ room]]; and she removed, at his desire,\nto the"
+      ]
+    },
+    {
+      "layer": 8,
+      "neuron": 254,
+      "selectivity": 68.33909499637456,
+      "freq": 0.9865662730529389,
+      "contexts": [
+        " herself forward. The two girls had been whispering to\n[[each]] other during the whole visit; and the result of it",
+        "\n     me, we shall be in danger of hating[[ each]] other for the rest of our\n     lives; for",
+        " never for many hours together; and as they\nalways see[[ each]] other in large mixed parties, it is impossible that\n"
+      ]
+    },
+    {
+      "layer": 8,
+      "neuron": 766,
+      "selectivity": 67.8899095499107,
+      "freq": 0.9811596125779488,
+      "contexts": [
+        " and much had been said\nin the regiment since the preceding[[ Wednesday]]; several of the officers\nhad dined lately with",
+        " and the other was art. On the\nfirst head she[[ could]] not make a mistake; her men, though limited,",
+        " in two very\nshort periods of writing--one of about[[ three]] years, and another of not\nmuch more than five"
+      ]
+    },
+    {
+      "layer": 8,
+      "neuron": 1499,
+      "selectivity": 63.89437175141496,
+      "freq": 0.9915417274777764,
+      "contexts": [
+        " been unfolded.\u201d\u201cWell,\u201d said Charlotte, \u201cI wish Jane[[ success]] with all my heart; and if\nshe were married",
+        " and the gentlemen are to dine with the officers.\n     Yours[[ ever]],She did at last extort from her father an",
+        " a favourite? and pray when am I to wish you\n[[joy]]?\u201d\u201cThat is exactly the question which I expected you to"
+      ]
+    },
+    {
+      "layer": 9,
+      "neuron": 3633,
+      "selectivity": 99.54432037834627,
+      "freq": 0.9759851399761178,
+      "contexts": [
+        " herself forward. The two girls had been whispering to\n[[each]] other during the whole visit; and the result of it",
+        "\n     me, we shall be in danger of hating[[ each]] other for the rest of our\n     lives; for",
+        " never for many hours together; and as they\nalways see[[ each]] other in large mixed parties, it is impossible that\n"
+      ]
+    },
+    {
+      "layer": 9,
+      "neuron": 907,
+      "selectivity": 72.04115701394677,
+      "freq": 0.9861682366989518,
+      "contexts": [
+        " name the very day of\nthe ball. But you would[[ not]] wish to be dancing while she is ill?\u201dLydia",
+        " of his unregenerate state,\nonly she has of course[[ not]] counted in what was due to her own personal\ncharm",
+        ", though ample for her situation in life, could but ill[[ supply]]\nthe deficiency of his. Her father had been an"
+      ]
+    },
+    {
+      "layer": 9,
+      "neuron": 2187,
+      "selectivity": 71.26592767074959,
+      "freq": 0.9911768608199549,
+      "contexts": [
+        " in love without\nencouragement. In nine cases out[[ of]] ten, a woman had better show _more_\naff",
+        " really in love without\nencouragement. In nine cases[[ out]] of ten, a woman had better show _more_\n",
+        " by your manner of talking, you must be two\nof[[ the]] silliest girls in the country. I have suspected it"
+      ]
+    },
+    {
+      "layer": 10,
+      "neuron": 3481,
+      "selectivity": 79.59728558198327,
+      "freq": 0.9760514793684489,
+      "contexts": [
+        "\nreasonableness. She has known him only a fortn[[ight]]. She danced four\ndances with him at M",
+        "reasonableness. She has known him only a fortnight[[.]] She danced four\ndances with him at Mery",
+        " its\nreasonableness. She has known him only a[[ fortn]]ight. She danced four\ndances with him at"
+      ]
+    },
+    {
+      "layer": 10,
+      "neuron": 3487,
+      "selectivity": 74.16373763915158,
+      "freq": 0.9895515457078413,
+      "contexts": [
+        "Mrs. Hurst was observing their game.Elizabeth took up[[ some]] needlework, and was sufficiently amused in\nattending",
+        " too little to care for his approbation.After playing[[ some]] Italian songs, Miss Bingley varied the charm by",
+        " was observing their game.Elizabeth took up some needlework,[[ and]] was sufficiently amused in\nattending to what passed between"
+      ]
+    },
+    {
+      "layer": 10,
+      "neuron": 3906,
+      "selectivity": 74.00035052983009,
+      "freq": 0.9594334615894918,
+      "contexts": [
+        " their actions,--may\nbe rendered ridiculous by a person[[ whose]] first object in life is a\njoke.\u201d\u201c",
+        "\u2019s beauty. I do not like to boast\nof my[[ own]] child; but to be sure, Jane--one does",
+        ".\u201d\u201cMr. Bennet, how can you abuse your[[ own]] children in such a way? You take\ndelight"
+      ]
+    },
+    {
+      "layer": 11,
+      "neuron": 353,
+      "selectivity": 86.3561136370921,
+      "freq": 0.9894520366193446,
+      "contexts": [
+        " is very rapid; it jumps from admiration to love, from[[ love]]\nto matrimony, in a moment. I",
+        " only took Fanny because Mary shocked him, and that F[[anny]] might\nvery likely have taken Crawford if he had been",
+        "mund only took Fanny because Mary shocked him, and that[[ F]]anny might\nvery likely have taken Crawford if he had"
+      ]
+    },
+    {
+      "layer": 11,
+      "neuron": 2008,
+      "selectivity": 83.79112073089354,
+      "freq": 0.9664322674804299,
+      "contexts": [
+        "field. Such amiable qualities must speak for\nthems[[elves]]. What a contrast between him and his friend! Mr",
+        ". She had high\nanimal spirits, and a sort of[[ natural]] self-consequence, which the\nattentions of the",
+        "self at Netherfield. Such amiable qualities must speak[[ for]]\nthemselves. What a contrast between him and"
+      ]
+    },
+    {
+      "layer": 11,
+      "neuron": 2247,
+      "selectivity": 62.07166673792317,
+      "freq": 0.9808279156162929,
+      "contexts": [
+        " well as her heart,\nwould have shrunk from such things[[ as]] the letter from the unfortunate\nhusband in the_",
+        "\nnovel which excelled in pathetic or humorous character,[[ or]] which\ndisplayed consummate command of dialogue--perhaps",
+        " having been to me--and, excepting a sore throat[[ and]] a\n     headache, there is not much the matter"
+      ]
+    },
+    {
+      "layer": 12,
+      "neuron": 4399,
+      "selectivity": 69.54325601452439,
+      "freq": 0.9639445402680111,
+      "contexts": [
+        " she is not acting by design. As yet she\ncannot[[ even]] be certain of the degree of her own regard, nor",
+        " acting by design. As yet she\ncannot even be certain[[ of]] the degree of her own regard, nor of its\n",
+        " is not acting by design. As yet she\ncannot even[[ be]] certain of the degree of her own regard, nor of"
+      ]
+    },
+    {
+      "layer": 12,
+      "neuron": 307,
+      "selectivity": 63.44617890236842,
+      "freq": 0.9739617885100172,
+      "contexts": [
+        "musical turn, you would have been invaluable; but as[[ it]] is, I would\nreally rather not sit down before",
+        "ical turn, you would have been invaluable; but as it[[ is]], I would\nreally rather not sit down before those",
+        "\nmusical turn, you would have been invaluable; but[[ as]] it is, I would\nreally rather not sit down"
+      ]
+    },
+    {
+      "layer": 12,
+      "neuron": 699,
+      "selectivity": 51.86244736584058,
+      "freq": 0.9289173411171554,
+      "contexts": [
+        "y. They attacked him\nin various ways, with bare[[f]]aced questions, ingenious suppositions, and\ndistant",
+        " established only as a tenant, Miss Bingley was by[[ no]]\nmeans unwilling to preside at his table; nor",
+        "\u2019clock the two ladies retired to dress, and at half[[-p]]ast six\nElizabeth was summoned to dinner. To the"
+      ]
+    },
+    {
+      "layer": 13,
+      "neuron": 916,
+      "selectivity": 58.57583144950257,
+      "freq": 0.9905134668966432,
+      "contexts": [
+        "etherfield is taken\nby a young man of large fortune[[ from]] the north of England; that he came\ndown on",
+        " taken\nby a young man of large fortune from the north[[ of]] England; that he came\ndown on Monday in a",
+        " is taken\nby a young man of large fortune from the[[ north]] of England; that he came\ndown on Monday in"
+      ]
+    },
+    {
+      "layer": 13,
+      "neuron": 421,
+      "selectivity": 58.0376031451419,
+      "freq": 0.9730993764097121,
+      "contexts": [
+        " my seeing Mr. Jones--therefore do not be alarmed[[ if]] you should hear\n     of his having been to me",
+        " Mr. Jones--therefore do not be alarmed if you[[ should]] hear\n     of his having been to me--and",
+        " not time to express them; by which\nmeans my letters[[ sometimes]] convey no ideas at all to my correspondents.\u201d\u201c"
+      ]
+    },
+    {
+      "layer": 13,
+      "neuron": 825,
+      "selectivity": 56.59977580409979,
+      "freq": 0.9714077219052674,
+      "contexts": [
+        " answer, therefore, was not propitious, at\nleast[[ not]] to Elizabeth\u2019s wishes, for she was impatient to get",
+        " Her answer, therefore, was not propitious, at\n[[least]] not to Elizabeth\u2019s wishes, for she was impatient to",
+        ", and I believe it at this\nmoment. At least[[,]] therefore, I did not assume the character of needless\n"
+      ]
+    },
+    {
+      "layer": 14,
+      "neuron": 1412,
+      "selectivity": 69.68744163802302,
+      "freq": 0.949946928486135,
+      "contexts": [
+        "able characteristics which seldom present\nthemselves now. As[[ for]] Mr. Bennet, Miss Austen, and Mr",
+        " her a share of the respect and affection (affection and[[\n]]respect of a peculiar kind; doubtless), with which",
+        " to her a share of the respect and affection (affection[[ and]]\nrespect of a peculiar kind; doubtless), with"
+      ]
+    },
+    {
+      "layer": 14,
+      "neuron": 1387,
+      "selectivity": 68.68444452248337,
+      "freq": 0.9827849276900623,
+      "contexts": [
+        " in the way in which a certain\nside, and more[[ than]] one, of humanity, and especially eighteenth-century\n",
+        " prime ministers and archbishops, of \u201cmetals,[[ semi]]-metals, and\ndistinguished philosophers.\u201d In",
+        "ety\u201d of his conduct. His wife was evidently, and[[ must]]\nalways have been, a quite irreclaimable fool"
+      ]
+    },
+    {
+      "layer": 14,
+      "neuron": 3056,
+      "selectivity": 67.09916507419786,
+      "freq": 0.987992569988059,
+      "contexts": [
+        " of this hereafter. If you should\n     have no[[ objection]] to receive me into your house, I propose myself\n",
+        " Wickham, and the rest, must pass without special comment[[,\n]]further than the remark that Charlotte Lucas (her egregious",
+        " a sweet girl, and one whom\nthey should not object[[ to]] know more of. Miss Bennet was therefore\nestablish"
+      ]
+    },
+    {
+      "layer": 15,
+      "neuron": 2969,
+      "selectivity": 95.02422158317694,
+      "freq": 0.9919729335279289,
+      "contexts": [
+        " no objection to receive me into your house, I propose myself[[\n]]     the satisfaction of waiting on you and your family,",
+        "\nshort periods of writing--one of about three years,[[ and]] another of not\nmuch more than five--she executed",
+        " Preface by\n                           George Saintsbury\n                                  and[[\n]]                           Illustrations by\n                             Hugh Thomson_To J."
+      ]
+    },
+    {
+      "layer": 15,
+      "neuron": 1721,
+      "selectivity": 72.64118432771001,
+      "freq": 0.9880920790765556,
+      "contexts": [
+        " periods of writing--one of about three years, and another[[ of]] not\nmuch more than five--she executed six capital",
+        " nor of its\nreasonableness. She has known him[[ only]] a fortnight. She danced four\ndances with",
+        " remarkable that in two very\nshort periods of writing--one[[ of]] about three years, and another of not\nmuch more"
+      ]
+    },
+    {
+      "layer": 15,
+      "neuron": 3487,
+      "selectivity": 71.92380582147615,
+      "freq": 0.9899495820618283,
+      "contexts": [
+        " few hints, when this\ndesirable event takes place,[[ as]] to the advantage of holding her tongue;\nand if you",
+        " chance as that of any man I know; and if,[[ as]] you were\nmounting your horse, a friend were",
+        " unregenerate state,\nonly she has of course not counted[[ in]] what was due to her own personal\ncharm.__"
+      ]
+    },
+    {
+      "layer": 16,
+      "neuron": 3484,
+      "selectivity": 111.5291877836514,
+      "freq": 0.9605944009552873,
+      "contexts": [
+        " was only the man who made\nhimself agreeable nowhere[[,]] and who had not thought her handsome enough\nto dance",
+        " have made no such pretension. I have faults enough,\n[[but]] they are not, I hope, of understanding. My",
+        " made no such pretension. I have faults enough,\nbut[[ they]] are not, I hope, of understanding. My temper"
+      ]
+    },
+    {
+      "layer": 16,
+      "neuron": 3153,
+      "selectivity": 107.48469805111606,
+      "freq": 0.975653443014462,
+      "contexts": [
+        "acency on the score of some\nquality or other, real[[ or]] imaginary. Vanity and pride are different\nthings, though",
+        " in playing with her bracelets and\nrings, joined now[[ and]] then in her brother\u2019s conversation with Miss\nBenn",
+        " her asleep, and\nwhen it appeared to her rather right[[ than]] pleasant that she should go\ndown stairs herself. On"
+      ]
+    },
+    {
+      "layer": 16,
+      "neuron": 726,
+      "selectivity": 98.2847623365567,
+      "freq": 0.9935319092477113,
+      "contexts": [
+        " rank, it did not render him supercilious; on[[ the]]\ncontrary, he was all attention to everybody.",
+        " his rank, it did not render him supercilious;[[ on]] the\ncontrary, he was all attention to everybody",
+        ", it did not render him supercilious; on the[[\n]]contrary, he was all attention to everybody. By"
+      ]
+    },
+    {
+      "layer": 17,
+      "neuron": 465,
+      "selectivity": 128.67528470166542,
+      "freq": 0.9938636062093671,
+      "contexts": [
+        " near them in silent indignation at such a mode of\n[[pass]]ing the evening, to the exclusion of all conversation,",
+        " or suspected, enough to be jealous; and her great\n[[an]]xiety for the recovery of her dear friend Jane received some",
+        ", no nasty niceness about her. The form of\n[[pass]]ion common and likely to seem natural in Miss Austen"
+      ]
+    },
+    {
+      "layer": 17,
+      "neuron": 2611,
+      "selectivity": 113.30508677663133,
+      "freq": 0.9927358365397373,
+      "contexts": [
+        " to many a woman who deserves it no\notherwise than by[[ net]]ting a purse or covering a screen; but I am",
+        " think. They all paint tables, cover screens, and\n[[net]] purses. I scarcely know any one who cannot do",
+        "iable cruelty. It is the custom with those\nwho judge[[ gross]]ly to contrast the good nature of Addison with the\n"
+      ]
+    },
+    {
+      "layer": 17,
+      "neuron": 1593,
+      "selectivity": 112.85259241523087,
+      "freq": 0.991641236566273,
+      "contexts": [
+        ", at\nwhom it was all aimed, was still[[ inf]]lexibly studious. In the\ndesperation of",
+        ", with either of which motives his joining them would\ninter[[f]]ere. What could he mean? She was dying to",
+        " think. They all paint tables, cover screens, and\n[[net]] purses. I scarcely know any one who cannot do"
+      ]
+    },
+    {
+      "layer": 18,
+      "neuron": 2855,
+      "selectivity": 109.8226907138831,
+      "freq": 0.9946596789173411,
+      "contexts": [
+        "\u201d in connection with her. If her world is a\n[[micro]]cosm, the cosmic quality of it is at least",
+        " and perfectly alive. In fact, for all the\n\u201c[[mini]]ature,\u201d there is something gigantic in the way in which",
+        "ous. Nothing in\neven our author is finer and more[[ delic]]ately touched than the change of\nhis demeanour at"
+      ]
+    },
+    {
+      "layer": 18,
+      "neuron": 416,
+      "selectivity": 105.19775546212354,
+      "freq": 0.9908783335544646,
+      "contexts": [
+        "ily\nexhibited if his creatress had not adjusted so[[ art]]fully to him the\nfigures of Mr. Bennet",
+        " that\nwe need not go beyond her own comparison to the[[ art]] of a miniature\npainter. To make this latter",
+        " genius knows. The one was humanity, and the other was[[ art]]. On the\nfirst head she could not make a"
+      ]
+    },
+    {
+      "layer": 18,
+      "neuron": 536,
+      "selectivity": 101.90030292631421,
+      "freq": 0.9893856972270134,
+      "contexts": [
+        " to deserve the word; and, besides all\nthis,[[ she]] must possess a certain something in her air and manner of",
+        ", to deserve the word; and, besides all\nthis[[,]] she must possess a certain something in her air and manner",
+        " miniature\npainter. To make this latter observation quite exact[[ we]] must not use the\nterm miniature in its restricted sense"
+      ]
+    },
+    {
+      "layer": 19,
+      "neuron": 413,
+      "selectivity": 131.76299305149828,
+      "freq": 0.9934987395515457,
+      "contexts": [
+        " given\nby Wickham, and by the awkwardness ([[ar]]ising with equal naturalness) from\nthe gradual transformation",
+        " happiness of seeing you; and though this gentleman dislikes the\n[[am]]usement in general, he can have no objection, I",
+        ". At length, quite exhausted by the attempt to be\n[[am]]used with her own book, which she had only chosen"
+      ]
+    },
+    {
+      "layer": 19,
+      "neuron": 4258,
+      "selectivity": 128.82929746182467,
+      "freq": 0.9944606607403477,
+      "contexts": [
+        " was a tall,\nheavy-looking young man of five-and-tw[[enty]]. His air was grave and\nstately, and",
+        " and cutting up a fool. A man in the early eight[[eenth]] century,\nof course, could push this taste further than",
+        " had himself\nexperienced from Lady Catherine. She had been[[ grac]]iously pleased to\napprove of both the discourses which"
+      ]
+    },
+    {
+      "layer": 19,
+      "neuron": 2581,
+      "selectivity": 117.17583578012196,
+      "freq": 0.9935319092477113,
+      "contexts": [
+        " and\nnothing could be, psychologically speaking, a_ causa[[ ver]]ior _for its\nsudden restoration to healthy conditions",
+        " fascinating Wickham.\nElizabeth, with nothing offensive, nothing_[[ vir]]aginous, _nothing of the\n\u201cNew Woman",
+        "her_ and more teasing than usual to himself. He\n[[wis]]ely resolved to be particularly careful that no sign of admiration"
+      ]
+    },
+    {
+      "layer": 20,
+      "neuron": 1620,
+      "selectivity": 112.08375858889589,
+      "freq": 0.9934987395515457,
+      "contexts": [
+        " what was going forward. As all\nconversation was thereby at[[ an]] end, Elizabeth soon afterwards left the\nroom.\u201c",
+        " to what was going forward. As all\nconversation was thereby[[ at]] an end, Elizabeth soon afterwards left the\nroom.",
+        " Jane and the contempt shown to the rest of her family\n[[ag]]gravate this resentment in the healthiest way in the"
+      ]
+    },
+    {
+      "layer": 20,
+      "neuron": 1374,
+      "selectivity": 108.90571830407302,
+      "freq": 0.974857370306488,
+      "contexts": [
+        "one of about three years, and another of not\nmuch[[ more]] than five--she executed six capital works, and has",
+        " estimation of ladies in general. I\ncannot boast of knowing[[ more]] than half-a-dozen in the whole range of my",
+        "--one of about three years, and another of not\n[[much]] more than five--she executed six capital works, and"
+      ]
+    },
+    {
+      "layer": 20,
+      "neuron": 2940,
+      "selectivity": 104.64753333932562,
+      "freq": 0.9946596789173411,
+      "contexts": [
+        " frigid as they might have looked\nto the Della[[ Cr]]uscans of their own day, and perhaps do look",
+        " own day, and perhaps do look to the Della\n[[Cr]]uscans of this.__And, after all, what",
+        " for\nshe will not know him herself.\u201d\u201cI honour your[[ circ]]umspection. A fortnight\u2019s acquaintance is certainly\n"
+      ]
+    },
+    {
+      "layer": 21,
+      "neuron": 4645,
+      "selectivity": 96.59998630081314,
+      "freq": 0.994029454690195,
+      "contexts": [
+        " really in love without\nencouragement. In nine cases[[ out]] of ten, a woman had better show _more_\n",
+        " of what he gives, you can\nshape a real impression[[ out]] of the rest. But with Miss Austen the\n",
+        " of an out-of-the-way country parish,\nrich, long[[ out]] of marital authority, and so forth, had opportunities of"
+      ]
+    },
+    {
+      "layer": 21,
+      "neuron": 653,
+      "selectivity": 91.15461894583785,
+      "freq": 0.9953562425368183,
+      "contexts": [
+        " in company with him four times. This is not quite\n[[en]]ough to make her understand his character.\u201d\u201cNot as",
+        " though up, was very feverish, and not well\n[[en]]ough to leave her room. Elizabeth was glad to be",
+        ", who had intended to purchase an estate,\nbut did not[[ live]] to do it. Mr. Bingley intended it"
+      ]
+    },
+    {
+      "layer": 21,
+      "neuron": 1572,
+      "selectivity": 90.13398359415318,
+      "freq": 0.9941621334748574,
+      "contexts": [
+        " tolerable fortune, and risen to the\nhonour of[[ kn]]ighthood by an address to the king during his may",
+        " without seeming to have\nany intention of speaking, Miss Lucas[[ def]]ied her friend to mention such\na subject to him",
+        " she very early received from Mr. Bingley by a[[ house]]maid,\nand some time afterwards from the two elegant ladies"
+      ]
+    },
+    {
+      "layer": 22,
+      "neuron": 4638,
+      "selectivity": 113.63497986173377,
+      "freq": 0.9927690062359029,
+      "contexts": [
+        " Elizabeth\nBennet, Diana Vernon, Argemone[[ L]]avington, Beatrix Esmond, and Barbara\n",
+        " with the greatest\npleasure; but Elizabeth still saw super[[cil]]iousness in their treatment of\neverybody, hardly",
+        "and\nsecondly in her being entirely destitute of[[ ill]]-nature for all her\npropensity to tease and"
+      ]
+    },
+    {
+      "layer": 22,
+      "neuron": 3642,
+      "selectivity": 104.53800326528048,
+      "freq": 0.9535292556720181,
+      "contexts": [
+        " of waiting on you and your family, Monday,\n     November[[ ]]18th, by four o\u2019clock, and",
+        ") was in its first shape written very early, somewhere about[[ ]]1796,\nwhen Miss Austen was barely",
+        "poor Mrs. Bennet\u2019s anguish over the entail._[[_]]The Bingleys and the Gardiners and the Luc"
+      ]
+    },
+    {
+      "layer": 22,
+      "neuron": 4777,
+      "selectivity": 99.4985652850302,
+      "freq": 0.9888549820883641,
+      "contexts": [
+        " of\nthe playwright has ever been laid upon_ Pride and[[ Pre]]judice; _and I dare\nsay that,",
+        ",\nI, for my part, declare for_ Pride and[[ Pre]]judice _unhesitatingly. It\nse",
+        ".__The goodness of the minor characters in_ Pride and[[ Pre]]judice _has been\nalready alluded to,"
+      ]
+    },
+    {
+      "layer": 23,
+      "neuron": 2751,
+      "selectivity": 138.64575637293123,
+      "freq": 0.9921056123125912,
+      "contexts": [
+        " or less estimable than such a one as yours.\u201d\u201c[[L]]izzy,\u201d cried her mother, \u201cremember where you are",
+        " characteristic dialogue; such figures as Miss Bates, as the\n[[El]]tons, cannot but unite the suffrages of everybody",
+        " an end, Elizabeth soon afterwards left the\nroom.\u201c[[El]]iza Bennet,\u201d said Miss Bingley, when"
+      ]
+    },
+    {
+      "layer": 23,
+      "neuron": 301,
+      "selectivity": 118.21508382609146,
+      "freq": 0.9933660607668834,
+      "contexts": [
+        " I believe, a considerable party for it._ Sense and\n[[S]]ensibility _has perhaps the fewest out-and-out",
+        " copying and then retailing moral sentiments, of playing and\n[[s]]inging too long in public, are, no doubt,",
+        " again, she was eagerly succeeded at the instrument by her\n[[s]]ister Mary, who having, in consequence of being the"
+      ]
+    },
+    {
+      "layer": 23,
+      "neuron": 1202,
+      "selectivity": 113.97102162413363,
+      "freq": 0.9931007031975587,
+      "contexts": [
+        " advice. Mr. Darcy walked off; and Elizabeth\n[[rem]]ained with no very cordial feelings towards him. She",
+        "that Miss Bennet shall receive every possible attention while she\n[[rem]]ains with us.\u201d\u201cI am sure,\u201d she added,",
+        " Austen there is, though a\nrestrained and well[[-m]]annered, an insatiable and ruthless delight in"
+      ]
+    }
+  ]
+}

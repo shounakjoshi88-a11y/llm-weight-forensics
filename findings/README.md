@@ -9,6 +9,7 @@ laptop GPU. Each finding stands alone: method, numbers, what it does not show.
 | [02](02-causality.md) | Causality | Massive activations are input-independent biases and removing all three collapses the model 18x. The induction heads are not load-bearing. |
 | [03](03-importance.md) | Importance | Attention pattern does not predict importance. Language and induction use almost entirely disjoint heads. |
 | [04](04-weight-space.md) | Weight space | Classical weight-only circuit readouts fail on this GQA + RoPE model, for identifiable structural reasons. |
+| [05](05-neurons.md) | Neurons | Zero dead neurons, 98% activation density, and the sharpest neurons track subword continuations rather than concepts. |
 
 Raw measurements are the `e0N_*.json` files next to each writeup.
 
