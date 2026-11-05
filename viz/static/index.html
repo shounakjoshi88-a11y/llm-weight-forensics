@@ -2,231 +2,802 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Neuron Visualizer · Qwen2.5-0.5B</title>
 <style>
   :root {
-    --bg: #070a12;
-    --panel: #0d1220;
-    --line: #1b2438;
-    --ink: #e6ecf7;
-    --dim: #7d8aa3;
-    --hot: #ffc266;
-    --warm: #ff7a45;
-    --cool: #4cc9f0;
+    --paper: #F4F1E9;
+    --paper-2: #FBF9F3;
+    --paper-3: #EDE9DC;
+    --ink: #1F1E1C;
+    --ink-soft: #45423C;
+    --muted: #7C786C;
+    --line: #DFD9C9;
+    --line-soft: #E8E3D5;
+    --clay: #D97757;
+    --clay-deep: #B44F2E;
+    --blue: #5C7C8A;
+    --serif: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+    --sans: "Inter", -apple-system, "Segoe UI", system-ui, sans-serif;
+    --mono: "JetBrains Mono", "SF Mono", Consolas, monospace;
   }
   * { box-sizing: border-box; }
+  html, body { height: 100%; }
   body {
-    margin: 0; background: var(--bg); color: var(--ink);
-    font-family: ui-monospace, "JetBrains Mono", Consolas, monospace;
-    font-size: 13px; line-height: 1.5;
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 13px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
   }
+
   header {
-    display: flex; align-items: baseline; gap: 16px;
-    padding: 18px 22px 14px; border-bottom: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 22px 14px;
+    border-bottom: 1px solid var(--line);
+    background: var(--paper-2);
   }
-  h1 { font-size: 15px; margin: 0; letter-spacing: .02em; font-weight: 600; }
-  header .meta { color: var(--dim); font-size: 12px; }
-  .dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%;
-         background: var(--cool); margin-right: 6px; vertical-align: middle; }
-  .dot.off { background: #3a4356; }
-  .bar { display: flex; gap: 10px; padding: 14px 22px; align-items: center; }
+  .mark {
+    width: 22px; height: 22px; border-radius: 6px;
+    background: var(--clay);
+    box-shadow: inset 0 -6px 10px rgba(0,0,0,.10);
+    flex: none;
+  }
+  h1 {
+    font-family: var(--serif);
+    font-size: 19px;
+    font-weight: 600;
+    letter-spacing: .01em;
+    margin: 0;
+  }
+  header .sub {
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: 11.5px;
+    padding-top: 3px;
+  }
+  header .grow { flex: 1; }
+  .status {
+    display: flex; align-items: center; gap: 7px;
+    color: var(--muted); font-size: 12px;
+  }
+  .dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--clay);
+    box-shadow: 0 0 0 3px rgba(217,119,87,.16);
+  }
+  .dot.off { background: #C4BEAE; box-shadow: 0 0 0 3px rgba(0,0,0,.04); }
+
+  .controls {
+    display: flex; align-items: center; gap: 10px;
+    padding: 12px 22px;
+    border-bottom: 1px solid var(--line);
+    background: var(--paper-2);
+  }
   input[type=text] {
-    flex: 1; background: var(--panel); border: 1px solid var(--line);
-    color: var(--ink); padding: 10px 12px; border-radius: 6px;
-    font-family: inherit; font-size: 13px; outline: none;
+    flex: 1;
+    min-width: 120px;
+    background: #fff;
+    border: 1px solid var(--line);
+    color: var(--ink);
+    padding: 10px 13px;
+    border-radius: 9px;
+    font-family: var(--sans);
+    font-size: 13.5px;
+    outline: none;
+    transition: border-color .15s, box-shadow .15s;
   }
-  input[type=text]:focus { border-color: #2c3c5c; }
+  input[type=text]:focus {
+    border-color: #C9A88F;
+    box-shadow: 0 0 0 3px rgba(217,119,87,.12);
+  }
   button {
-    background: #16203a; color: var(--ink); border: 1px solid #24314e;
-    padding: 10px 16px; border-radius: 6px; cursor: pointer;
-    font-family: inherit; font-size: 13px;
+    font-family: var(--sans);
+    font-size: 13px;
+    border-radius: 9px;
+    padding: 10px 16px;
+    cursor: pointer;
+    border: 1px solid var(--line);
+    background: #fff;
+    color: var(--ink);
+    transition: background .15s, border-color .15s, opacity .15s;
   }
-  button:hover { background: #1c2947; }
-  button:disabled { opacity: .45; cursor: default; }
-  main { display: grid; grid-template-columns: 1fr 300px; gap: 18px; padding: 4px 22px 22px; }
-  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 14px; }
-  canvas { display: block; width: 100%; height: auto; }
-  .cap { color: var(--dim); font-size: 11px; margin-top: 8px; }
-  #tok { font-size: 22px; color: var(--hot); min-height: 34px; word-break: break-all; }
-  .kv { display: flex; justify-content: space-between; padding: 3px 0; border-bottom: 1px solid #121a2b; }
-  .kv span:last-child { color: var(--dim); }
-  .nlist { margin-top: 10px; max-height: 260px; overflow: auto; }
-  .nrow { display: flex; justify-content: space-between; padding: 2px 0; font-size: 12px; }
-  .nrow b { color: var(--cool); font-weight: 500; }
-  .nrow i { color: var(--dim); font-style: normal; }
-  #out { color: var(--dim); white-space: pre-wrap; word-break: break-word;
-         max-height: 90px; overflow: auto; font-size: 12px; }
-  .legend { display: flex; gap: 8px; align-items: center; color: var(--dim); font-size: 11px; margin-top: 8px; }
-  .sw { height: 9px; flex: 1; border-radius: 2px;
-        background: linear-gradient(90deg, #0d1526, #2b6a8f, var(--cool), var(--hot), var(--warm)); }
+  button:hover { background: var(--paper-3); }
+  button:disabled { opacity: .4; cursor: default; }
+  button.primary {
+    background: var(--clay);
+    border-color: var(--clay);
+    color: #fff;
+    font-weight: 500;
+  }
+  button.primary:hover { background: var(--clay-deep); border-color: var(--clay-deep); }
+  button.ghost { color: var(--muted); }
+  .toggle {
+    display: flex; align-items: center; gap: 7px;
+    color: var(--ink-soft); font-size: 12.5px;
+    padding: 0 4px; user-select: none; cursor: pointer;
+  }
+  .toggle input { accent-color: var(--clay); width: 14px; height: 14px; }
+
+  main {
+    flex: 1;
+    min-height: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 320px;
+    gap: 16px;
+    padding: 16px 22px 20px;
+  }
+
+  .stage {
+    position: relative;
+    min-width: 0;
+    min-height: 0;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: var(--paper);
+    overflow: hidden;
+    box-shadow: 0 1px 0 rgba(255,255,255,.7) inset;
+  }
+  #net { position: absolute; inset: 0; display: block; }
+
+  .legend {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px;
+    color: var(--muted);
+    font-size: 11px;
+    background: var(--paper-3);
+    border: 1px solid var(--line-soft);
+    border-radius: 9px;
+    padding: 9px 11px;
+    margin-bottom: 13px;
+  }
+  .legend .key { display: flex; align-items: center; gap: 6px; }
+  .sw { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+  .sw.pos { background: var(--clay); box-shadow: 0 0 6px rgba(217,119,87,.8); }
+  .sw.neg { background: var(--blue); box-shadow: 0 0 6px rgba(92,124,138,.7); }
+
+  .panel {
+    min-height: 0;
+    overflow: auto;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: var(--paper-2);
+    padding: 16px 16px 14px;
+  }
+  .label {
+    font-size: 10.5px;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .token {
+    font-family: var(--mono);
+    font-size: 22px;
+    color: var(--clay-deep);
+    min-height: 30px;
+    word-break: break-all;
+    line-height: 1.25;
+  }
+  .meta {
+    display: flex; justify-content: space-between;
+    color: var(--muted); font-family: var(--mono); font-size: 11.5px;
+    margin-top: 4px;
+  }
+  .hr { height: 1px; background: var(--line-soft); margin: 15px 0; }
+  .big {
+    font-family: var(--mono);
+    font-size: 17px;
+    color: var(--ink);
+  }
+  .big small { color: var(--muted); font-size: 11.5px; margin-left: 6px; }
+  .nlist { margin-top: 9px; display: flex; flex-direction: column; gap: 2px; }
+  .nrow {
+    display: grid;
+    grid-template-columns: 62px 1fr 52px;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--mono);
+    font-size: 11.5px;
+  }
+  .nrow .id { color: var(--ink-soft); }
+  .nrow .bar { height: 5px; border-radius: 3px; background: var(--paper-3); overflow: hidden; }
+  .nrow .bar i { display: block; height: 100%; background: var(--clay); border-radius: 3px; }
+  .nrow.neg .bar i { background: var(--blue); }
+  .nrow .val { text-align: right; color: var(--muted); }
+  #out {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    white-space: pre-wrap;
+    word-break: break-word;
+    max-height: 140px;
+    overflow: auto;
+  }
+  .note {
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  @media (max-width: 900px) {
+    main { grid-template-columns: 1fr; grid-template-rows: minmax(0,1fr) auto; }
+    .panel { max-height: 240px; }
+  }
 </style>
 </head>
 <body>
+
 <header>
+  <span class="mark"></span>
   <h1>Neuron Visualizer</h1>
-  <span class="meta"><span class="dot off" id="status"></span><span id="statusText">idle</span></span>
-  <span class="meta" id="modelMeta">Qwen2.5-0.5B-Instruct · 24 layers · 4864 neurons/layer</span>
+  <span class="sub">Qwen2.5-0.5B-Instruct</span>
+  <span class="grow"></span>
+  <span class="status"><span class="dot off" id="statusDot"></span><span id="statusText">loading</span></span>
 </header>
 
-<div class="bar">
-  <input id="prompt" type="text" value="The capital of France is" />
-  <button id="go">Generate</button>
+<div class="controls">
+  <input id="prompt" type="text" value="The capital of France is" spellcheck="false" autocomplete="off" />
+  <button id="go" class="primary">Generate</button>
   <button id="stop" disabled>Stop</button>
+  <label class="toggle"><input type="checkbox" id="auto" checked /> auto focus</label>
+  <button id="reset" class="ghost">Reset view</button>
 </div>
 
 <main>
-  <div class="card">
-    <canvas id="heat" width="900" height="520"></canvas>
-    <div class="legend">
-      <span>quiet</span><span class="sw"></span><span>loud</span>
-      <span style="margin-left:12px">rows = layers 0-23, columns = top 64 neurons by |activation|</span>
-    </div>
-  </div>
+  <section class="stage">
+    <canvas id="net"></canvas>
+  </section>
 
-  <div class="card">
-    <div class="cap">current token</div>
-    <div id="tok">-</div>
-    <div class="kv"><span>step</span><span id="step">0</span></div>
-    <div class="kv"><span>layer</span><span id="layerSel">-</span></div>
-    <div class="kv"><span>peak</span><span id="peak">-</span></div>
-    <div class="cap" style="margin-top:14px">top neurons, this layer</div>
-    <div class="nlist" id="nlist"></div>
-  </div>
+  <aside class="panel">
+    <div class="label">now processing</div>
+    <div id="tok" class="token">-</div>
+    <div class="meta"><span id="phase">idle</span><span id="pos">0</span></div>
+
+    <div class="hr"></div>
+
+    <div class="label">hottest layer</div>
+    <div id="hotLayer" class="big">-</div>
+    <div id="nlist" class="nlist"></div>
+
+    <div class="hr"></div>
+
+    <div class="label">output</div>
+    <div id="out">-</div>
+
+    <div class="hr"></div>
+
+    <div class="legend">
+      <span class="key"><i class="sw pos"></i>positive</span>
+      <span class="key"><i class="sw neg"></i>negative</span>
+      <span class="key">glow = activation</span>
+      <span class="key">columns = layers</span>
+    </div>
+
+    <p class="note">
+      48 of 4,864 MLP neurons per layer, picked by how strongly each one writes
+      to the residual stream. Every value here is a real activation from the
+      forward pass, streamed as the model reads the prompt and then writes.
+    </p>
+  </aside>
 </main>
 
-<div class="card" style="margin:0 22px 22px">
-  <div class="cap">output</div>
-  <div id="out"></div>
-</div>
-
 <script>
-const heat = document.getElementById("heat");
-const ctx = heat.getContext("2d");
-const ROWS = 24, COLS = 64;
-const PAD_L = 34, PAD_T = 8, CW = 13, CH = 20;
+(() => {
+  "use strict";
 
-let data = null;          // latest payload
-let selectedLayer = 0;
-let source = null;
-let trail = 0;
+  const cv = document.getElementById("net");
+  const ctx = cv.getContext("2d");
 
-function colorFor(v) {
-  // v in 0..1 -> dark blue to cyan to amber to warm
-  const stops = [
-    [0.00, 13, 21, 38],
-    [0.30, 43, 106, 143],
-    [0.55, 76, 201, 240],
-    [0.80, 255, 194, 102],
-    [1.00, 255, 122, 69],
-  ];
-  let a = stops[0], b = stops[stops.length - 1];
-  for (let i = 0; i < stops.length - 1; i++) {
-    if (v >= stops[i][0] && v <= stops[i + 1][0]) { a = stops[i]; b = stops[i + 1]; break; }
-  }
-  const t = (v - a[0]) / Math.max(1e-6, b[0] - a[0]);
-  const r = Math.round(a[1] + (b[1] - a[1]) * t);
-  const g = Math.round(a[2] + (b[2] - a[2]) * t);
-  const bl = Math.round(a[3] + (b[3] - a[3]) * t);
-  return `rgb(${r},${g},${bl})`;
-}
+  let L = 24, K = 48;
+  let meta = null;
+  let target = [], disp = [], sgn = [];
+  let lscale = new Float32Array(24), lweight = new Float32Array(24);
+  let gmax = 0;
+  let last = null;
+  let source = null;
+  let outText = "";
 
-function draw() {
-  ctx.clearRect(0, 0, heat.width, heat.height);
-  ctx.fillStyle = "#0a0f1a";
-  ctx.fillRect(0, 0, heat.width, heat.height);
+  let W = 0, H = 0, DPR = 1;
+  let worldW = 1, worldH = 1, fit = 1;
 
-  ctx.font = "10px ui-monospace, monospace";
-  for (let r = 0; r < ROWS; r++) {
-    ctx.fillStyle = r === selectedLayer ? "#4cc9f0" : "#3d4a63";
-    ctx.fillText(String(r).padStart(2, "0"), 6, PAD_T + r * CH + 14);
+  const PADX = 66, PADY = 60, COL = 56, ROW = 17.4, BOTTOM = 60;
+
+  let cam = { x: 0, y: 0, z: 1 };
+  let camT = { x: 0, y: 0, z: 1 };
+  let autoFocus = true;
+  let hotLayer = -1;
+  let dragging = false;
+  let dragMoved = false;
+
+  const pulses = [];
+  let glowPos = null, glowNeg = null;
+
+  // ---------------------------------------------------------------- layout
+
+  function layout() {
+    worldW = PADX * 2 + (L - 1) * COL;
+    worldH = PADY * 2 + (K - 1) * ROW + BOTTOM;
   }
 
-  if (!data) return;
-  for (const layer of data.layers) {
-    const r = layer.layer;
-    if (r >= ROWS) continue;
-    const mx = layer.max || 1e-9;
-    for (let c = 0; c < Math.min(COLS, layer.top.length); c++) {
-      const v = Math.min(1, Math.abs(layer.top[c].v) / mx);
-      ctx.fillStyle = colorFor(v);
-      ctx.fillRect(PAD_L + c * CW, PAD_T + r * CH, CW - 1.5, CH - 2.5);
+  function nodePos(li, j) {
+    return {
+      x: PADX + li * COL,
+      y: PADY + j * ROW + Math.sin(li * 1.31 + j * 0.71) * 2.0,
+    };
+  }
+
+  function makeGlow(r, g, b) {
+    const c = document.createElement("canvas");
+    c.width = c.height = 96;
+    const x = c.getContext("2d");
+    const grd = x.createRadialGradient(48, 48, 0, 48, 48, 48);
+    grd.addColorStop(0.00, `rgba(${r},${g},${b},0.95)`);
+    grd.addColorStop(0.30, `rgba(${r},${g},${b},0.42)`);
+    grd.addColorStop(0.65, `rgba(${r},${g},${b},0.10)`);
+    grd.addColorStop(1.00, `rgba(${r},${g},${b},0)`);
+    x.fillStyle = grd;
+    x.fillRect(0, 0, 96, 96);
+    return c;
+  }
+
+  // ---------------------------------------------------------------- resize
+
+  function resize() {
+    const r = cv.parentElement.getBoundingClientRect();
+    DPR = Math.min(window.devicePixelRatio || 1, 2);
+    W = Math.max(320, Math.round(r.width));
+    H = Math.max(260, Math.round(r.height));
+    cv.width = Math.round(W * DPR);
+    cv.height = Math.round(H * DPR);
+    cv.style.width = W + "px";
+    cv.style.height = H + "px";
+    layout();
+    fit = Math.min(W / worldW, H / worldH) * 0.96;
+    if (cam.z < fit) cam.z = fit;
+    if (camT.z < fit) camT.z = fit;
+    if (!last) {
+      cam.x = camT.x = worldW / 2;
+      cam.y = camT.y = worldH / 2;
+      cam.z = camT.z = fit;
     }
   }
-  if (trail > 0) {
-    ctx.fillStyle = `rgba(7,10,18,${trail})`;
-    ctx.fillRect(0, 0, heat.width, heat.height);
-    trail = 0;
+
+  // ---------------------------------------------------------------- camera
+
+  function updateCameraTarget() {
+    if (!autoFocus || dragging) return;
+
+    let total = 0, sw = 0, sx = 0, sy = 0, topSum = 0;
+    const items = [];
+    for (let li = 0; li < L; li++) {
+      for (let j = 0; j < K; j++) {
+        const w = target[li][j];
+        const w2 = w * w;
+        total += w2;
+        if (w > 0.10) items.push([w2, li, j]);
+      }
+    }
+    if (!items.length || total <= 1e-9) {
+      camT.x = worldW / 2;
+      camT.y = worldH / 2;
+      camT.z = fit;
+      return;
+    }
+
+    items.sort((a, b) => b[0] - a[0]);
+    const top = items.slice(0, 14);
+    for (const item of top) {
+      const p = nodePos(item[1], item[2]);
+      sw += item[0]; sx += item[0] * p.x; sy += item[0] * p.y;
+      topSum += item[0];
+    }
+
+    // how much of the total activity sits in the top 14 neurons: when the
+    // firing is concentrated, push in; when it is spread, stay wide
+    const focus = Math.min(1, topSum / total);
+    const z = Math.min(fit * 3.2, fit * (1 + 2.4 * focus));
+
+    camT.z = z;
+    camT.x = sx / sw;
+    camT.y = sy / sw;
+
+    const hw = W / (2 * camT.z), hh = H / (2 * camT.z);
+    camT.x = worldW < 2 * hw ? worldW / 2
+      : Math.max(hw, Math.min(worldW - hw, camT.x));
+    camT.y = worldH < 2 * hh ? worldH / 2
+      : Math.max(hh, Math.min(worldH - hh, camT.y));
   }
-}
 
-function updatePanel() {
-  if (!data) return;
-  document.getElementById("tok").textContent = JSON.stringify(data.token);
-  document.getElementById("step").textContent = data.step;
-  const layer = data.layers.find(l => l.layer === selectedLayer);
-  if (!layer) return;
-  document.getElementById("layerSel").textContent = selectedLayer;
-  document.getElementById("peak").textContent = layer.max.toFixed(2);
-  const list = document.getElementById("nlist");
-  list.innerHTML = layer.top.slice(0, 14).map(n =>
-    `<div class="nrow"><b>n${n.n}</b><i>${n.v >= 0 ? "+" : ""}${n.v.toFixed(3)}</i></div>`
-  ).join("");
-}
+  function stepCamera() {
+    const k = 0.075;
+    cam.x += (camT.x - cam.x) * k;
+    cam.y += (camT.y - cam.y) * k;
+    cam.z += (camT.z - cam.z) * 0.06;
+  }
 
-heat.addEventListener("click", (e) => {
-  const rect = heat.getBoundingClientRect();
-  const y = (e.clientY - rect.top) * (heat.height / rect.height);
-  const r = Math.floor((y - PAD_T) / CH);
-  if (r >= 0 && r < ROWS) { selectedLayer = r; updatePanel(); draw(); }
-});
+  // ---------------------------------------------------------------- drawing
 
-function setStatus(text, on) {
-  document.getElementById("statusText").textContent = text;
-  document.getElementById("status").className = "dot" + (on ? "" : " off");
-}
+  function drawBackdrop() {
+    const g = ctx.createLinearGradient(0, 0, 0, H);
+    g.addColorStop(0, "#F7F4EC");
+    g.addColorStop(1, "#EFEBDD");
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, W, H);
 
-function generate() {
-  if (source) source.close();
-  const prompt = document.getElementById("prompt").value;
-  const max = 40;
-  document.getElementById("out").textContent = "";
-  document.getElementById("go").disabled = true;
-  document.getElementById("stop").disabled = false;
-  setStatus("generating", true);
+    ctx.fillStyle = "rgba(120,110,92,0.10)";
+    const gap = 26;
+    for (let x = gap / 2; x < W; x += gap) {
+      for (let y = gap / 2; y < H; y += gap) {
+        ctx.fillRect(x, y, 1, 1);
+      }
+    }
+  }
 
-  let text = "";
-  source = new EventSource(`/stream?prompt=${encodeURIComponent(prompt)}&max_tokens=${max}`);
-  source.onmessage = (ev) => {
-    const msg = JSON.parse(ev.data);
+  function topIdx(li, n) {
+    const arr = [];
+    for (let j = 0; j < K; j++) arr.push([disp[li][j], j]);
+    arr.sort((a, b) => b[0] - a[0]);
+    return arr.slice(0, n).filter(a => a[0] > 0.30).map(a => a[1]);
+  }
+
+  function drawEdges() {
+    ctx.lineCap = "round";
+    for (let li = 0; li < L - 1; li++) {
+      const a = topIdx(li, 5);
+      const b = topIdx(li + 1, 5);
+      if (!a.length || !b.length) continue;
+      for (const i of a) {
+        const p1 = nodePos(li, i);
+        for (const j of b) {
+          const w = Math.min(disp[li][i], disp[li + 1][j]);
+          if (w < 0.30) continue;
+          const p2 = nodePos(li + 1, j);
+          const mx = (p1.x + p2.x) / 2;
+          ctx.beginPath();
+          ctx.moveTo(p1.x, p1.y);
+          ctx.bezierCurveTo(mx, p1.y, mx, p2.y, p2.x, p2.y);
+          ctx.strokeStyle = `rgba(150,118,92,${Math.min(0.30, w * 0.30)})`;
+          ctx.lineWidth = 0.7 / cam.z;
+          ctx.stroke();
+        }
+      }
+    }
+  }
+
+  function drawNodes() {
+    const pos = "#D97757", neg = "#5C7C8A";
+    for (let li = 0; li < L; li++) {
+      for (let j = 0; j < K; j++) {
+        const rel = disp[li][j];
+        const p = nodePos(li, j);
+        const a = Math.min(1, rel);
+
+        if (rel > 0.16) {
+          const g = (6 + 24 * Math.pow(a, 0.8)) / cam.z;
+          ctx.globalAlpha = Math.min(0.92, 0.10 + 0.82 * Math.pow(a, 1.2));
+          ctx.drawImage(sgn[li][j] < 0 ? glowNeg : glowPos,
+                        p.x - g, p.y - g, 2 * g, 2 * g);
+          ctx.globalAlpha = 1;
+        }
+
+        const r = (2.5 + 3.0 * a) / cam.z;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
+        if (rel < 0.05) {
+          ctx.globalAlpha = 0.30;
+          ctx.fillStyle = "rgba(122,112,94,1)";
+        } else {
+          ctx.globalAlpha = 0.18 + 0.82 * a;
+          ctx.fillStyle = sgn[li][j] < 0 ? neg : pos;
+        }
+        ctx.fill();
+        ctx.globalAlpha = 1;
+      }
+    }
+  }
+
+  function drawPulses(now) {
+    for (let i = pulses.length - 1; i >= 0; i--) {
+      const p = pulses[i];
+      const age = (now - p.t) / 620;
+      if (age >= 1) { pulses.splice(i, 1); continue; }
+      const q = nodePos(p.li, p.j);
+      const r = (2.2 + 15 * age) / cam.z;
+      ctx.beginPath();
+      ctx.arc(q.x, q.y, r, 0, Math.PI * 2);
+      ctx.strokeStyle = `rgba(217,119,87,${0.42 * (1 - age)})`;
+      ctx.lineWidth = 1.1 / cam.z;
+      ctx.stroke();
+    }
+  }
+
+  function drawAxis() {
+    const y = H - 18;
+    const g = ctx.createLinearGradient(0, H - 42, 0, H);
+    g.addColorStop(0, "rgba(244,241,233,0)");
+    g.addColorStop(1, "rgba(244,241,233,0.94)");
+    ctx.fillStyle = g;
+    ctx.fillRect(0, H - 42, W, 42);
+
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.font = '10.5px "JetBrains Mono", Consolas, monospace';
+    for (let li = 0; li < L; li++) {
+      const sx = (PADX + li * COL - cam.x) * cam.z + W / 2;
+      if (sx < 12 || sx > W - 12) continue;
+      ctx.fillStyle = li === hotLayer ? "#B44F2E" : "rgba(70,64,54,0.50)";
+      ctx.fillText(String(li), sx, y);
+    }
+    ctx.textAlign = "left";
+    ctx.fillStyle = "rgba(70,64,54,0.38)";
+    ctx.fillText("layer", 14, y);
+  }
+
+  function render(now) {
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    drawBackdrop();
+
+    if (!meta) {
+      ctx.fillStyle = "rgba(120,112,96,0.55)";
+      ctx.font = '13px "Inter", system-ui, sans-serif';
+      ctx.textAlign = "center";
+      ctx.fillText("loading network", W / 2, H / 2);
+      requestAnimationFrame(render);
+      return;
+    }
+
+    // ease displayed activation toward the target so firing has weight
+    for (let li = 0; li < L; li++) {
+      const d = disp[li], t = target[li];
+      for (let j = 0; j < K; j++) d[j] += (t[j] - d[j]) * 0.22;
+    }
+
+    updateCameraTarget();
+    stepCamera();
+
+    ctx.save();
+    ctx.translate(W / 2, H / 2);
+    ctx.scale(cam.z, cam.z);
+    ctx.translate(-cam.x, -cam.y);
+
+    drawEdges();
+    drawPulses(now);
+    drawNodes();
+
+    ctx.restore();
+    drawAxis();
+    requestAnimationFrame(render);
+  }
+
+  // ---------------------------------------------------------------- data
+
+  function initData() {
+    target = Array.from({ length: L }, () => new Float32Array(K));
+    disp = Array.from({ length: L }, () => new Float32Array(K));
+    sgn = Array.from({ length: L }, () => new Int8Array(K).fill(1));
+    lscale = new Float32Array(L);
+    lweight = new Float32Array(L);
+    gmax = 0;
+  }
+
+  function onFrame(msg) {
     if (msg.done) { finish(); return; }
-    data = msg;
-    trail = 0.18;
-    text += msg.token;
-    document.getElementById("out").textContent = text;
-    updatePanel();
-    draw();
-  };
-  source.onerror = () => finish();
-}
 
-function finish() {
-  if (source) { source.close(); source = null; }
-  document.getElementById("go").disabled = false;
-  document.getElementById("stop").disabled = true;
-  setStatus("idle", false);
-}
+    let frameMax = 0;
+    for (let li = 0; li < L; li++) frameMax = Math.max(frameMax, msg.mx[li] || 0);
+    gmax = gmax > 0 ? gmax * 0.90 + (frameMax || 0) * 0.10 : (frameMax || 1);
 
-document.getElementById("go").onclick = generate;
-document.getElementById("stop").onclick = finish;
-document.getElementById("prompt").addEventListener("keydown", (e) => {
-  if (e.key === "Enter") generate();
-});
+    for (let li = 0; li < L; li++) {
+      const lm = Math.max(1e-6, msg.mx[li] || 0);
+      lscale[li] = lscale[li] > 0 ? lscale[li] * 0.86 + lm * 0.14 : lm;
+      lweight[li] = Math.pow(lscale[li] / Math.max(gmax, 1e-6), 0.5);
+      const loud = 0.40 + 0.60 * lweight[li];
 
-fetch("/health").then(r => r.json()).then(j => {
-  setStatus(j.loaded ? `ready · ${j.device}` : "loading", j.loaded);
-}).catch(() => setStatus("offline", false));
+      const row = msg.v[li];
+      for (let j = 0; j < K; j++) {
+        const raw = row[j];
+        sgn[li][j] = raw < 0 ? -1 : 1;
+        const rel = Math.pow(Math.abs(raw) / lscale[li], 0.60);
+        target[li][j] = Math.min(1.2, rel * loud);
+      }
+    }
 
-draw();
+    // pulse only the few strongest rising nodes, so the view does not fill
+    // with rings
+    const cand = [];
+    for (let li = 0; li < L; li++) {
+      for (let j = 0; j < K; j++) {
+        if (target[li][j] > 0.78 && disp[li][j] < 0.38) {
+          cand.push([target[li][j], li, j]);
+        }
+      }
+    }
+    cand.sort((a, b) => b[0] - a[0]);
+    const now = performance.now();
+    for (let k = 0; k < Math.min(6, cand.length); k++) {
+      pulses.push({ li: cand[k][1], j: cand[k][2], t: now });
+    }
+    if (pulses.length > 120) pulses.splice(0, pulses.length - 120);
+
+    last = msg;
+    if (msg.phase === "write") outText += msg.token;
+    document.getElementById("out").textContent = outText || "-";
+    updatePanel(msg);
+  }
+
+  function updatePanel(msg) {
+    document.getElementById("tok").textContent = JSON.stringify(msg.token);
+    document.getElementById("phase").textContent =
+      msg.phase === "read" ? "reading prompt" : "writing";
+    document.getElementById("pos").textContent = "pos " + msg.pos;
+
+    let best = 0, bestE = -1;
+    for (let li = 0; li < L; li++) {
+      const m = msg.mx[li] || 0;
+      if (m > bestE) { bestE = m; best = li; }
+    }
+    const hot = document.getElementById("hotLayer");
+    hotLayer = best;
+    hot.innerHTML = `L${best}<small>${bestE.toFixed(2)} peak</small>`;
+
+    const vals = msg.v[best];
+    const order = Array.from({ length: K }, (_, j) => j)
+      .sort((a, b) => Math.abs(vals[b]) - Math.abs(vals[a]))
+      .slice(0, 8);
+    const maxAbs = Math.max(1e-6, ...order.map(j => Math.abs(vals[j])));
+
+    document.getElementById("nlist").innerHTML = order.map(j => {
+      const v = vals[j];
+      const pct = Math.max(2, (Math.abs(v) / maxAbs) * 100);
+      const id = meta.neurons[best][j];
+      return `<div class="nrow ${v < 0 ? "neg" : ""}">
+        <span class="id">n${id}</span>
+        <span class="bar"><i style="width:${pct.toFixed(1)}%"></i></span>
+        <span class="val">${v >= 0 ? "+" : ""}${v.toFixed(2)}</span>
+      </div>`;
+    }).join("");
+  }
+
+  // ---------------------------------------------------------------- stream
+
+  function setStatus(text, on) {
+    document.getElementById("statusText").textContent = text;
+    document.getElementById("statusDot").className = "dot" + (on ? "" : " off");
+  }
+
+  function generate() {
+    if (source) source.close();
+    const prompt = document.getElementById("prompt").value;
+    outText = "";
+    gmax = 0;
+    lscale = new Float32Array(L);
+    lweight = new Float32Array(L);
+    pulses.length = 0;
+    for (let li = 0; li < L; li++) {
+      disp[li].fill(0);
+      target[li].fill(0);
+    }
+    document.getElementById("out").textContent = "-";
+    document.getElementById("go").disabled = true;
+    document.getElementById("stop").disabled = false;
+    setStatus("running", true);
+
+    source = new EventSource(
+      `/stream?prompt=${encodeURIComponent(prompt)}&max_tokens=48`);
+    source.onmessage = (ev) => {
+      let msg;
+      try { msg = JSON.parse(ev.data); } catch (_) { return; }
+      onFrame(msg);
+    };
+    source.onerror = () => finish();
+  }
+
+  function finish() {
+    if (source) { source.close(); source = null; }
+    document.getElementById("go").disabled = false;
+    document.getElementById("stop").disabled = true;
+    setStatus("idle", false);
+  }
+
+  // ---------------------------------------------------------------- input
+
+  cv.addEventListener("wheel", (e) => {
+    e.preventDefault();
+    const before = cam.z;
+    cam.z *= Math.exp(-e.deltaY * 0.0014);
+    cam.z = Math.max(fit, Math.min(fit * 4.2, cam.z));
+    camT.z = cam.z;
+
+    const rect = cv.getBoundingClientRect();
+    const mx = e.clientX - rect.left - W / 2;
+    const my = e.clientY - rect.top - H / 2;
+    cam.x += mx / before - mx / cam.z;
+    cam.y += my / before - my / cam.z;
+    camT.x = cam.x; camT.y = cam.y;
+
+    autoFocus = false;
+    document.getElementById("auto").checked = false;
+  }, { passive: false });
+
+  cv.addEventListener("pointerdown", (e) => {
+    dragging = true;
+    dragMoved = false;
+    cv.setPointerCapture(e.pointerId);
+    cv.style.cursor = "grabbing";
+  });
+
+  cv.addEventListener("pointermove", (e) => {
+    if (!dragging) return;
+    dragMoved = true;
+    cam.x -= e.movementX / cam.z;
+    cam.y -= e.movementY / cam.z;
+    camT.x = cam.x;
+    camT.y = cam.y;
+  });
+
+  cv.addEventListener("pointerup", (e) => {
+    dragging = false;
+    cv.style.cursor = "grab";
+    if (dragMoved) {
+      autoFocus = false;
+      document.getElementById("auto").checked = false;
+    }
+  });
+
+  cv.addEventListener("pointercancel", () => { dragging = false; });
+
+  document.getElementById("auto").addEventListener("change", (e) => {
+    autoFocus = e.target.checked;
+  });
+
+  document.getElementById("reset").addEventListener("click", () => {
+    autoFocus = true;
+    document.getElementById("auto").checked = true;
+    camT.x = worldW / 2;
+    camT.y = worldH / 2;
+    camT.z = fit;
+  });
+
+  document.getElementById("go").onclick = generate;
+  document.getElementById("stop").onclick = finish;
+  document.getElementById("prompt").addEventListener("keydown", (e) => {
+    if (e.key === "Enter") generate();
+  });
+
+  cv.style.cursor = "grab";
+
+  // ---------------------------------------------------------------- boot
+
+  glowPos = makeGlow(217, 119, 87);
+  glowNeg = makeGlow(92, 124, 138);
+
+  new ResizeObserver(resize).observe(cv.parentElement);
+  resize();
+  requestAnimationFrame(render);
+
+  fetch("/meta")
+    .then(r => r.json())
+    .then(m => {
+      meta = m;
+      L = m.layers;
+      K = m.per_layer;
+      initData();
+      layout();
+      fit = Math.min(W / worldW, H / worldH) * 0.96;
+      cam.x = camT.x = worldW / 2;
+      cam.y = camT.y = worldH / 2;
+      cam.z = camT.z = fit;
+      setStatus("ready · " + m.device, true);
+    })
+    .catch(() => setStatus("offline", false));
+})();
 </script>
 </body>
 </html>

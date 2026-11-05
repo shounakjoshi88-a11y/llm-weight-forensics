@@ -119,17 +119,31 @@ matching) before the cosine means anything.
 
 ## Live neuron visualizer
 
-Watches the model think. Every generated token streams the activation of all
-116,736 MLP neurons to the browser, which renders them as a heatmap that flashes
-as the model runs. Click any row to inspect that layer's top neurons.
+Watches the model think. The browser draws the network as 24 columns, one per
+layer, each holding 48 neurons, and lights up the ones that fire as the model
+reads the prompt and then writes. Every value is a real activation from the
+forward pass, streamed token by token.
 
 ```bash
 python viz/server.py
 # open http://127.0.0.1:8000
 ```
 
-Rows are layers 0 to 23, columns are the top 64 neurons by absolute activation at
-that step, colour is activation magnitude. No build step, no extra dependencies.
+- 48 of 4,864 MLP neurons per layer, chosen once from `down_proj` by how strongly
+  each neuron writes into the residual stream. The set is fixed, so a neuron
+  keeps its place on screen across tokens.
+- Colour is the sign of the activation, glow is its magnitude, and the edges
+  connect the strongest neurons between adjacent layers.
+- The camera eases toward whatever is firing and zooms in when the activity is
+  concentrated. Scroll to zoom, drag to pan, "Reset view" to pull back.
+- The layer axis stays pinned to the bottom and marks the hottest layer.
+
+The prompt pass is paced at about 70 ms per token so the reading phase is
+visible instead of a blur. No build step, no extra dependencies.
+
+Note: this shows a fixed 48-neuron sample per layer, not the whole MLP. The
+selection is weight-derived, not activation-derived, so it is not cherry-picked
+per token.
 
 ## Inside the network
 
