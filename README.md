@@ -22,6 +22,7 @@ probe/            instrumentation
 experiments/      one script per experiment, e01 to e12
 findings/         one writeup per finding, raw JSON next to each
 viz/              live neuron visualizer (FastAPI server + Three.js frontend)
+math-ability/     the arithmetic editing program, e01 to e17 (own README)
 
 Qwen2.5-0.5B/          494M params, bf16, 942 MB   (base)
 Qwen2.5-0.5B-Instruct/ 494M params, bf16, 942 MB   (SFT of the base)
@@ -230,6 +231,61 @@ edit removes the user's assertion, not a judgement that the answer is false. It
 also makes the model ignore correct corrections.
 
 Full writeup: [`findings/07-weight-editing.md`](findings/07-weight-editing.md).
+
+## Arithmetic: seven edits that did nothing, and what the model actually does
+
+A separate program in [`math-ability/`](math-ability/README.md), run under the same
+rule: change existing tensors, no LoRA, no adapters, no gradients. The target was
+`57892 x 512`.
+
+**Where it breaks.** 1x1 to 2x2 addition is perfect, 4x4 and 5x5 are 0.60, 7x7 is
+0.15. Multiplication collapses at the second factor digit: 2x1 is 1.00, 2x2 is
+0.35, 3x2 is 0.05.
+
+The errors are not dropped carries. 0 of 38 addition errors equal the no-carry
+value, 55 percent are off by a power of ten, and 93 percent of multiplication
+errors are within 10 percent of the answer with none matching a partial product.
+The model is rounding an approximation, not running the wrong algorithm.
+
+**Seven edits, all null on held-out problems.**
+
+| edit | what changes | held-out |
+|---|---|---|
+| global gain | all of q, o or down | 0.633 vs 0.625 |
+| carry rank-one | one `down_proj` | null |
+| layer gain search | one scalar per block | 0.661 vs 0.679, overfit |
+| carry neurons | top-k `down_proj` rows | 0.91 vs 0.88, selected on eval |
+| base blend | every tensor toward `Qwen2.5-0.5B` | 0.82 vs 0.81 |
+| ` is` row | 896 numbers in `embed_tokens` | 0.732 vs 0.732 |
+| digit bias | 10 rows of `lm_head` | 0.89 vs 0.90 |
+| EOS row | 896 numbers in `lm_head` | 0.27 vs 0.27, rambles |
+
+Every gap is inside one standard error at n = 100. Edits big enough to move
+behaviour move it everywhere, in directions that disagree across operations.
+
+**What does work.** Two things, neither of them a weight edit.
+
+A base-100 chunked scaffold that only asks for 2-digit by 1-digit products and
+2-digit sums solves `57892 x 512 = 29640704` exactly. Across 30 held-out problems
+per cell: 2x2 0.35 to 1.00, 3x2 0.05 to 1.00, 5x3 0.05 to 0.81.
+
+A one-sentence chain-of-thought prefill on 60 generated word problems: 0.23 to
+0.78 exact. The `The answer is` prefill used for every arithmetic number above
+scores 0.13, the worst of the three, because it forces an answer before the model
+has reasoned.
+
+**Why the edits fail, and why this is the Astra control.** The Astra post reports
+MATH-500 going 7.9 to 48.1 on Qwen3.5-0.8B by subtracting a loop direction from
+two MLP layers. That baseline was crippled by a loop: 93 percent of its answers
+hit the 32,768 token limit. Their own no-loop control, Gemma 3 270M, did not
+improve, and they say so: editing weights can remove an obstacle that hid an
+ability, but it cannot add one.
+
+This model does not loop (0 of 20 prompts). It stops: median reply 2 to 4
+characters. Suppressing EOS does not make it reason, it makes it ramble. So there
+is no obstacle of that kind to remove.
+
+Full writeups: [`math-ability/findings/`](math-ability/findings/).
 
 ## What this does and does not show
 

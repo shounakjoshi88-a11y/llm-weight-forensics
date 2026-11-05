@@ -1,0 +1,23 @@
+{
+  "add2x2": {
+    "n": 100,
+    "first": 0.97,
+    "majority": 0.99,
+    "any": 1.0,
+    "disagreement_rate": 0.04
+  },
+  "add3x3": {
+    "n": 94,
+    "first": 0.9042553191489362,
+    "majority": 0.9148936170212766,
+    "any": 0.9468085106382979,
+    "disagreement_rate": 0.0851063829787234
+  },
+  "mul2x1": {
+    "n": 100,
+    "first": 0.95,
+    "majority": 0.94,
+    "any": 0.96,
+    "disagreement_rate": 0.06
+  }
+}

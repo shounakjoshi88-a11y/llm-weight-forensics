@@ -1,0 +1,460 @@
+{
+  "n": 60,
+  "problems": [
+    [
+      "A shop sells pens in packs of 20. Maya buys 4 packs and gives 8 pens away. How many pens does she have left?",
+      72
+    ],
+    [
+      "A train travels 76 km per hour for 9 hours, then 27 km per hour for 5 hours. How far does it travel in total?",
+      819
+    ],
+    [
+      "There are 15 boxes with 6 apples each. 8 apples are rotten. How many good apples are there?",
+      82
+    ],
+    [
+      "Liam saves 31 dollars a week for 3 weeks. He spends 14 dollars on a bike. How much money does he have left?",
+      79
+    ],
+    [
+      "A tank holds 720 litres. It already has 389 litres. How many more litres can it hold?",
+      331
+    ],
+    [
+      "A shop sells pens in packs of 62. Maya buys 8 packs and gives 4 pens away. How many pens does she have left?",
+      492
+    ],
+    [
+      "A train travels 42 km per hour for 6 hours, then 30 km per hour for 7 hours. How far does it travel in total?",
+      462
+    ],
+    [
+      "There are 78 boxes with 7 apples each. 7 apples are rotten. How many good apples are there?",
+      539
+    ],
+    [
+      "Liam saves 36 dollars a week for 6 weeks. He spends 19 dollars on a bike. How much money does he have left?",
+      197
+    ],
+    [
+      "A tank holds 216 litres. It already has 145 litres. How many more litres can it hold?",
+      71
+    ],
+    [
+      "A shop sells pens in packs of 57. Maya buys 9 packs and gives 8 pens away. How many pens does she have left?",
+      505
+    ],
+    [
+      "A train travels 94 km per hour for 6 hours, then 29 km per hour for 6 hours. How far does it travel in total?",
+      738
+    ],
+    [
+      "There are 21 boxes with 9 apples each. 4 apples are rotten. How many good apples are there?",
+      185
+    ],
+    [
+      "Liam saves 26 dollars a week for 5 weeks. He spends 6 dollars on a bike. How much money does he have left?",
+      124
+    ],
+    [
+      "A tank holds 465 litres. It already has 420 litres. How many more litres can it hold?",
+      45
+    ],
+    [
+      "A shop sells pens in packs of 68. Maya buys 5 packs and gives 3 pens away. How many pens does she have left?",
+      337
+    ],
+    [
+      "A train travels 60 km per hour for 8 hours, then 44 km per hour for 3 hours. How far does it travel in total?",
+      612
+    ],
+    [
+      "There are 40 boxes with 4 apples each. 4 apples are rotten. How many good apples are there?",
+      156
+    ],
+    [
+      "Liam saves 66 dollars a week for 6 weeks. He spends 55 dollars on a bike. How much money does he have left?",
+      341
+    ],
+    [
+      "A tank holds 342 litres. It already has 78 litres. How many more litres can it hold?",
+      264
+    ],
+    [
+      "A shop sells pens in packs of 54. Maya buys 7 packs and gives 6 pens away. How many pens does she have left?",
+      372
+    ],
+    [
+      "A train travels 79 km per hour for 4 hours, then 73 km per hour for 5 hours. How far does it travel in total?",
+      681
+    ],
+    [
+      "There are 31 boxes with 5 apples each. 3 apples are rotten. How many good apples are there?",
+      152
+    ],
+    [
+      "Liam saves 77 dollars a week for 8 weeks. He spends 32 dollars on a bike. How much money does he have left?",
+      584
+    ],
+    [
+      "A tank holds 476 litres. It already has 131 litres. How many more litres can it hold?",
+      345
+    ],
+    [
+      "A shop sells pens in packs of 38. Maya buys 7 packs and gives 8 pens away. How many pens does she have left?",
+      258
+    ],
+    [
+      "A train travels 70 km per hour for 7 hours, then 36 km per hour for 7 hours. How far does it travel in total?",
+      742
+    ],
+    [
+      "There are 15 boxes with 9 apples each. 7 apples are rotten. How many good apples are there?",
+      128
+    ],
+    [
+      "Liam saves 36 dollars a week for 6 weeks. He spends 10 dollars on a bike. How much money does he have left?",
+      206
+    ],
+    [
+      "A tank holds 380 litres. It already has 180 litres. How many more litres can it hold?",
+      200
+    ],
+    [
+      "A shop sells pens in packs of 59. Maya buys 4 packs and gives 2 pens away. How many pens does she have left?",
+      234
+    ],
+    [
+      "A train travels 63 km per hour for 9 hours, then 33 km per hour for 7 hours. How far does it travel in total?",
+      798
+    ],
+    [
+      "There are 68 boxes with 6 apples each. 3 apples are rotten. How many good apples are there?",
+      405
+    ],
+    [
+      "Liam saves 42 dollars a week for 6 weeks. He spends 34 dollars on a bike. How much money does he have left?",
+      218
+    ],
+    [
+      "A tank holds 304 litres. It already has 261 litres. How many more litres can it hold?",
+      43
+    ],
+    [
+      "A shop sells pens in packs of 90. Maya buys 9 packs and gives 5 pens away. How many pens does she have left?",
+      805
+    ],
+    [
+      "A train travels 69 km per hour for 3 hours, then 18 km per hour for 2 hours. How far does it travel in total?",
+      243
+    ],
+    [
+      "There are 49 boxes with 5 apples each. 9 apples are rotten. How many good apples are there?",
+      236
+    ],
+    [
+      "Liam saves 53 dollars a week for 4 weeks. He spends 10 dollars on a bike. How much money does he have left?",
+      202
+    ],
+    [
+      "A tank holds 138 litres. It already has 125 litres. How many more litres can it hold?",
+      13
+    ],
+    [
+      "A shop sells pens in packs of 69. Maya buys 5 packs and gives 5 pens away. How many pens does she have left?",
+      340
+    ],
+    [
+      "A train travels 83 km per hour for 7 hours, then 22 km per hour for 5 hours. How far does it travel in total?",
+      691
+    ],
+    [
+      "There are 37 boxes with 5 apples each. 7 apples are rotten. How many good apples are there?",
+      178
+    ],
+    [
+      "Liam saves 17 dollars a week for 8 weeks. He spends 22 dollars on a bike. How much money does he have left?",
+      114
+    ],
+    [
+      "A tank holds 664 litres. It already has 581 litres. How many more litres can it hold?",
+      83
+    ],
+    [
+      "A shop sells pens in packs of 77. Maya buys 5 packs and gives 3 pens away. How many pens does she have left?",
+      382
+    ],
+    [
+      "A train travels 34 km per hour for 4 hours, then 59 km per hour for 3 hours. How far does it travel in total?",
+      313
+    ],
+    [
+      "There are 88 boxes with 5 apples each. 3 apples are rotten. How many good apples are there?",
+      437
+    ],
+    [
+      "Liam saves 63 dollars a week for 3 weeks. He spends 19 dollars on a bike. How much money does he have left?",
+      170
+    ],
+    [
+      "A tank holds 176 litres. It already has 9 litres. How many more litres can it hold?",
+      167
+    ],
+    [
+      "A shop sells pens in packs of 44. Maya buys 5 packs and gives 9 pens away. How many pens does she have left?",
+      211
+    ],
+    [
+      "A train travels 16 km per hour for 9 hours, then 32 km per hour for 6 hours. How far does it travel in total?",
+      336
+    ],
+    [
+      "There are 18 boxes with 5 apples each. 8 apples are rotten. How many good apples are there?",
+      82
+    ],
+    [
+      "Liam saves 47 dollars a week for 5 weeks. He spends 26 dollars on a bike. How much money does he have left?",
+      209
+    ],
+    [
+      "A tank holds 828 litres. It already has 640 litres. How many more litres can it hold?",
+      188
+    ],
+    [
+      "A shop sells pens in packs of 62. Maya buys 9 packs and gives 3 pens away. How many pens does she have left?",
+      555
+    ],
+    [
+      "A train travels 50 km per hour for 6 hours, then 77 km per hour for 7 hours. How far does it travel in total?",
+      839
+    ],
+    [
+      "There are 76 boxes with 9 apples each. 8 apples are rotten. How many good apples are there?",
+      676
+    ],
+    [
+      "Liam saves 85 dollars a week for 4 weeks. He spends 28 dollars on a bike. How much money does he have left?",
+      312
+    ],
+    [
+      "A tank holds 195 litres. It already has 53 litres. How many more litres can it hold?",
+      142
+    ]
+  ],
+  "results": {
+    "answer": {
+      "last": 0.13333333333333333,
+      "ci": [
+        0.06914026978309641,
+        0.241653945900721
+      ],
+      "contains": 0.13333333333333333,
+      "median_chars": 5,
+      "replies": [
+        " 16.",
+        " 183.",
+        " 90.",
+        " -27.",
+        " 331.",
+        " 30.",
+        " 159.",
+        " 59.",
+        " -25.",
+        " 71.",
+        " 43.",
+        " 180.",
+        " 18.",
+        " -10.",
+        " 45.",
+        " 19.",
+        " 120.",
+        " 160.",
+        " -11.",
+        " 264.",
+        " 18.",
+        " 1068.",
+        " 148.",
+        " -15.",
+        " 345.",
+        " 64.",
+        " 182.",
+        " 123.",
+        " -24.",
+        " 200.",
+        " 108.",
+        " 154.",
+        " 420.",
+        " -18.",
+        " 43.",
+        " 45.",
+        " 75 kilometers.",
+        " 23.",
+        " -23.",
+        " 3.",
+        " 102.",
+        " 164.",
+        " 180.",
+        " -35.",
+        " 73.",
+        " 19.",
+        " 1068 kilometers.",
+        " 46.",
+        " -24.",
+        " 107.",
+        " 120.",
+        " 140.",
+        " 92.",
+        " -1.",
+        " 188.",
+        " 158.",
+        " 1234.",
+        " 684.",
+        " -17.",
+        " 92."
+      ]
+    },
+    "bare": {
+      "last": 0.23333333333333334,
+      "ci": [
+        0.1443943161843107,
+        0.3543651134039202
+      ],
+      "contains": 0.23333333333333334,
+      "median_chars": 2,
+      "replies": [
+        "16",
+        "To find the total distance traveled by the train, we need to calculate the distance covered at each speed separately and then sum these distances.\n\nFirst, let's calculate the distance traveled at 76 km/hour for 9 hours:\n\\[ \\text{Distance}_1 = 76 \\, \\text{km/h} \\times 9 \\, \\text{hours} = 684 \\, \\text{km} \\]\n\nNext, let's calculate the distance traveled at 27 km/hour for 5 hours:\n\\[ \\text{Distance}_2 = 27 \\, \\text{km/h} \\times 5 \\, \\text{hours} = 135 \\, \\text{km} \\]\n\nNow, we add the two distances together to get the total distance traveled:\n\\[ \\text{Total Distance} = \\text{Distance}_1 + \\text{Distance}_2 = 684 \\, \\text{km} + 135 \\, \\text{km} = 819 \\, \\text{km} \\]\n\nSo, the total distance traveled by the train is 819 kilometers.",
+        "The number of good apples can be calculated by subtracting the number of rotten apples from the total number of apples in all the boxes. \n\nTotal number of apples = Number of boxes \u00d7 Apples per box\n= 15 \u00d7 6\n= 90\n\nNumber of rotten apples = 8\n\nGood apples = Total number of apples - Number of rotten apples\n= 90 - 8\n= 82\n\nTherefore, there are 82 good apples.",
+        "27",
+        "431",
+        "19",
+        "To find the total distance traveled by the train, we need to calculate the distance covered at each speed separately and then sum these distances.\n\nFirst, let's calculate the distance traveled at 42 km/hour for 6 hours:\n\\[ \\text{Distance}_1 = 42 \\, \\text{km/h} \\times 6 \\, \\text{hours} = 252 \\, \\text{km} \\]\n\nNext, let's calculate the distance traveled at 30 km/hour for 7 hours:\n\\[ \\text{Distance}_2 = 30 \\, \\text{km/h} \\times 7 \\, \\text{hours} = 210 \\, \\text{km} \\]\n\nNow, we add the two distances together to get the total distance traveled:\n\\[ \\text{Total Distance} = \\text{Distance}_1 + \\text{Distance}_2 = 252 \\, \\text{km} + 210 \\, \\text{km} = 462 \\, \\text{km} \\]\n\nSo, the total distance traveled by the train is 462 kilometers.",
+        "51",
+        "27",
+        "91",
+        "49",
+        "To find the total distance traveled by the train, we need to calculate the distance covered at each speed separately and then sum these distances.\n\nFirst, let's calculate the distance traveled at 94 km/hour for 6 hours:\n\\[ \\text{Distance}_1 = 94 \\, \\text{km/h} \\times 6 \\, \\text{hours} = 564 \\, \\text{km} \\]\n\nNext, let's calculate the distance traveled at 29 km/hour for 6 hours:\n\\[ \\text{Distance}_2 = 29 \\, \\text{km/h} \\times 6 \\, \\text{hours} = 174 \\, \\text{km} \\]\n\nNow, we add the two distances together to get the total distance traveled:\n\\[ \\text{Total Distance} = \\text{Distance}_1 + \\text{Distance}_2 = 564 \\, \\text{km} + 174 \\, \\text{km} = 738 \\, \\text{km} \\]\n\nSo, the total distance traveled by the train is 738 kilometers.",
+        "85",
+        "19",
+        "135",
+        "24",
+        "To find the total distance traveled by the train, we need to calculate the distance covered at each speed separately and then sum these distances.\n\nFirst, let's calculate the distance traveled at 60 km/hour for 8 hours:\n\\[ \\text{Distance}_1 = 60 \\, \\text{km/h} \\times 8 \\, \\text{hours} = 480 \\, \\text{km} \\]\n\nNext, let's calculate the distance traveled at 44 km/hour for 3 hours:\n\\[ \\text{Distance}_2 = 44 \\, \\text{km/h} \\times 3 \\, \\text{hours} = 132 \\, \\text{km} \\]\n\nNow, we add the two distances together to get the total distance traveled:\n\\[ \\text{Total Distance} = \\text{Distance}_1 + \\text{Distance}_2 = 480 \\, \\text{km} + 132 \\, \\text{km} = 612 \\, \\text{km} \\]\n\nSo, the total distance traveled by the train is 612 kilometers.",
+        "16",
+        "101",
+        "164",
+        "36",
+        "To find the total distance traveled by the train, we need to calculate the distance covered at each speed separately and then sum these distances.\n\nFirst, let's calculate the distance traveled at 79 km/hour for 4 hours:\n\\[ \\text{Distance}_1 = 79 \\, \\text{km/h} \\times 4 \\, \\text{hours} = 316 \\, \\text{km} \\]\n\nNext, let's calculate the distance traveled at 73 km/hour for 5 hours:\n\\[ \\text{Distance}_2 = 73 \\, \\text{km/h} \\times 5 \\, \\text{hours} = 365 \\, \\text{km} \\]\n\nNow, we add the two distances together to get the total distance traveled:\n\\[ \\text{Total Distance} = \\text{Distance}_1 + \\text{Distance}_2 = 316 \\, \\text{km} + 365 \\, \\text{km} = 681 \\, \\text{km} \\]\n\nSo, the total distance traveled by the train is 681 kilometers.",
+        "28",
+        "155",
+        "545",
+        "24",
+        "To find the total distance traveled by the train, we need to calculate the distance covered at each speed separately and then sum these distances.\n\nFirst, let's calculate the distance traveled at 70 km/hour for 7 hours:\n\\[ \\text{Distance}_1 = 70 \\, \\text{km/h} \\times 7 \\, \\text{hours} = 490 \\, \\text{km} \\]\n\nNext, let's calculate the distance traveled at 36 km/hour for 7 hours:\n\\[ \\text{Distance}_2 = 36 \\, \\text{km/h} \\times 7 \\, \\text{hours} = 252 \\, \\text{km} \\]\n\nNow, we add the two distances together to get the total distance traveled:\n\\[ \\text{Total Distance} = \\text{Distance}_1 + \\text{Distance}_2 = 490 \\, \\text{km} + 252 \\, \\text{km} = 742 \\, \\text{km} \\]\n\nSo, the total distance traveled by the train is 742 kilometers.",
+        "The number of good apples can be calculated by subtracting the number of rotten apples from the total number of apples in all the boxes. \n\nTotal number of apples = 15 boxes * 9 apples/box = 135 apples\n\nNumber of rotten apples = 7 apples\n\nGood apples = Total number of apples - Number of rotten apples = 135 - 7 = 128\n\nSo, there are 128 good apples.",
+        "46",
+        "200",
+        "17",
+        "To find the total distance traveled by the train, we need to calculate the distance covered at each speed separately and then sum these distances.\n\nFirst, let's calculate the distance traveled at 63 km/hour for 9 hours:\n\\[ \\text{Distance}_1 = 63 \\, \\text{km/h} \\times 9 \\, \\text{hours} = 567 \\, \\text{km} \\]\n\nNext, let's calculate the distance traveled at 33 km/hour for 7 hours:\n\\[ \\text{Distance}_2 = 33 \\, \\text{km/h} \\times 7 \\, \\text{hours} = 231 \\, \\text{km} \\]\n\nNow, we add the two distances together to get the total distance traveled:\n\\[ \\text{Total Distance} = \\text{Distance}_1 + \\text{Distance}_2 = 567 \\, \\text{km} + 231 \\, \\text{km} = 898 \\, \\text{km} \\]\n\nSo, the total distance traveled by the train is **898 km**.",
+        "40",
+        "18",
+        "53",
+        "145",
+        "To find the total distance traveled by the train, we need to calculate the distance covered at each speed separately and then sum these distances.\n\nFirst, let's calculate the distance traveled at 69 km/hour for 3 hours:\n\\[ \\text{Distance}_1 = 69 \\, \\text{km/h} \\times 3 \\, \\text{hours} = 207 \\, \\text{km} \\]\n\nNext, let's calculate the distance traveled at 18 km/hour for 2 hours:\n\\[ \\text{Distance}_2 = 18 \\, \\text{km/h} \\times 2 \\, \\text{hours} = 36 \\, \\text{km} \\]\n\nNow, we add the two distances together to get the total distance traveled:\n\\[ \\text{Total Distance} = \\text{Distance}_1 + \\text{Distance}_2 = 207 \\, \\text{km} + 36 \\, \\text{km} = 243 \\, \\text{km} \\]\n\nSo, the total distance traveled by the train is 243 kilometers.",
+        "20",
+        "22",
+        "9",
+        "20",
+        "To find the total distance traveled by the train, we need to calculate the distance covered at each speed separately and then sum these distances.\n\nFirst, let's calculate the distance traveled at 83 km/hour for 7 hours:\n\\[ \\text{Distance}_1 = 83 \\, \\text{km/h} \\times 7 \\, \\text{hours} = 581 \\, \\text{km} \\]\n\nNext, let's calculate the distance traveled at 22 km/hour for 5 hours:\n\\[ \\text{Distance}_2 = 22 \\, \\text{km/h} \\times 5 \\, \\text{hours} = 110 \\, \\text{km} \\]\n\nNow, we add the two distances together to get the total distance traveled:\n\\[ \\text{Total Distance} = \\text{Distance}_1 + \\text{Distance}_2 = 581 \\, \\text{km} + 110 \\, \\text{km} = 691 \\, \\text{km} \\]\n\nSo, the total distance traveled by the train is 691 kilometers.",
+        "20",
+        "5",
+        "The tank currently holds 581 litres and contains 664 - 581 = 83 more litres.",
+        "24",
+        "162",
+        "42",
+        "24",
+        "87",
+        "21",
+        "To find the total distance traveled by the train, we need to calculate the distance covered at each speed separately and then sum these distances.\n\nFirst, let's calculate the distance traveled at 16 km/hour for 9 hours:\n\\[ \\text{Distance}_1 = 16 \\, \\text{km/h} \\times 9 \\, \\text{hours} = 144 \\, \\text{km} \\]\n\nNext, let's calculate the distance traveled at 32 km/hour for 6 hours:\n\\[ \\text{Distance}_2 = 32 \\, \\text{km/h} \\times 6 \\, \\text{hours} = 192 \\, \\text{km} \\]\n\nNow, we add the two distances together to get the total distance traveled:\n\\[ \\text{Total Distance} = \\text{Distance}_1 + \\text{Distance}_2 = 144 \\, \\text{km} + 192 \\, \\text{km} = 336 \\, \\text{km} \\]\n\nSo, the total distance traveled by the train is 336 kilometers.",
+        "42",
+        "19",
+        "188",
+        "18",
+        "235",
+        "The number of good apples can be calculated by subtracting the number of rotten apples from the total number of apples. So, \\(76 \\times 9 - 8 = 684\\). The number of good apples is 684.",
+        "167",
+        "62"
+      ]
+    },
+    "cot": {
+      "last": 0.7833333333333333,
+      "ci": [
+        0.6637973165265748,
+        0.8687707895359299
+      ],
+      "contains": 0.9333333333333333,
+      "median_chars": 387,
+      "replies": [
+        "1. First, we need to find out how many pens are in one pack. Since the question states that each pack contains 20 pens, we can say there are 20 pens per pack.\n2. Next, we know that Maya bought 4 packs. So, if we multiply the number of packs by the number of pens per pack, we get:\n   4 packs * 20 pens/pack = 80 pens\n3. Now, we're told that Maya gave away 8 pens. To find out how many pens she has left, we subtract the number of pens given away from the total number of pens she had before giving any away:\n   80 pens - 8 pens = 72 pens\n\nTherefore, Maya has 72 pens left after buying 4 packs and giving away 8 pens.",
+        "1. First, we calculate the distance traveled at 76 km/hour for 9 hours:\n   Distance = Speed \u00d7 Time\n   Distance = 76 km/h \u00d7 9 h\n   Distance = 684 km\n\n2. Next, we calculate the distance traveled at 27 km/hour for 5 hours:\n   Distance = Speed \u00d7 Time\n   Distance = 27 km/h \u00d7 5 h\n   Distance = 135 km\n\n3. Finally, we add these two distances together to find the total distance traveled:\n   Total Distance = Distance at 76 km/h + Distance at 27 km/h\n   Total Distance = 684 km + 135 km\n   Total Distance = 819 km\n\nSo, the train travels a total of 819 kilometers.",
+        "First, we need to find out how many good apples there are in total. To do that, we'll subtract the number of rotten apples from the total number of apples.\n\nTotal number of apples = Number of boxes \u00d7 Apples per box\n= 15 \u00d7 6\n= 90\n\nNumber of rotten apples = 8\n\nGood apples = Total number of apples - Number of rotten apples\n= 90 - 8\n= 82\n\nSo, there are 82 good apples.",
+        "First, we need to calculate how much Liam saved in total:\n\\[ 31 \\text{ dollars/week} \\times 3 \\text{ weeks} = 93 \\text{ dollars} \\]\n\nNext, we subtract the amount spent on a bike from his savings:\n\\[ 93 \\text{ dollars} - 14 \\text{ dollars} = 79 \\text{ dollars} \\]\n\nSo, after spending $14 on a bike, Liam has $79 left.",
+        "1. The tank currently contains 389 liters of water.\n2. We need to find out how much more water the tank can hold.\n3. To do this, we subtract the amount of water already in the tank from its total capacity.\n\nSo, we calculate:\n\\[ \\text{Remaining Capacity} = \\text{Total Capacity} - \\text{Water Already in Tank} \\]\n\\[ \\text{Remaining Capacity} = 720 \\text{ liters} - 389 \\text{ liters} \\]\n\nNow let's perform the subtraction:\n\n\\[ 720 - 389 = 331 \\]\n\nTherefore, the tank can hold an additional 331 liters of water.",
+        "1. First, we need to find out how many pens are in one pack. We know that each pack contains 62 pens.\n2. Next, we calculate the total number of pens in 8 packs: \\( 62 \\text{ pens/pack} \\times 8 \\text{ packs} = 496 \\text{ pens} \\).\n3. Then, we subtract the number of pens Maya gave away (4 pens) from the total number of pens: \\( 496 \\text{ pens} - 4 \\text{ pens} = 492 \\text{ pens} \\).\n\nSo, Maya has 492 pens left after giving away 4 pens.",
+        "1. First, we calculate the distance traveled at 42 km/hour for 6 hours:\n   Distance = Speed \u00d7 Time\n   Distance = 42 km/h \u00d7 6 h\n   Distance = 252 km\n\n2. Next, we calculate the distance traveled at 30 km/hour for 7 hours:\n   Distance = Speed \u00d7 Time\n   Distance = 30 km/h \u00d7 7 h\n   Distance = 210 km\n\n3. Finally, we add these two distances together to find the total distance traveled:\n   Total Distance = Distance at 42 km/h + Distance at 30 km/h\n   Total Distance = 252 km + 210 km\n   Total Distance = 462 km\n\nSo, the train travels a total of 462 kilometers.",
+        "1. First, we need to find out how many good apples there are in total. To do this, we subtract the number of rotten apples from the total number of apples.\n2. The total number of apples is 78.\n3. The number of rotten apples is 7.\n\nSo, the calculation would be:\n\\[ \\text{Good apples} = \\text{Total apples} - \\text{Rotten apples} \\]\n\\[ \\text{Good apples} = 78 - 7 \\]\n\nNow let's perform the subtraction:\n\\[ 78 - 7 = 71 \\]\n\nTherefore, there are 71 good apples.",
+        "First, we need to calculate how much Liam saved in total:\n\\[ \\text{Total savings} = \\text{Weekly savings} \\times \\text{Number of weeks} \\]\n\\[ \\text{Total savings} = 36 \\times 6 \\]\n\\[ \\text{Total savings} = 216 \\]\n\nNext, we subtract the amount spent on a bike from his total savings:\n\\[ \\text{Money left} = \\text{Total savings} - \\text{Amount spent}\n\\]\n\\[ \\text{Money left} = 216 - 19 \\]\n\\[ \\text{Money left} = 207 \\]\n\nSo, after spending $19 on a bike, Liam has $207 left.",
+        "1. The tank currently contains 145 litres of water.\n2. The tank also contains 216 litres of water in total.\n3. To find out how much more water the tank can hold, we need to subtract the amount of water already in the tank from the total capacity of the tank.\n\nSo, let's do the math:\n\n\\[ \\text{Remaining Capacity} = \\text{Total Capacity} - \\text{Water Already in Tank} \\]\n\n\\[ \\text{Remaining Capacity} = 216 \\text{ litres} - 145 \\text{ litres} \\]\n\n\\[ \\text{Remaining Capacity} = 71 \\text{ litres} \\]\n\nTherefore, the tank can hold an additional 71 litres of water.",
+        "1. First, we need to find out how many pens are in one pack. We know that each pack contains 57 pens.\n2. Next, we calculate the total number of pens in 9 packs: \\( 57 \\times 9 = 513 \\) pens.\n3. Then, we subtract the number of pens Maya gave away (8) from the total number of pens: \\( 513 - 8 = 505 \\).\n\nSo, Maya has 505 pens left after giving some away.",
+        "1. First, we calculate the distance traveled at 94 km/hour for 6 hours:\n   Distance = Speed \u00d7 Time\n   Distance = 94 km/h \u00d7 6 h\n   Distance = 564 km\n\n2. Next, we calculate the distance traveled at 29 km/hour for 6 hours:\n   Distance = Speed \u00d7 Time\n   Distance = 29 km/h \u00d7 6 h\n   Distance = 174 km\n\n3. Finally, we add these two distances together to find the total distance traveled:\n   Total Distance = Distance at 94 km/h + Distance at 29 km/h\n                  = 564 km + 174 km\n                  = 738 km\n\nTherefore, the train travels a total of 738 kilometers.",
+        "First, we need to find out how many good apples there are in total. To do that, we'll subtract the number of rotten apples from the total number of apples.\n\nTotal number of apples = 21 boxes * 9 apples/box = 189 apples\n\nNumber of rotten apples = 4\n\nGood apples = Total number of apples - Number of rotten apples\nGood apples = 189 - 4 = 185 apples\n\nSo, there are 185 good apples!",
+        "1. First, we need to calculate how much Liam saved in total:\n   - He saves $26 per week for 5 weeks: \n     \\[\n     26 \\times 5 = 130 \\text{ dollars}\n     \\]\n2. Next, we subtract the amount spent on a bike from his savings:\n   - He spends $6 on a bike:\n     \\[\n     130 - 6 = 124 \\text{ dollars}\n     \\]\n\nSo, after spending $6 on a bike, Liam has $124 left.",
+        "1. The tank currently contains 420 litres of water.\n2. We need to find out how much more water the tank can hold.\n3. To do this, we subtract the amount of water already in the tank from its total capacity.\n\nSo, \\( 465 \\text{ litres} - 420 \\text{ litres} = 45 \\text{ litres} \\).\n\nTherefore, the tank can hold an additional 45 litres.",
+        "1. First, we need to find out how many pens are in one pack. We know that each pack contains 68 pens.\n2. Next, we calculate the total number of pens Maya has before giving any away. This would be \\(68 \\times 5\\).\n3. Then, we subtract the number of pens she gave away (which is 3) from the total number of pens.\n\nSo, let's do the math:\n\\[ 68 \\times 5 = 340 \\]\n\\[ 340 - 3 = 337 \\]\n\nTherefore, Maya has 337 pens left.",
+        "1. First, we calculate the distance traveled at 60 km/hour for 8 hours:\n   Distance = Speed \u00d7 Time\n   Distance = 60 km/h \u00d7 8 h = 480 km\n\n2. Next, we calculate the distance traveled at 44 km/hour for 3 hours:\n   Distance = Speed \u00d7 Time\n   Distance = 44 km/h \u00d7 3 h = 132 km\n\n3. Finally, we add these two distances together to find the total distance traveled:\n   Total Distance = Distance at 60 km/h + Distance at 44 km/h\n                  = 480 km + 132 km = 612 km\n\nTherefore, the train travels a total of 612 kilometers.",
+        "1. First, we need to find out how many total apples there are in the 40 boxes. We do this by multiplying the number of boxes by the number of apples per box:\n   \\[\n   40 \\text{ boxes} \\times 4 \\text{ apples/box} = 160 \\text{ apples}\n   \\]\n2. Next, we subtract the number of rotten apples from the total number of apples to find out how many good apples there are:\n   \\[\n   160 \\text{ apples} - 4 \\text{ rotten apples} = 156 \\text{ good apples}\n   \\]\n\nSo, there are **156** good apples.",
+        "1. First, we need to calculate how many dollars Liam saved in total:\n   \\[\n   66 \\text{ dollars/week} \\times 6 \\text{ weeks} = 396 \\text{ dollars}\n   \\]\n2. Next, we subtract the amount spent on a bike from the total savings:\n   \\[\n   396 \\text{ dollars} - 55 \\text{ dollars} = 341 \\text{ dollars}\n   \\]\n\nSo, after spending $55 on a bike, Liam has $341 left.",
+        "1. We start with the total capacity of the tank: 342 litres.\n2. We know that the tank already contains 78 litres.\n3. To find out how much more the tank can hold, we subtract the amount already in the tank from its total capacity:\n   \\[\n   342 - 78 = 264\n   \\]\n\nSo, the tank can hold an additional 264 litres.",
+        "1. First, we need to find out how many pens are in one pack. We know that each pack contains 54 pens.\n2. Next, we calculate the total number of pens Maya has before giving any away. This would be \\(54 \\times 7\\).\n3. Then, we subtract the number of pens she gave away (which is 6) from the total number of pens.\n\nSo, let's do the math:\n\\[ 54 \\times 7 = 378 \\]\n\\[ 378 - 6 = 372 \\]\n\nTherefore, Maya has 372 pens left after buying 7 packs and giving away 6 pens.",
+        "1. First, we calculate the distance traveled at 79 km/hour for 4 hours:\n   Distance = Speed \u00d7 Time\n   Distance = 79 km/h \u00d7 4 h\n   Distance = 316 km\n\n2. Next, we calculate the distance traveled at 73 km/hour for 5 hours:\n   Distance = Speed \u00d7 Time\n   Distance = 73 km/h \u00d7 5 h\n   Distance = 365 km\n\n3. Finally, we add these two distances together to find the total distance traveled:\n   Total Distance = 316 km + 365 km\n   Total Distance = 681 km\n\nTherefore, the train travels a total of 681 kilometers.",
+        "First, we need to find out how many good apples there are in total. We do this by subtracting the number of rotten apples from the total number of apples.\n\nTotal number of apples = Number of boxes \u00d7 Apples per box\n= 31 \u00d7 5\n= 155\n\nNow, we subtract the number of rotten apples:\n\nGood apples = Total number of apples - Number of rotten apples\n= 155 - 3\n= 152\n\nSo, there are 152 good apples!",
+        "1. First, we need to calculate how many dollars Liam saved in total:\n   \\( 77 \\text{ dollars/week} \\times 8 \\text{ weeks} = 616 \\text{ dollars} \\)\n2. Next, we subtract the amount spent on a bike from his savings:\n   \\( 616 \\text{ dollars} - 32 \\text{ dollars} = 584 \\text{ dollars} \\)\n\nSo, after spending $32 on a bike, Liam has $584 left.",
+        "1. We start with the total capacity of the tank: 476 litres.\n2. We know that the tank already contains 131 litres.\n3. To find out how much more the tank can hold, we subtract the amount already in the tank from its total capacity:\n   \\[\n   476 - 131 = 345\n   \\]\n\nSo, the tank can hold **345** more litres before reaching its full capacity.",
+        "1. First, we need to find out how many pens are in one pack. We know that each pack contains 38 pens.\n2. Next, we calculate the total number of pens Maya has before giving any away. This would be \\(38 \\times 7\\).\n3. Then, we subtract the number of pens she gave away (which is 8) from the total number of pens.\n\nSo, let's do the math:\n\\[ 38 \\times 7 = 266 \\]\n\\[ 266 - 8 = 258 \\]\n\nTherefore, Maya has 258 pens left.",
+        "1. First, we calculate the distance traveled at 70 km/hour for 7 hours:\n   Distance = Speed \u00d7 Time\n   Distance = 70 km/h \u00d7 7 h = 490 km\n\n2. Next, we calculate the distance traveled at 36 km/hour for 7 hours:\n   Distance = Speed \u00d7 Time\n   Distance = 36 km/h \u00d7 7 h = 252 km\n\n3. Finally, we add these two distances together to find the total distance traveled:\n   Total Distance = Distance at 70 km/h + Distance at 36 km/h\n                  = 490 km + 252 km = 742 km\n\nTherefore, the train travels a total of 742 kilometers.",
+        "First, we need to find out how many apples are in total:\n\\[ 15 \\text{ boxes} \\times 9 \\text{ apples/box} = 135 \\text{ apples} \\]\n\nNext, we subtract the number of rotten apples from the total:\n\\[ 135 \\text{ apples} - 7 \\text{ rotten apples} = 128 \\text{ good apples} \\]\n\nSo, there are 128 good apples.",
+        "First, we need to calculate how much Liam saved in total:\n\\[ 36 \\text{ dollars/week} \\times 6 \\text{ weeks} = 216 \\text{ dollars} \\]\n\nNext, we subtract the amount spent on a bike from his savings:\n\\[ 216 \\text{ dollars} - 10 \\text{ dollars} = 206 \\text{ dollars} \\]\n\nSo, after spending $10 on a bike, Liam has $206 left.",
+        "1. The tank currently contains 180 liters of water.\n2. We need to find out how much more water the tank can hold.\n3. To do this, we subtract the amount of water already in the tank from its total capacity.\n\nSo, \\( 380 \\text{ liters} - 180 \\text{ liters} = 200 \\text{ liters} \\).\n\nTherefore, the tank can hold an additional 200 liters.",
+        "1. First, we need to find out how many pens are in one pack. We know that each pack contains 59 pens.\n2. Next, we calculate the total number of pens in 4 packs: \\( 59 \\times 4 = 236 \\).\n3. Then, we subtract the number of pens Maya gave away (which is 2) from the total number of pens: \\( 236 - 2 = 234 \\).\n\nSo, Maya has 234 pens left after giving away 2 pens.",
+        "1. First, we calculate the distance traveled at 63 km/hour for 9 hours:\n   Distance = Speed \u00d7 Time\n   Distance = 63 km/h \u00d7 9 h\n   Distance = 567 km\n\n2. Next, we calculate the distance traveled at 33 km/hour for 7 hours:\n   Distance = Speed \u00d7 Time\n   Distance = 33 km/h \u00d7 7 h\n   Distance = 231 km\n\n3. Finally, we add these two distances together to find the total distance traveled:\n   Total Distance = 567 km + 231 km\n   Total Distance = 898 km\n\nSo, the train travels a total of 898 kilometers.",
+        "1. First, we need to find out how many good apples there are in total. To do this, we'll subtract the number of rotten apples from the total number of apples.\n2. There are 68 boxes, and each box contains 6 apples. So, the total number of apples is:\n   68 * 6 = 408\n3. Now, we subtract the number of rotten apples (which is 3) from the total number of apples:\n   408 - 3 = 405\n\nTherefore, there are 405 good apples!",
+        "1. First, we need to calculate how much Liam saved in total:\n   \\[\n   42 \\text{ dollars/week} \\times 6 \\text{ weeks} = 252 \\text{ dollars}\n   \\]\n2. Next, we subtract the amount spent on a bike from the total savings:\n   \\[\n   252 \\text{ dollars} - 34 \\text{ dollars} = 218 \\text{ dollars}\n   \\]\n\nSo, after spending $34 on a bike, Liam has $218 left.",
+        "1. The tank currently contains 261 liters of water.\n2. We need to find out how much more water the tank can hold.\n3. To do this, we subtract the amount of water already in the tank from the total capacity of the tank.\n\nSo, let's perform the subtraction:\n\n\\[ \\text{Total capacity} - \\text{Water already in the tank} = \\text{Remaining capacity} \\]\n\n\\[ 304 \\text{ liters} - 261 \\text{ liters} = 43 \\text{ liters} \\]\n\nTherefore, the tank can hold an additional 43 liters.",
+        "1. First, we need to find out how many pens are in one pack. Since the question states that each pack contains 90 pens, we can say that each pack has 90 pens.\n2. Next, we know that Maya bought 9 packs. So, if each pack has 90 pens, then 9 packs would contain \\(9 \\times 90 = 810\\) pens.\n3. Now, we're told that Maya gave away 5 pens. To find out how many pens she has left, we subtract the number of pens given away from the total number of pens she had before giving any away: \\(810 - 5 = 805\\).\n\nTherefore, Maya has 805 pens left after buying 9 packs and giving away 5 pens.",
+        "First, we calculate the distance traveled at 69 km/hour for 3 hours:\nDistance = Speed \u00d7 Time\n= 69 km/h \u00d7 3 h\n= 207 km\n\nNext, we calculate the distance traveled at 18 km/hour for 2 hours:\nDistance = Speed \u00d7 Time\n= 18 km/h \u00d7 2 h\n= 36 km\n\nNow, to find the total distance traveled, we add these two distances together:\nTotal Distance = Distance at 69 km/h + Distance at 18 km/h\n= 207 km + 36 km\n= 243 km\n\nTherefore, the train travels a total of 243 kilometers.",
+        "1. First, we need to find out how many good apples there are in total. To do this, we subtract the number of rotten apples from the total number of apples.\n2. The total number of apples is 49 * 5 = 245.\n3. Subtracting the number of rotten apples (9) gives us 245 - 9 = 236.\n\nSo, there are 236 good apples!",
+        "First, we need to calculate how much Liam saved in total:\n\\[ 53 \\text{ dollars/week} \\times 4 \\text{ weeks} = 212 \\text{ dollars} \\]\n\nNext, we subtract the amount spent on a bike from his savings:\n\\[ 212 \\text{ dollars} - 10 \\text{ dollars} = 202 \\text{ dollars} \\]\n\nSo, after spending $10 on a bike, Liam has $202 left.",
+        "1. The tank currently contains 125 liters of water.\n2. We need to find out how much more water the tank can hold.\n3. To do this, we subtract the amount of water already in the tank from its total capacity.\n\nSo, \\( 138 \\text{ liters} - 125 \\text{ liters} = 13 \\text{ liters} \\).\n\nTherefore, the tank can hold an additional 13 liters of water.",
+        "1. First, we need to find out how many pens are in one pack. We know that each pack contains 69 pens.\n2. Next, we calculate the total number of pens Maya has before giving any away. This would be \\(5 \\text{ packs} \\times 69 \\text{ pens/pack}\\).\n3. After calculating the total number of pens, we subtract the 5 pens she gave away from the total.\n\nNow let's do the math:\n\\(5 \\text{ packs} \\times 69 \\text{ pens/pack} = 345 \\text{ pens}\\)\n\\(345 \\text{ pens} - 5 \\text{ pens} = 340 \\text{ pens}\\)\n\nSo, Maya has 340 pens left after buying 5 packs and giving away 5 pens.",
+        "1. First, we calculate the distance traveled at 83 km/hour for 7 hours:\n   Distance = Speed \u00d7 Time\n   Distance = 83 km/h \u00d7 7 h\n   Distance = 581 km\n\n2. Next, we calculate the distance traveled at 22 km/hour for 5 hours:\n   Distance = Speed \u00d7 Time\n   Distance = 22 km/h \u00d7 5 h\n   Distance = 110 km\n\n3. Finally, we add these two distances together to find the total distance traveled:\n   Total Distance = Distance at 83 km/h + Distance at 22 km/h\n   Total Distance = 581 km + 110 km\n   Total Distance = 691 km\n\nTherefore, the train travels a total of 691 kilometers.",
+        "1. First, we need to find out how many good apples there are in total. To do this, we subtract the number of rotten apples from the total number of apples.\n2. The total number of apples is 37 * 5 = 185.\n3. The number of rotten apples is 7.\n4. So, the number of good apples is 185 - 7 = 178.\n\nTherefore, the answer is 178.",
+        "First, we need to calculate how much Liam saved in total:\n\\[ 17 \\text{ dollars/week} \\times 8 \\text{ weeks} = 136 \\text{ dollars} \\]\n\nNext, we subtract the amount spent on a bike from his savings:\n\\[ 136 \\text{ dollars} - 22 \\text{ dollars} = 114 \\text{ dollars} \\]\n\nSo, after spending $22 on a bike, Liam has $114 left.",
+        "1. We start with the total capacity of the tank: 664 litres.\n2. We know that the tank already contains 581 litres.\n3. To find out how much more the tank can hold, we subtract the amount already in the tank from its total capacity:\n   664 - 581 = 83 litres.\n\nSo, the tank can hold an additional 83 litres.",
+        "1. First, we need to find out how many pens are in one pack. We know that the shop sells pens in packs of 77.\n2. Next, we calculate how many pens are in 5 packs: \\( 5 \\times 77 = 385 \\).\n3. Then, we subtract the number of pens Maya gave away (3) from the total number of pens in the packs: \\( 385 - 3 = 382 \\).\n\nSo, Maya has 382 pens left after giving away 3 pens.",
+        "1. First, we calculate the distance traveled at 34 km/hour for 4 hours:\n   Distance = Speed \u00d7 Time\n   Distance = 34 km/h \u00d7 4 h\n   Distance = 136 km\n\n2. Next, we calculate the distance traveled at 59 km/hour for 3 hours:\n   Distance = Speed \u00d7 Time\n   Distance = 59 km/h \u00d7 3 h\n   Distance = 177 km\n\n3. Finally, we add these two distances together to find the total distance traveled:\n   Total Distance = 136 km + 177 km\n   Total Distance = 313 km\n\nTherefore, the train travels a total of 313 kilometers.",
+        "1. First, we need to find out how many good apples there are in total. To do this, we'll subtract the number of rotten apples from the total number of apples.\n2. The total number of apples is 88.\n3. There are 3 rotten apples.\n\nSo, the calculation would be:\n\\[ \\text{Good apples} = \\text{Total apples} - \\text{Rotten apples} \\]\n\\[ \\text{Good apples} = 88 - 3 \\]\n\nNow let's perform the subtraction:\n\\[ 88 - 3 = 85 \\]\n\nTherefore, there are 85 good apples.",
+        "First, we need to calculate how much Liam saved in total:\n\\[ 63 \\text{ dollars/week} \\times 3 \\text{ weeks} = 189 \\text{ dollars} \\]\n\nNext, we subtract the amount spent on a bike from his savings:\n\\[ 189 \\text{ dollars} - 19 \\text{ dollars} = 170 \\text{ dollars} \\]\n\nSo, after spending $19 on a bike, Liam has $170 left.",
+        "1. The tank currently contains 9 liters of water.\n2. We need to find out how much more water the tank can hold.\n3. To do this, we subtract the amount of water already in the tank from its total capacity.\n\nSo, \\( 176 \\text{ liters} - 9 \\text{ liters} = 167 \\text{ liters} \\).\n\nTherefore, the tank can hold an additional 167 liters.",
+        "1. First, we need to find out how many pens are in one pack. We know that each pack contains 44 pens.\n2. Next, we calculate the total number of pens Maya has before giving any away. This would be 5 packs multiplied by 44 pens per pack, which equals 220 pens.\n3. Then, we subtract the number of pens Maya gave away (9) from the total number of pens she had before. So, 220 - 9 = 211 pens.\n\nTherefore, Maya has 211 pens left after buying 5 packs and giving away 9 pens.",
+        "First, we calculate the distance traveled at each speed:\n- For the first part of the journey: \\( 16 \\text{ km/h} \\times 9 \\text{ h} = 144 \\text{ km} \\)\n- For the second part of the journey: \\( 32 \\text{ km/h} \\times 6 \\text{ h} = 192 \\text{ km} \\)\n\nNow, let's add these distances together to find the total distance:\n\\( 144 \\text{ km} + 192 \\text{ km} = 336 \\text{ km} \\)\n\nSo, the train travels a total of 336 kilometers.",
+        "First, we need to find out how many good apples there are in total. To do that, we'll subtract the number of rotten apples from the total number of apples.\n\nTotal number of apples = Number of boxes \u00d7 Apples per box\n= 18 \u00d7 5\n= 90\n\nNumber of rotten apples = 8\n\nGood apples = Total number of apples - Number of rotten apples\n= 90 - 8\n= 82\n\nSo, there are 82 good apples.",
+        "1. First, we need to calculate how many dollars Liam saved in total:\n   \\[\n   47 \\text{ dollars/week} \\times 5 \\text{ weeks} = 235 \\text{ dollars}\n   \\]\n2. Next, we subtract the amount spent on a bike from the total savings:\n   \\[\n   235 \\text{ dollars} - 26 \\text{ dollars} = 209 \\text{ dollars}\n   \\]\n\nSo, after spending $26 on a bike, Liam has $209 left.",
+        "1. The tank currently contains 640 liters of water.\n2. The tank also contains 828 liters of water.\n3. To find out how much more water the tank can hold, we need to subtract the amount of water already in the tank from its total capacity.\n\nSo, let's do the math:\n\n\\[ \\text{Remaining Capacity} = \\text{Total Capacity} - \\text{Water Already in Tank} \\]\n\n\\[ \\text{Remaining Capacity} = 828 \\text{ liters} - 640 \\text{ liters} \\]\n\n\\[ \\text{Remaining Capacity} = 188 \\text{ liters} \\]\n\nTherefore, the tank can hold an additional 188 liters of water.",
+        "1. First, we need to find out how many pens are in one pack. We know that each pack contains 62 pens.\n2. Next, we calculate the total number of pens in 9 packs: \\( 9 \\times 62 = 558 \\) pens.\n3. Then, we subtract the number of pens Maya gave away (3 pens): \\( 558 - 3 = 555 \\).\n\nSo, Maya has 555 pens left after giving away 3 pens.",
+        "1. First, we calculate the distance traveled at 50 km/hour for 6 hours:\n   Distance = Speed \u00d7 Time\n   Distance = 50 km/h \u00d7 6 h = 300 km\n\n2. Next, we calculate the distance traveled at 77 km/hour for 7 hours:\n   Distance = Speed \u00d7 Time\n   Distance = 77 km/h \u00d7 7 h = 539 km\n\n3. Finally, we add these two distances together to find the total distance traveled:\n   Total Distance = 300 km + 539 km = 839 km\n\nSo, the train travels a total of 839 kilometers.",
+        "1. First, we need to find out how many good apples there are in total. To do this, we subtract the number of rotten apples from the total number of apples.\n2. The total number of apples is 76 * 9 = 684.\n3. Subtracting the number of rotten apples (8) gives us 684 - 8 = 676.\n\nSo, there are 676 good apples!",
+        "1. First, we need to calculate how many dollars Liam saved in total:\n   \\( 85 \\text{ dollars/week} \\times 4 \\text{ weeks} = 340 \\text{ dollars} \\)\n2. Next, we subtract the amount spent on a bike from his savings:\n   \\( 340 \\text{ dollars} - 28 \\text{ dollars} = 312 \\text{ dollars} \\)\n\nSo, after spending $28 on a bike, Liam has $312 left.",
+        "1. We start with the total capacity of the tank: 195 litres.\n2. We know that the tank already contains 53 litres.\n3. To find out how much more the tank can hold, we subtract the amount already in the tank from its total capacity:\n   \\[\n   195 - 53 = 142\n   \\]\n4. Therefore, the tank can hold an additional 142 litres.\n\nSo, the tank can hold **142** more litres."
+      ]
+    }
+  }
+}

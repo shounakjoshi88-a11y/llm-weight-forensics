@@ -1,0 +1,60 @@
+{
+  "base_train": 0.5666666666666667,
+  "base_val": 0.6785714285714286,
+  "gains": {
+    "attn9": 1.15,
+    "attn11": 0.85,
+    "attn15": 1.15,
+    "mlp0": 1.15
+  },
+  "train_after": 0.65,
+  "val_after": 0.6607142857142857,
+  "history": [
+    {
+      "pass": 1,
+      "train": 0.65,
+      "gains": {
+        "attn9": 1.15,
+        "attn11": 0.85,
+        "attn15": 1.15,
+        "mlp0": 1.15
+      }
+    },
+    {
+      "pass": 2,
+      "train": 0.65,
+      "gains": {
+        "attn9": 1.15,
+        "attn11": 0.85,
+        "attn15": 1.15,
+        "mlp0": 1.15
+      }
+    }
+  ],
+  "detail": {
+    "add4x4": {
+      "base": 0.8,
+      "edited": 0.8
+    },
+    "add5x5": {
+      "base": 0.3,
+      "edited": 0.3
+    },
+    "sub3x3": {
+      "base": 1.0,
+      "edited": 0.9
+    },
+    "sub4x4": {
+      "base": 1.0,
+      "edited": 1.0
+    },
+    "mul2x2": {
+      "base": 0.5,
+      "edited": 0.3333333333333333
+    },
+    "mul3x2": {
+      "base": 0.5,
+      "edited": 0.5
+    }
+  }
+}

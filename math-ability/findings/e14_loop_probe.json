@@ -1,0 +1,202 @@
+[
+  {
+    "kind": "word",
+    "q": "A shop sells pens in packs of 12. Maya buys 7 packs and gives 15 pens away. How many pens does she have left?",
+    "want": 69,
+    "got": 60,
+    "last": 60,
+    "loop": 0.0,
+    "chars": 2,
+    "ok": false
+  },
+  {
+    "kind": "word",
+    "q": "A train travels 68 km per hour for 4 hours, then 45 km per hour for 3 hours. How far does it travel in total?",
+    "want": 407,
+    "got": 68,
+    "last": 407,
+    "loop": 0.027434842249657063,
+    "chars": 733,
+    "ok": false
+  },
+  {
+    "kind": "word",
+    "q": "There are 23 boxes with 14 apples each. 37 apples are rotten. How many good apples are there?",
+    "want": 285,
+    "got": 58,
+    "last": 58,
+    "loop": 0.0,
+    "chars": 2,
+    "ok": false
+  },
+  {
+    "kind": "word",
+    "q": "Liam saves 35 dollars a week for 19 weeks. He spends 240 dollars on a bike. How much is left?",
+    "want": 425,
+    "got": 61,
+    "last": 61,
+    "loop": 0.0,
+    "chars": 2,
+    "ok": false
+  },
+  {
+    "kind": "word",
+    "q": "A rectangle is 47 cm long and 26 cm wide. What is its area in square centimetres?",
+    "want": 1222,
+    "got": 1802,
+    "last": 1802,
+    "loop": 0.0,
+    "chars": 4,
+    "ok": false
+  },
+  {
+    "kind": "word",
+    "q": "A tank holds 850 litres. It is filled at 65 litres per minute for 9 minutes. How much more can it hold?",
+    "want": 265,
+    "got": 41,
+    "last": 41,
+    "loop": 0.0,
+    "chars": 2,
+    "ok": false
+  },
+  {
+    "kind": "word",
+    "q": "There are 96 students split into 8 equal groups. Each group needs 3 helpers. How many helpers in total?",
+    "want": 36,
+    "got": 96,
+    "last": 36,
+    "loop": 0.03802281368821293,
+    "chars": 530,
+    "ok": false
+  },
+  {
+    "kind": "word",
+    "q": "A book has 312 pages. Sam reads 48 pages a day for 5 days. How many pages are left?",
+    "want": 72,
+    "got": 5,
+    "last": 72,
+    "loop": 0.04310344827586207,
+    "chars": 479,
+    "ok": false
+  },
+  {
+    "kind": "word",
+    "q": "A farmer has 74 sheep and buys 39 more. He then sells 28. How many does he have?",
+    "want": 85,
+    "got": 105,
+    "last": 105,
+    "loop": 0.0,
+    "chars": 3,
+    "ok": false
+  },
+  {
+    "kind": "word",
+    "q": "Each crate holds 24 bottles. A truck carries 15 crates. 46 bottles break. How many are intact?",
+    "want": 314,
+    "got": 1,
+    "last": 314,
+    "loop": 0.027359781121751026,
+    "chars": 736,
+    "ok": false
+  },
+  {
+    "kind": "word",
+    "q": "A worker earns 17 dollars an hour and works 38 hours. How much does she earn?",
+    "want": 646,
+    "got": 544,
+    "last": 544,
+    "loop": 0.0,
+    "chars": 3,
+    "ok": false
+  },
+  {
+    "kind": "word",
+    "q": "A field is 93 metres by 57 metres. A fence runs around the edge. How many metres of fence?",
+    "want": 300,
+    "got": 240,
+    "last": 240,
+    "loop": 0.0,
+    "chars": 3,
+    "ok": false
+  },
+  {
+    "kind": "word",
+    "q": "A jar has 245 sweets. They are shared equally among 7 children. How many does each get?",
+    "want": 35,
+    "got": 36,
+    "last": 36,
+    "loop": 0.0,
+    "chars": 2,
+    "ok": false
+  },
+  {
+    "kind": "word",
+    "q": "A cyclist rides 26 km a day for 14 days, then 19 km a day for 6 days. Total distance?",
+    "want": 478,
+    "got": 50,
+    "last": 50,
+    "loop": 0.0,
+    "chars": 2,
+    "ok": false
+  },
+  {
+    "kind": "word",
+    "q": "A school orders 64 boxes of 25 pencils. They give 130 pencils away. How many remain?",
+    "want": 1470,
+    "got": 64,
+    "last": 0,
+    "loop": 0.06802721088435375,
+    "chars": 294,
+    "ok": false
+  },
+  {
+    "kind": "direct",
+    "q": "What is 57892 x 512? Work through it step by step.",
+    "want": 29640704,
+    "got": 57892,
+    "last": 3453648,
+    "loop": 0.06756756756756757,
+    "chars": 301,
+    "ok": false
+  },
+  {
+    "kind": "direct",
+    "q": "What is 4837 x 296? Work through it step by step.",
+    "want": 1431752,
+    "got": 4837,
+    "last": 1284000,
+    "loop": 0.03372681281618887,
+    "chars": 682,
+    "ok": false
+  },
+  {
+    "kind": "direct",
+    "q": "What is 87654 + 98765? Work through it step by step.",
+    "want": 186419,
+    "got": 87654,
+    "last": 87660,
+    "loop": 0.12195121951219512,
+    "chars": 166,
+    "ok": false
+  },
+  {
+    "kind": "direct",
+    "q": "What is 70213 - 48697? Work through it step by step.",
+    "want": 21516,
+    "got": 70213,
+    "last": 26,
+    "loop": 0.07220216606498195,
+    "chars": 316,
+    "ok": false
+  },
+  {
+    "kind": "direct",
+    "q": "What is 394 x 87? Work through it step by step.",
+    "want": 34278,
+    "got": 394,
+    "last": 22064,
+    "loop": 0.08928571428571429,
+    "chars": 245,
+    "ok": false
+  }
+]
