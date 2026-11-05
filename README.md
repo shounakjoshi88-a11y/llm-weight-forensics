@@ -232,7 +232,7 @@ also makes the model ignore correct corrections.
 
 Full writeup: [`findings/07-weight-editing.md`](findings/07-weight-editing.md).
 
-## Arithmetic: seven edits that did nothing, and what the model actually does
+## Arithmetic: nine edits, one that moves held-out accuracy
 
 A separate program in [`math-ability/`](math-ability/README.md), run under the same
 rule: change existing tensors, no LoRA, no adapters, no gradients. The target was
@@ -263,25 +263,41 @@ The model is rounding an approximation, not running the wrong algorithm.
 Every gap is inside one standard error at n = 100. Edits big enough to move
 behaviour move it everywhere, in directions that disagree across operations.
 
-**The one edit that works is not an arithmetic edit.** Boosting the `Step` row of
-`lm_head` by a start-of-reply direction, 896 numbers, raises held-out word-problem
-accuracy from 0.23 to 0.59 (41 fixed, 5 broken, p = 4.4e-8) by making the model
-start reasoning instead of blurting a number. It costs 5x5 addition, 0.55 to
-0.05, and it is worse than the `Step 1: ` prefill, which gets 0.95. It is a
-format prior, not a capability.
+**Why they fail, measured.** At each digit position, with the correct prefix fed
+in, a closed-form probe from the residual matches the model's own accuracy almost
+exactly: 0.97, 0.90, 0.90, 0.87, 0.89, 0.98 for the six digits of a 5x5 sum,
+against a probe at 1.00, 0.88, 0.90, 0.85, 0.92, 0.98 and a shuffled control at
+chance. There is no hidden correct digit for a better readout to find. Exact
+match multiplies six per-digit rates, and six rates near 0.9 multiply to the 0.55
+the model actually scores.
 
-**What does work.** Two things, neither of them a weight edit.
+**The one arithmetic edit that works.** The readout is still a couple of points
+worse than a least-squares fit to those same states. Replacing a quarter of the
+ten digit rows of `lm_head` with that fit, 8,960 numbers solved in closed form,
+raises held-out 5x5 addition from 0.60 to 0.65 (18 fixed, 3 broken, p = 0.001) and
+costs 3x2 multiplication, 0.15 to 0.11. It holds on five-digit and six-digit sums
+alike, so it is not the constant leading digit. It is two points per digit, which
+is five points of exact answers: the size of the effect available at the output
+layer, and the reason the larger edits failed.
+
+**The `Step` row is not an arithmetic edit.** Boosting it by a start-of-reply
+direction, 896 numbers, raises held-out word-problem accuracy from 0.23 to 0.59
+(41 fixed, 5 broken, p = 4.4e-8) by making the model start reasoning instead of
+blurting a number. It costs 5x5 addition, 0.55 to 0.05, and it is worse than the
+`Step 1: ` prefill, which gets 0.95. It is a format prior, not a capability.
+
+**What works without touching weights.** Two things.
 
 A base-100 chunked scaffold that only asks for 2-digit by 1-digit products and
 2-digit sums solves `57892 x 512 = 29640704` exactly. Across 30 held-out problems
 per cell: 2x2 0.35 to 1.00, 3x2 0.05 to 1.00, 5x3 0.05 to 0.81.
 
 A one-sentence chain-of-thought prefill on 60 generated word problems: 0.23 to
-0.78 exact. The `The answer is` prefill used for every arithmetic number above
-scores 0.13, the worst of the three, because it forces an answer before the model
-has reasoned.
+0.78 exact, and `Step 1: ` reaches 0.92. The `The answer is` prefill used for
+every arithmetic number above scores 0.13, the worst of the three, because it
+forces an answer before the model has reasoned.
 
-**Why the edits fail, and why this is the Astra control.** The Astra post reports
+**Why the large edits fail, and why this is the Astra control.** The Astra post reports
 MATH-500 going 7.9 to 48.1 on Qwen3.5-0.8B by subtracting a loop direction from
 two MLP layers. That baseline was crippled by a loop: 93 percent of its answers
 hit the 32,768 token limit. Their own no-loop control, Gemma 3 270M, did not
