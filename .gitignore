@@ -41,3 +41,9 @@ out/
 
 # 115 MB raw atlas; the .gz is committed instead
 findings/e10_neuron_atlas.json
+
+# Fine-tune outputs: rebuilt by finetune/data.py and finetune/train.py.
+# The adapter tokenizer alone is 114 MB, over GitHub's file limit.
+math-ability/finetune/adapter/
+math-ability/finetune/run/
+math-ability/finetune/train_data.json

@@ -22,7 +22,7 @@ probe/            instrumentation
 experiments/      one script per experiment, e01 to e12
 findings/         one writeup per finding, raw JSON next to each
 viz/              live neuron visualizer (FastAPI server + Three.js frontend)
-math-ability/     the arithmetic editing program, e01 to e17 (own README)
+math-ability/     the arithmetic program, e01 to e30 plus a LoRA fine-tune (own README)
 
 Qwen2.5-0.5B/          494M params, bf16, 942 MB   (base)
 Qwen2.5-0.5B-Instruct/ 494M params, bf16, 942 MB   (SFT of the base)
@@ -232,11 +232,12 @@ also makes the model ignore correct corrections.
 
 Full writeup: [`findings/07-weight-editing.md`](findings/07-weight-editing.md).
 
-## Arithmetic: nine edits, one that moves held-out accuracy
+## Arithmetic: nine edits, one that moves held-out accuracy, and a fine-tune that moves it a lot
 
-A separate program in [`math-ability/`](math-ability/README.md), run under the same
-rule: change existing tensors, no LoRA, no adapters, no gradients. The target was
-`57892 x 512`.
+A separate program in [`math-ability/`](math-ability/README.md). Most of it ran
+under the same rule: change existing tensors, no LoRA, no adapters, no
+gradients. The target was `57892 x 512`. That rule was lifted for the last
+experiment, a LoRA fine-tune, and it is the one that works.
 
 **Where it breaks.** 1x1 to 2x2 addition is perfect, 4x4 and 5x5 are 0.60, 7x7 is
 0.15. Multiplication collapses at the second factor digit: 2x1 is 1.00, 2x2 is
@@ -285,6 +286,38 @@ direction, 896 numbers, raises held-out word-problem accuracy from 0.23 to 0.59
 (41 fixed, 5 broken, p = 4.4e-8) by making the model start reasoning instead of
 blurting a number. It costs 5x5 addition, 0.55 to 0.05, and it is worse than the
 `Step 1: ` prefill, which gets 0.95. It is a format prior, not a capability.
+
+**The fine-tune is the result.** Once new parameters and gradients were allowed,
+a LoRA adapter (r=32, all attention and MLP projections, 17.6M trainable
+parameters, 3.4 percent) was trained for two epochs on 9,147 generated worked
+solutions, all verified arithmetically true. Only the `train` hash split was
+used; zero of the 560 held-out eval problems appear in the corpus. 40 held-out
+problems per cell, natural prompting:
+
+| cell | base | tuned |
+|---|---:|---:|
+| add 3x3 | 0.80 | 1.00 |
+| add 5x5 | 0.57 | 0.97 |
+| add 6x6 | 0.35 | 0.97 |
+| sub 5x4 | 0.50 | 0.75 |
+| mul 2x2 | 0.50 | 1.00 |
+| mul 3x2 | 0.17 | 0.90 |
+| mul 3x3 | 0.00 | 0.72 |
+| mul 4x3 | 0.00 | 0.50 |
+| mul 5x3 | 0.00 | 0.42 |
+
+Word problems go 0.17 to 0.90 with no prefill. The gain is generalisation, not
+memorisation: the eval problems are disjoint from training and the barely
+trained 1x1 cells stayed flat.
+
+It is not solved. The remaining errors are three different bugs. Addition is
+correct in every column and then transcribes the final answer wrong.
+Subtraction drops a borrow into the next column. Multiplication gets every
+partial product right and then botches the sum of the shifted products, which is
+why `57892 x 512` is still wrong: 115784, 578920 and 28946000 are all correct,
+and their sum is written as 30130624 instead of 29640704. The cost is an 8
+percent rise in prose perplexity and occasional arithmetic formatting on
+non-arithmetic questions.
 
 **What works without touching weights.** Two things.
 
