@@ -137,9 +137,9 @@
     position: absolute;
     transform: translate(-50%, -50%);
     font-family: var(--mono);
-    font-size: 10px;
+    font-size: 11px;
     letter-spacing: .04em;
-    color: rgba(70,64,54,.42);
+    color: rgba(70,64,54,.52);
     white-space: nowrap;
     transition: color .2s;
   }
@@ -264,7 +264,7 @@
   <input id="prompt" type="text" value="The capital of France is" spellcheck="false" autocomplete="off" />
   <button id="go" class="primary">Generate</button>
   <button id="stop" disabled>Stop</button>
-  <label class="toggle"><input type="checkbox" id="auto" checked /> auto focus</label>
+  <label class="toggle"><input type="checkbox" id="auto" /> auto focus</label>
   <button id="reset" class="ghost">Reset view</button>
 </div>
 
@@ -322,10 +322,10 @@ import { OrbitControls } from "/assets/vendor/OrbitControls.js";
 
 const CLAY = 0xD97757;
 const BLUE = 0x5C7C8A;
-const RING = 0xC9BFA6;
+const RING = 0xBCB097;
 
-const R = 5.0;          // ring radius
-const SPACING = 1.35;   // distance between layers along z
+const R = 6.8;          // ring radius
+const SPACING = 1.22;   // distance between layers along z
 const TWIST = 0.085;    // radians per layer
 
 let L = 24, K = 48;
@@ -346,9 +346,8 @@ let lastFly = 0;
 const stage = document.getElementById("stage");
 const scene = new THREE.Scene();
 
-const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 500);
-const HOME = new THREE.Vector3(40, 15, 16);
-camera.position.copy(HOME);
+const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 500);
+camera.position.set(35, 17, 20);
 
 const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
@@ -363,8 +362,6 @@ controls.rotateSpeed = 0.62;
 controls.zoomSpeed = 0.85;
 controls.minDistance = 11;
 controls.maxDistance = 95;
-controls.autoRotate = true;
-controls.autoRotateSpeed = 0.12;
 
 let baseDist = camera.position.length();
 
@@ -379,6 +376,68 @@ function nodePos(li, j, out) {
   const r = R * (1 + 0.045 * Math.sin(li * 1.7 + j * 2.3));
   out.set(Math.cos(a) * r, Math.sin(a) * r, layerZ(li));
   return out;
+}
+
+// ------------------------------------------------------------------ framing
+
+// The home pose is solved from the content rather than hard coded, so the
+// network fills the stage at any window shape instead of shrinking into the
+// middle of a wide one.
+const HOME_DIR = new THREE.Vector3(0.82, 0.42, 0.48).normalize();
+const HOME_TARGET = new THREE.Vector3(0, -0.55, 0);
+const FILL_X = 0.92;
+const FILL_Y = 0.80;
+
+const _src = new THREE.Vector3();
+const _ndc = new THREE.Vector3();
+const _fwd = new THREE.Vector3();
+const _right = new THREE.Vector3();
+const _up = new THREE.Vector3();
+
+function contentBounds() {
+  let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+  const scan = () => {
+    _ndc.copy(_src).project(camera);
+    if (_ndc.x < minX) minX = _ndc.x;
+    if (_ndc.x > maxX) maxX = _ndc.x;
+    if (_ndc.y < minY) minY = _ndc.y;
+    if (_ndc.y > maxY) maxY = _ndc.y;
+  };
+  for (let li = 0; li < L; li++) {
+    for (let j = 0; j < K; j++) { nodePos(li, j, _src); scan(); }
+    _src.set(0, -R - 1.45, layerZ(li));
+    scan();
+  }
+  return { minX, maxX, minY, maxY };
+}
+
+function frameView() {
+  let d = 46;
+  const tgt = HOME_TARGET.clone();
+  const tanV = Math.tan(THREE.MathUtils.degToRad(camera.fov) * 0.5);
+
+  // A few passes converge: scale the distance to the projected extents, then
+  // slide the aim point so the content is centred rather than corner-anchored.
+  for (let pass = 0; pass < 3; pass++) {
+    camera.position.copy(tgt).addScaledVector(HOME_DIR, d);
+    camera.lookAt(tgt);
+    camera.updateMatrixWorld(true);
+
+    const b = contentBounds();
+    const halfX = (b.maxX - b.minX) * 0.5;
+    const halfY = (b.maxY - b.minY) * 0.5;
+    d *= Math.max(halfY / FILL_Y, halfX / FILL_X);
+
+    const halfH = tanV * d;
+    const halfW = halfH * camera.aspect;
+    camera.getWorldDirection(_fwd);
+    _right.crossVectors(_fwd, camera.up).normalize();
+    _up.crossVectors(_right, _fwd).normalize();
+    tgt.addScaledVector(_right, (b.minX + b.maxX) * 0.5 * halfW)
+       .addScaledVector(_up, (b.minY + b.maxY) * 0.5 * halfH);
+  }
+
+  return { pos: tgt.clone().addScaledVector(HOME_DIR, d), target: tgt, dist: d };
 }
 
 // ------------------------------------------------------------------ points
@@ -411,7 +470,7 @@ function buildPoints() {
 
   pointMat = new THREE.ShaderMaterial({
     uniforms: {
-      uSize: { value: 1.3 },
+      uSize: { value: 1.8 },
       uPixelRatio: { value: Math.min(window.devicePixelRatio || 1, 2) },
       uPos: { value: new THREE.Color(CLAY) },
       uNeg: { value: new THREE.Color(BLUE) }
@@ -451,13 +510,13 @@ function buildPoints() {
         float halo = pow(max(0.0, 1.0 - d), 3.0);
         float disc = smoothstep(0.58, 0.28, d);
 
-        vec3 idle = vec3(0.26, 0.23, 0.19);
+        vec3 idle = vec3(0.34, 0.30, 0.25);
         vec3 live = vSign < 0.0 ? uNeg : uPos;
         vec3 base = mix(idle, live, smoothstep(0.04, 0.55, vIntensity));
         vec3 col = mix(base, vec3(1.0, 0.97, 0.92), disc * 0.45 * vIntensity);
 
         float fade = clamp(1.0 - (vDepth - 24.0) / 82.0, 0.30, 1.0);
-        float a = (disc * 0.86 + halo * 0.34) * (0.52 + 0.48 * vIntensity) * fade;
+        float a = (disc * 0.86 + halo * 0.34) * (0.62 + 0.38 * vIntensity) * fade;
         if (a < 0.004) discard;
 
         gl_FragColor = vec4(col, a);
@@ -481,13 +540,15 @@ let ringGroup = null;
 function buildRings() {
   ringGroup = new THREE.Group();
   const mat = new THREE.LineBasicMaterial({
-    color: RING, transparent: true, opacity: 0.18, depthWrite: false
+    color: RING, transparent: true, opacity: 0.36, depthWrite: false
   });
-  const v = new THREE.Vector3();
   for (let li = 0; li < L; li++) {
+    // A smooth circle, not the jittered node positions: the nodes float on
+    // the ring, and the ring stays legible as one layer.
     const pts = [];
-    for (let j = 0; j < K; j++) {
-      pts.push(nodePos(li, j, v).clone());
+    for (let j = 0; j < 96; j++) {
+      const a = (j / 96) * Math.PI * 2;
+      pts.push(new THREE.Vector3(Math.cos(a) * R, Math.sin(a) * R, layerZ(li)));
     }
     const g = new THREE.BufferGeometry().setFromPoints(pts);
     const loop = new THREE.LineLoop(g, mat);
@@ -505,6 +566,54 @@ function buildRings() {
     new THREE.BufferGeometry().setFromPoints([a, b]), spineMat));
 
   scene.add(ringGroup);
+}
+
+// ------------------------------------------------------------------ hot ring
+
+let hotRing = null;
+let hotDisc = null;
+let lastHotRing = -1;
+
+function buildHotRing() {
+  const pts = [];
+  for (let j = 0; j < 96; j++) {
+    const a = (j / 96) * Math.PI * 2;
+    pts.push(new THREE.Vector3(Math.cos(a) * R * 1.07, Math.sin(a) * R * 1.07, 0));
+  }
+  const g = new THREE.BufferGeometry().setFromPoints(pts);
+  const m = new THREE.LineBasicMaterial({
+    color: CLAY, transparent: true, opacity: 0, depthWrite: false,
+    depthTest: false
+  });
+  hotRing = new THREE.LineLoop(g, m);
+  hotRing.renderOrder = 1;
+  scene.add(hotRing);
+
+  // faint disc behind the ring, so the marked layer reads as a slice
+  const dg = new THREE.CircleGeometry(R * 1.07, 64);
+  const dm = new THREE.MeshBasicMaterial({
+    color: CLAY, transparent: true, opacity: 0, depthWrite: false,
+    depthTest: false, side: THREE.DoubleSide
+  });
+  hotDisc = new THREE.Mesh(dg, dm);
+  hotDisc.renderOrder = 0;
+  scene.add(hotDisc);
+}
+
+function markHotRing(li) {
+  if (!hotRing || li === lastHotRing) return;
+  lastHotRing = li;
+  const z = layerZ(li);
+  gsap.to(hotRing.position, {
+    z, duration: 0.55, ease: "power2.out", overwrite: true
+  });
+  gsap.to(hotDisc.position, {
+    z, duration: 0.55, ease: "power2.out", overwrite: true
+  });
+  gsap.fromTo(hotRing.material, { opacity: 0.34 },
+    { opacity: 0.13, duration: 1.4, ease: "power2.out", overwrite: true });
+  gsap.fromTo(hotDisc.material, { opacity: 0.06 },
+    { opacity: 0.02, duration: 1.4, ease: "power2.out", overwrite: true });
 }
 
 // ------------------------------------------------------------------ edges
@@ -702,12 +811,15 @@ function updateLabels() {
 // ------------------------------------------------------------------ camera
 
 let camTween = null;
-let autoFocus = true;
+// Off by default: the camera should hold still unless the viewer asks it to
+// follow the action.
+let autoFocus = false;
 
 function flyTo(targetZ, dist, duration) {
   const startTarget = controls.target.clone();
   const startPos = camera.position.clone();
-  const endTarget = new THREE.Vector3(0, 0, targetZ);
+  // Keep the current vertical framing; only pan along the tube.
+  const endTarget = new THREE.Vector3(startTarget.x, startTarget.y, targetZ);
   const dir = startPos.clone().sub(startTarget);
   if (dir.lengthSq() < 1e-6) dir.set(0, 0.4, 1);
   dir.normalize();
@@ -722,6 +834,38 @@ function flyTo(targetZ, dist, duration) {
       camera.position.lerpVectors(startPos, endPos, o.t);
     }
   });
+}
+
+let framed = false;
+let userMoved = false;
+
+controls.addEventListener("start", () => { userMoved = true; });
+
+function applyHome(animate) {
+  if (!meta) return;
+  const home = frameView();
+  baseDist = home.dist;
+  if (camTween) { camTween.kill(); camTween = null; }
+
+  if (!animate) {
+    camera.position.copy(home.pos);
+    controls.target.copy(home.target);
+    controls.update();
+    framed = true;
+    return;
+  }
+
+  const fromPos = camera.position.clone();
+  const fromTgt = controls.target.clone();
+  const o = { t: 0 };
+  camTween = gsap.to(o, {
+    t: 1, duration: 1.25, ease: "power3.inOut", overwrite: true,
+    onUpdate: () => {
+      camera.position.lerpVectors(fromPos, home.pos, o.t);
+      controls.target.lerpVectors(fromTgt, home.target, o.t);
+    }
+  });
+  framed = true;
 }
 
 function focusRatio() {
@@ -751,15 +895,15 @@ function updateFocus() {
   if (best < 0 || total < 0.35) return;
 
   const now = performance.now();
-  if (now - lastFly < 1400) return;
-  if (focusLayer >= 0 && Math.abs(best - focusLayer) < 1) return;
+  if (now - lastFly < 2600) return;
+  if (focusLayer >= 0 && Math.abs(best - focusLayer) < 5) return;
 
   focusLayer = best;
   lastFly = now;
   const fr = focusRatio();
-  const z = layerZ(best) * 0.65;
-  const dist = baseDist * (0.97 - 0.12 * fr);
-  flyTo(z, dist, 1.35);
+  const z = layerZ(best) * 0.26;
+  const dist = baseDist * (1.0 + 0.02 * fr);
+  flyTo(z, dist, 2.4);
 }
 
 // ------------------------------------------------------------------ data
@@ -821,6 +965,7 @@ function updatePanel(msg) {
     if (m > bestE) { bestE = m; best = li; }
   }
   hotLayer = best;
+  markHotRing(best);
   document.getElementById("hotLayer").innerHTML =
     `L${best}<small>${bestE.toFixed(2)} peak</small>`;
 
@@ -860,6 +1005,13 @@ function generate() {
   target.fill(0);
   hotLayer = -1;
   focusLayer = -1;
+  lastHotRing = -1;
+  if (hotRing) {
+    gsap.killTweensOf(hotRing.material);
+    hotRing.material.opacity = 0;
+    gsap.killTweensOf(hotDisc.material);
+    hotDisc.material.opacity = 0;
+  }
   clearPulses();
   document.getElementById("out").textContent = "-";
   document.getElementById("go").disabled = true;
@@ -867,7 +1019,6 @@ function generate() {
   setStatus("running", true, true);
 
   if (autoFocus) {
-    controls.autoRotate = false;
     flyTo(0, baseDist, 1.0);
   }
 
@@ -888,7 +1039,6 @@ function finish() {
   setStatus("idle", false, false);
   document.getElementById("chip").className = "phase-chip";
   document.getElementById("chipText").textContent = "idle";
-  controls.autoRotate = autoFocus;
 }
 
 // ------------------------------------------------------------------ loop
@@ -903,6 +1053,7 @@ function resize() {
     pointMat.uniforms.uPixelRatio.value =
       Math.min(window.devicePixelRatio || 1, 2);
   }
+  if (framed && !userMoved && !source) applyHome(false);
 }
 
 let lastT = 0;
@@ -933,17 +1084,14 @@ function animate(t) {
 
 document.getElementById("auto").addEventListener("change", (e) => {
   autoFocus = e.target.checked;
-  controls.autoRotate = autoFocus;
   if (!autoFocus && camTween) camTween.kill();
 });
 
 document.getElementById("reset").addEventListener("click", () => {
-  autoFocus = true;
-  document.getElementById("auto").checked = true;
-  controls.autoRotate = true;
   focusLayer = -1;
   lastFly = performance.now();
-  flyTo(0, baseDist, 1.2);
+  userMoved = false;
+  applyHome(true);
 });
 
 document.getElementById("go").onclick = generate;
@@ -957,17 +1105,13 @@ new ResizeObserver(resize).observe(stage);
 // ------------------------------------------------------------------ boot
 
 buildPulses();
+buildHotRing();
 resize();
 
-// intro fly-in
-controls.autoRotate = false;
-camera.position.set(64, 40, 60);
+// intro fly-in: start wide, settle into the solved home pose once the
+// network size is known
+camera.position.set(64, 44, 62);
 controls.target.set(0, 0, 0);
-gsap.to(camera.position, {
-  x: HOME.x, y: HOME.y, z: HOME.z, duration: 2.2, ease: "power3.out",
-  onUpdate: () => { baseDist = camera.position.distanceTo(controls.target); },
-  onComplete: () => { controls.autoRotate = true; }
-});
 gsap.from(renderer.domElement, { opacity: 0, duration: 0.9, ease: "power1.out" });
 
 requestAnimationFrame(animate);
@@ -975,10 +1119,13 @@ requestAnimationFrame(animate);
 // small debug handle, also useful for screenshot checks
 window.__viz = {
   camera, controls, scene, renderer,
+  applyHome, frameView,
   get L() { return L; },
   get K() { return K; },
   get disp() { return disp; },
-  get hotLayer() { return hotLayer; }
+  get hotLayer() { return hotLayer; },
+  get framed() { return framed; },
+  get userMoved() { return userMoved; }
 };
 
 fetch("/meta")
@@ -996,6 +1143,7 @@ fetch("/meta")
     buildEdges();
     buildLabels();
     resize();
+    applyHome(true);
 
     document.getElementById("boot").classList.add("gone");
     setStatus("ready · " + m.device, true, false);

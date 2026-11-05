@@ -120,7 +120,7 @@ matching) before the cosine means anything.
 ## Live neuron visualizer
 
 Watches the model think. The browser draws the network in 3D: 24 rings, one per
-layer, 48 neurons on each ring, stacked into a tube that the camera orbits. Real
+layer, 48 neurons on each ring, stacked into a tube you can orbit. Real
 activations stream in as the model reads the prompt and then writes, and the
 neurons that fire light up.
 
@@ -135,13 +135,18 @@ python viz/server.py
 - Grey is idle, clay is a positive activation, blue-grey is negative, and both
   grow and brighten with magnitude. Edges connect the strongest neurons between
   adjacent layers, so the view reads as a network rather than a grid.
-- The camera eases toward the layer that is firing and pulls in when the activity
-  is concentrated. Scroll to zoom, drag to orbit, "Reset view" to fly home.
+- The camera holds still. The opening shot is solved from the network's projected
+  size, so the tube fills the stage at any window shape. Auto focus is off by
+  default; switch it on for a slow pan toward the firing layer. Scroll to zoom,
+  drag to orbit, "Reset view" to return home.
 - Layer numbers sit under the tube and the hottest layer is marked in clay.
 
-The prompt pass is paced at about 130 ms per token so the reading phase is
-visible instead of a blur. Three.js, OrbitControls and GSAP are vendored under
-`viz/static/vendor/`, so there is no build step and no network access needed.
+The prompt pass is paced at about 90 ms per token so the reading phase is
+visible instead of a blur. The checkpoint is an instruct model, so the server
+wraps the prompt in its chat template before the forward pass; without that it
+continues the string instead of answering. Three.js, OrbitControls and GSAP are
+vendored under `viz/static/vendor/`, so there is no build step and no network
+access needed.
 
 Note: this shows a fixed 48-neuron sample per layer, not the whole MLP. The
 selection is weight-derived, not activation-derived, so it is not cherry-picked

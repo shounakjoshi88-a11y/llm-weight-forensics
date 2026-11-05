@@ -108,7 +108,13 @@ def payload(phase: str, step: int, token: str, token_id: int,
 
 def stream(prompt: str, max_tokens: int):
     load()
-    ids = _tok(prompt, return_tensors="pt", truncation=True,
+    # The checkpoint is an instruct model. Feeding it raw text makes it continue
+    # the string instead of answering, which reads as a wrong answer. Apply the
+    # chat template so it sees the question in the shape it was trained on.
+    msgs = [{"role": "user", "content": prompt}]
+    text = _tok.apply_chat_template(msgs, tokenize=False,
+                                    add_generation_prompt=True)
+    ids = _tok(text, return_tensors="pt", truncation=True,
                max_length=MAX_PROMPT).input_ids.to(_dev)
     toks = ids[0].tolist()
     if not toks:
@@ -124,9 +130,11 @@ def stream(prompt: str, max_tokens: int):
         # Paced so the read is watchable rather than a single blur.
         for p, tid in enumerate(toks):
             yield sse(payload("read", p, _tok.decode([tid]), tid, p, p))
-            time.sleep(0.13)
+            time.sleep(0.09)
 
-        # phase 2: generation, one token at a time
+        # phase 2: generation, one token at a time. A light repetition penalty
+        # stops a small model from looping on the same phrase.
+        recent: list[int] = []
         nxt = int(out.logits[0, -1].argmax())
         for step in range(max_tokens):
             cur = torch.tensor([[nxt]], device=_dev)
@@ -135,9 +143,14 @@ def stream(prompt: str, max_tokens: int):
             past = out.past_key_values
             yield sse(payload("write", step, _tok.decode([nxt]), nxt,
                               len(toks) + step, 0))
+            recent.append(nxt)
+            recent = recent[-24:]
             if nxt == _tok.eos_token_id:
                 break
-            nxt = int(out.logits[0, -1].argmax())
+            logits = out.logits[0, -1].float().clone()
+            for t in set(recent):
+                logits[t] /= 1.15
+            nxt = int(logits.argmax())
 
     yield 'data: {"done": true}\n\n'
 
