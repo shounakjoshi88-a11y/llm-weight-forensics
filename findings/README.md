@@ -10,6 +10,7 @@ laptop GPU. Each finding stands alone: method, numbers, what it does not show.
 | [03](03-importance.md) | Importance | Attention pattern does not predict importance. Language and induction use almost entirely disjoint heads. |
 | [04](04-weight-space.md) | Weight space | Classical weight-only circuit readouts fail on this GQA + RoPE model, for identifiable structural reasons. |
 | [05](05-neurons.md) | Neurons | Zero dead neurons, 98% activation density, and the sharpest neurons track subword continuations rather than concepts. |
+| [06](06-weight-reading.md) | Reading weights | Five 129-parameter networks identified blind from their weights, 5/5, and a three-statistic reader holds at 20/20 on held-out seeds. |
 
 Raw measurements are the `e0N_*.json` files next to each writeup.
 
@@ -38,3 +39,10 @@ rediscover:
   the sweeps by task (finding 03) was required to see this.
 - **Per-head importance is not a property of a head.** It is a property of a head
   and a task together. The two maps are uncorrelated at r = -0.016.
+- **The obvious weight statistics are the wrong statistics.** Clustering the
+  individual hidden directions of a small network looks like it should identify
+  the task and does not: 11 of 20 held out. The optimiser spreads a linear
+  function over units pointing many ways. Only the output-weighted sum,
+  `sum_i w_out_i * w_i`, recovers the direction, and that reader gets 20 of 20.
+- **A 5/5 by-eye reading is not evidence until it is repeated blind.** The first
+  written rule scored 3 of 5 on the very networks it was set on.

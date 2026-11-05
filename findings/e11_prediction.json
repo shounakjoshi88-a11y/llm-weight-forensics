@@ -1,0 +1,41 @@
+{
+  "prediction": {
+    "A": "circle",
+    "B": "diagonal",
+    "C": "horizontal",
+    "D": "xor",
+    "E": "vertical"
+  },
+  "reasoning": {
+    "E": "share of input weight on x is 0.998, every w_y is within 0.55 of zero. The function depends only on x. Signs confirm the half-plane x > 0: n0 has w_x -18.98 with w_out -19.55, so it subtracts on the negative side and is silent on the positive side.",
+    "C": "mirror of E. share of input weight on x is 0.028, every w_x is within 0.33 of zero, all signal on y. n26 (w_y +17.39, w_out +17.41) adds for y > 0, n27 (w_y -9.20, w_out -9.65) subtracts for y < 0.",
+    "B": "share on x is 0.507, but the directions are not spread: the top units sit at 46, 39, 39, 38 degrees and their negatives at 224, 225, 230. All weights lie on one axis, the (1,1) direction. w_out is positive on the 45 degree units and negative on the 225 degree units, a monotone function of x+y. Biases are small against |w| (0.04 to 0.14), so the boundary passes near the origin. That is x + y > 0.",
+    "D": "biases are essentially zero against |w| (0.001 to 0.039), so every boundary passes through the origin. Directions sit on the four diagonals (48, 122, 195, 123, -34, 134, 234, -53) and the output signs alternate by quadrant: negative for (+,+) and (-,-), positive for (-,+) and (+,-). Positive on exactly the quadrants where one input is positive, which is XOR.",
+    "A": "the only network with directions spread over the full circle (155, 80, -20, 134, 58, 239, 249, 37) and the only one with a uniform sign structure: all eight w_out negative, all eight biases negative, and a large positive output bias of +1.493. That is the subtract-outside construction, where the positive region is the convex blob left where no half-plane detector fires. 25 units above |w| 0.5, enough sides to approximate a disc. b/|w| clusters at 0.22 +/- 0.045, consistent with tangent lines at a common radius."
+  },
+  "discriminating_statistics": {
+    "share_of_input_weight_on_x": {"A": 0.515, "B": 0.507, "C": 0.028, "D": 0.478, "E": 0.998},
+    "angular_spread": {
+      "A": "full circle, 8 directions over 360 degrees",
+      "B": "one axis, 38 to 46 degrees and its negation",
+      "C": "one axis, 90 degrees",
+      "D": "four diagonals, 45/135/225/315",
+      "E": "one axis, 0 degrees"
+    },
+    "bias_over_weight_norm": {
+      "A": "0.155 to 0.300, clustered",
+      "B": "0.015 to 0.823, wide",
+      "C": "0.040 to 0.250",
+      "D": "0.001 to 0.039, all near zero",
+      "E": "0.021 to 0.253"
+    },
+    "output_sign_structure": {
+      "A": "all negative w_out, positive output bias",
+      "B": "sign tracks the sign of the (1,1) direction",
+      "C": "sign tracks the sign of y",
+      "D": "alternates by quadrant",
+      "E": "sign tracks the sign of x"
+    }
+  },
+  "note": "Recorded before running --reveal. Each of the five tasks is used exactly once, which is the consistency check on the set."
+}

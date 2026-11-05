@@ -19,7 +19,7 @@ probe/            instrumentation
   attention.py    induction, sink, previous-token and entropy scores
   corpus.py       public domain text download for neuron analysis
 
-experiments/      one script per experiment, e01 to e10
+experiments/      one script per experiment, e01 to e11b
 findings/         one writeup per finding, raw JSON next to each
 viz/              live neuron visualizer (FastAPI server + canvas frontend)
 
@@ -133,7 +133,7 @@ that step, colour is activation magnitude. No build step, no extra dependencies.
 
 ## Inside the network
 
-A separate line of work, documented in [`findings/`](findings/README.md). Four
+A separate line of work, documented in [`findings/`](findings/README.md). Five
 results that survived controls:
 
 - **Residual norm is not monotonic.** 90x growth across the first four layers,
@@ -145,14 +145,53 @@ results that survived controls:
   highest induction scores rank 200, 254 and 336 out of 336 when ablated.
 - **Language and induction use disjoint heads.** Correlation between the two
   per-head importance maps is -0.016.
+- **Classical weight-space readouts fail on this architecture.** K-composition
+  from previous-token heads correlates -0.232 with measured importance, and an
+  OV copying score correlates -0.022. GQA and RoPE move the circuit out of the
+  matrices that the readout touches.
+
+## Reading weights directly
+
+The blog's opening experiment, at a scale where reading is possible. Five
+networks of **129 parameters** each (`2 -> 32 -> 1`), trained on five different 2D
+tasks, then dumped with the labels replaced by the slots A to E.
+
+Identified blind, from the numbers, before the mapping was revealed:
+
+| slot | identified as | true task |
+|---|---|---|
+| A | circle | circle |
+| B | diagonal | diagonal |
+| C | horizontal | horizontal |
+| D | xor | xor |
+| E | vertical | vertical |
+
+5 of 5. Then the reading was turned into an explicit rule and repeated on 25
+networks (5 tasks x 5 seeds) to check it was not hindsight:
+
+| reader | set on 1 seed | held out, 4 seeds |
+|---|---|---|
+| obvious statistics (energy on x, direction clustering, bias size) | 3/5 | 11/20 |
+| output-weighted direction, `sum_i w_out_i * w_i` | 5/5 | **20/20** |
+
+The obvious statistics fail because the optimiser spreads a linear function over
+units pointing in many directions; only the output-weighted sum recovers the
+discriminant. The working reader recovers the function class, the discriminant
+angle to within 1.3 degrees, and sometimes the circle radius as a number.
+
+Full writeup: [`findings/06-weight-reading.md`](findings/06-weight-reading.md).
 
 ## What this does and does not show
 
 **Does:** architecture, tokenizer family, quantization recipe, and fine-tune
-lineage are all recoverable from weights alone. Metadata is unnecessary.
+lineage are all recoverable from weights alone. Metadata is unnecessary. In a
+small network, the task itself is recoverable too: the label shows up as a
+low-dimensional geometric summary of all the weights, not as any single number.
 
 **Doesn't:** recover training data, predict capabilities, or identify an unknown
-model from scratch. Two models independently trained on similar data with similar
+model from scratch. The 5/5 reading result is at 129 parameters; the same
+statistics return noise at 494M, where GQA, RoPE and superposition break the
+clean geometry. Two models independently trained on similar data with similar
 recipes are not separable by these statistics. Nothing in the weights encodes a
 unique identity unless someone embedded one deliberately.
 

@@ -1,0 +1,9 @@
+{
+  "order": [
+    "circle",
+    "diagonal",
+    "horizontal",
+    "xor",
+    "vertical"
+  ]
+}
