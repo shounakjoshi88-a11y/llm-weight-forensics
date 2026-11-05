@@ -1,0 +1,37 @@
+# Model checkpoints: re-download with `python fetch_models.py`.
+# Excluded wholesale, since even the tokenizer files are 6.7 MB each.
+Qwen2.5-0.5B/
+Qwen2.5-0.5B-Instruct/
+SmolLM2-135M/
+
+# Model weights: far over GitHub's 100 MB file limit.
+*.safetensors
+*.bin
+*.gguf
+*.pth
+*.pt
+*.onnx
+*.h5
+*.msgpack
+*.ckpt
+
+# Hugging Face download bookkeeping
+.cache/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+
+# Editors and OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Local analysis output
+out/
+*.out
