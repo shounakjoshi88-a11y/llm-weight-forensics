@@ -21,7 +21,7 @@ probe/            instrumentation
 
 experiments/      one script per experiment, e01 to e11b
 findings/         one writeup per finding, raw JSON next to each
-viz/              live neuron visualizer (FastAPI server + canvas frontend)
+viz/              live neuron visualizer (FastAPI server + Three.js frontend)
 
 Qwen2.5-0.5B/          494M params, bf16, 942 MB   (base)
 Qwen2.5-0.5B-Instruct/ 494M params, bf16, 942 MB   (SFT of the base)
