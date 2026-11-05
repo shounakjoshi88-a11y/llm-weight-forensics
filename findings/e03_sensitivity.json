@@ -1,0 +1,99 @@
+{
+  "ablation_sanity": {
+    "all heads in layer 9": 29.61573028564453,
+    "all heads in all layers": 6444082.5,
+    "all MLP in layer 9": 30.449316024780273
+  },
+  "induction": {
+    "baseline": {
+      "margin": 5.5078125,
+      "acc": 0.9375,
+      "shuffled_margin": -10.414132356643677
+    },
+    "induction L9H13": {
+      "margin": 5.4696044921875,
+      "delta": -0.0382080078125,
+      "acc": 0.921875
+    },
+    "induction L11H12": {
+      "margin": 5.990234375,
+      "delta": 0.482421875,
+      "acc": 0.96875
+    },
+    "induction L16H3": {
+      "margin": 5.04052734375,
+      "delta": -0.46728515625,
+      "acc": 0.9375
+    },
+    "all 3 induction heads": {
+      "margin": 5.01904296875,
+      "delta": -0.48876953125,
+      "acc": 0.9375
+    },
+    "prev-token L8H11": {
+      "margin": 5.50732421875,
+      "delta": -0.00048828125,
+      "acc": 0.9375
+    },
+    "prev-token L15H6": {
+      "margin": 5.51416015625,
+      "delta": 0.00634765625,
+      "acc": 0.953125
+    },
+    "prev-token L1H12": {
+      "margin": 5.65283203125,
+      "delta": 0.14501953125,
+      "acc": 0.953125
+    },
+    "all 3 prev-token heads": {
+      "margin": 5.718017578125,
+      "delta": 0.210205078125,
+      "acc": 0.96875
+    },
+    "induction + prev": {
+      "margin": 4.2266845703125,
+      "delta": -1.2811279296875,
+      "acc": 0.90625
+    },
+    "random 6 heads": {
+      "margin": -0.7404022216796875,
+      "delta": -6.2482147216796875,
+      "acc": 0.546875
+    }
+  },
+  "massive_stability": {
+    "2": {
+      "tops": [
+        813,
+        813,
+        813,
+        813,
+        813
+      ],
+      "dominant": 813,
+      "agreement": 5
+    },
+    "3": {
+      "tops": [
+        2247,
+        2247,
+        2247,
+        2247,
+        2247
+      ],
+      "dominant": 2247,
+      "agreement": 5
+    },
+    "21": {
+      "tops": [
+        567,
+        567,
+        567,
+        567,
+        567
+      ],
+      "dominant": 567,
+      "agreement": 5
+    }
+  }
+}

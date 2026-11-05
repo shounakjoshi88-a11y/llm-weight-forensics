@@ -5,9 +5,22 @@ answer for small models, with the controls needed to keep the claim honest.
 
 ## What's here
 
+Two layers of work: weight-level forensics (what the file is) and mechanistic
+interpretability (what the network does).
+
 ```
 analyze.py        fingerprint / lineage / GGUF tooling (no torch needed)
 perm_test.py      permutation-invariance check on cosine similarity
+fetch_models.py   download the checkpoints
+
+probe/            instrumentation
+  core.py         model loading, forward-pass capture, logit lens
+  ablate.py       zeroing heads and neurons
+  attention.py    induction, sink, previous-token and entropy scores
+
+experiments/      one script per experiment, e01 to e07
+findings/         one writeup per finding, raw JSON next to each
+
 Qwen2.5-0.5B/          494M params, bf16, 942 MB   (base)
 Qwen2.5-0.5B-Instruct/ 494M params, bf16, 942 MB   (SFT of the base)
 SmolLM2-135M/          135M params, bf16, 270 MB   (negative control)
@@ -101,6 +114,21 @@ comparison. Discrimination is trivial at this level.
 from "same model with reordered neurons", since both score about 0. Any real
 provenance claim needs permutation-invariant matching (Git Re-Basin or weight
 matching) before the cosine means anything.
+
+## Inside the network
+
+A separate line of work, documented in [`findings/`](findings/README.md). Four
+results that survived controls:
+
+- **Residual norm is not monotonic.** 90x growth across the first four layers,
+  then a flat plateau, then a 4x spike at the final layer.
+- **Massive activations are fixed biases.** Channels 813, 2247 and 567 are the
+  maximum in 5 of 5 unrelated inputs, at about 1536 regardless of content.
+  Removing all three costs 18x perplexity. Removing any one costs about 1.1x.
+- **Attention pattern does not predict importance.** The three heads with the
+  highest induction scores rank 200, 254 and 336 out of 336 when ablated.
+- **Language and induction use disjoint heads.** Correlation between the two
+  per-head importance maps is -0.016.
 
 ## What this does and does not show
 
