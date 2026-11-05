@@ -3,12 +3,17 @@
 Can a small model be made better at exact arithmetic by editing its existing
 weights, with no LoRA, no adapters, no new parameters and no gradients?
 
-I tested six edit families on held-out problems. None of them moved exact
-accuracy. The reason turned out to be more interesting than the null: the model
-does not lack arithmetic, it fails to start doing any. Given a one-sentence
-chain-of-thought prefill, word-problem accuracy goes from 0.23 to 0.78 with no
-weight change at all. Given a decomposition into 2-digit atoms, it solves
+Seven edits aimed at arithmetic did nothing. One edit aimed at the model's
+default output format does move held-out accuracy, from 0.23 to 0.59 on word
+problems, and it costs half the 5x5 addition accuracy. The reason is the same
+in both cases: the model does not lack arithmetic, it fails to start doing any.
+Given a one-sentence chain-of-thought prefill it reaches 0.95 with no weight
+change at all. Given a decomposition into 2-digit atoms, it solves
 `57892 x 512 = 29640704` exactly.
+
+The only positive weight edit is a policy edit, not a capability edit. It makes
+the model begin with `Step` instead of blurting a number, and it is strictly
+worse than simply prompting for the same thing.
 
 Neither of those is a weight edit. Both are the same statement: the model has
 the parts, not the sequence.
@@ -42,20 +47,24 @@ partial product. The model is rounding an approximation, not running the wrong
 algorithm.
 
 **Word problems, 60 generated two-step problems.** Details in
-[`findings/04-astra-and-the-real-failure.md`](findings/04-astra-and-the-real-failure.md).
+[`findings/04-astra-and-the-real-failure.md`](findings/04-astra-and-the-real-failure.md)
+and [`findings/05-one-edit-that-works.md`](findings/05-one-edit-that-works.md).
 
 | condition | exact | 95% CI |
 |---|---:|---|
 | prefill `The answer is` | 0.13 | [0.07, 0.24] |
 | no prefill | 0.23 | [0.14, 0.35] |
 | prefill `Let me work through this step by step.` | 0.78 | [0.66, 0.87] |
+| prefill `Step 1: ` | 0.92 | [0.82, 0.96] |
 
-The format used for every arithmetic number above is the worst of the three.
-It forces an answer before the model has reasoned, so the failure map measures
-the model with its reasoning switched off.
+The last row is at 384 tokens, the others at 256. The format used for every
+arithmetic number above is the worst of them. It forces an answer before the
+model has reasoned, so the failure map measures the model with its reasoning
+switched off.
 
 **Weight edits, held-out.** Details and controls in
-[`findings/02-carry-edits.md`](findings/02-carry-edits.md).
+[`findings/02-carry-edits.md`](findings/02-carry-edits.md) and
+[`findings/05-one-edit-that-works.md`](findings/05-one-edit-that-works.md).
 
 | edit | what changes | held-out |
 |---|---|---:|
@@ -67,10 +76,16 @@ the model with its reasoning switched off.
 | ` is` row | 896 numbers in `embed_tokens` | 0.732 vs 0.732 |
 | digit bias | 10 rows of `lm_head` | 0.89 vs 0.90 |
 | EOS row | 896 numbers in `lm_head` | 0.27 vs 0.27, rambles |
+| `Step` row | 896 numbers in `lm_head` | **0.59 vs 0.23** on word problems |
 
-Every gap is inside one standard error at n = 100. The pattern across failures
-is that any edit large enough to change behaviour changes it everywhere, in
-directions that disagree across operations.
+Every arithmetic gap is inside one standard error at n = 100. The pattern
+across those failures is that any edit large enough to change behaviour changes
+it everywhere, in directions that disagree across operations.
+
+The `Step` row is the exception and it is not an arithmetic edit. It raises
+word-problem accuracy from 0.23 to 0.59 (41 fixed, 5 broken, p = 4.4e-8) by
+making the model start with `Step`, and it costs 5x5 addition, 0.55 to 0.05.
+It is worse than the `Step 1: ` prefill, which gets 0.95.
 
 **Scaffold, 30 problems per cell.** Details in
 [`findings/03-scaffolds.md`](findings/03-scaffolds.md).
@@ -110,7 +125,7 @@ Windows, Python 3.12 or newer, a CUDA card with 6 GB. Set the thread limits or
 BLAS oversubscribes and the runs get slower.
 
 ```powershell
-cd D:\Q_project\learning\research\math-ability
+cd D:\Q_project\learning\research\model-weights\math-ability
 $env:OPENBLAS_NUM_THREADS="1"
 $env:OMP_NUM_THREADS="1"
 
@@ -130,6 +145,14 @@ python experiments\e14_loop_probe.py        # does it loop? no
 python experiments\e15_continuation.py      # stop against chain of thought
 python experiments\e16_stop_edit.py         # the EOS row edit
 python experiments\e17_word_problems.py     # 60 word problems, three formats
+python experiments\e18_math_mode.py         # math-mode direction, the blunt version
+python experiments\e19_start_direction.py   # start-of-reply direction, six rows
+python experiments\e20_openers.py           # which prefill opener works
+python experiments\e21_step_row.py          # one row, large alpha, loops
+python experiments\e22_alpha_scan.py        # where the first token flips
+python experiments\e23_step_small_alpha.py  # the usable alpha window
+python experiments\e24_confirm.py           # 100 fresh problems, paired test
+python experiments\e25_edit_raw_arithmetic.py  # what the edit costs on arithmetic
 ```
 
 Each writes a JSON file into `findings/`. The writeups quote only numbers that
@@ -144,13 +167,15 @@ math-ability/
   experiments/
     common.py                problem generation, prompting, scoring, model loading
     edits.py                 apply/restore tensors, evaluate, accuracy
-    e01..e17                 one file per experiment
+    e01..e25                 one file per experiment
   findings/
     01-failure-map.md        where it breaks, and the shape of the errors
-    02-carry-edits.md        six edit families, all null
+    02-carry-edits.md        seven edit families, all null on arithmetic
     03-scaffolds.md          the decomposition that works
     04-astra-and-the-real-failure.md
                              the Astra comparison, and the stop that is not a lever
+    05-one-edit-that-works.md
+                             the `Step` row, and what it costs
     *.json                   raw measurements
 ```
 

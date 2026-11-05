@@ -3,7 +3,7 @@
 Date: 2026-11-05
 Status: done, results in `findings/`
 Model: Qwen2.5-0.5B-Instruct
-Folder: `D:\Q_project\learning\research\math-ability\`
+Folder: `D:\Q_project\learning\research\model-weights\math-ability\`
 
 ## 1. Purpose
 

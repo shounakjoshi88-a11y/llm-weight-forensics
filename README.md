@@ -247,7 +247,7 @@ value, 55 percent are off by a power of ten, and 93 percent of multiplication
 errors are within 10 percent of the answer with none matching a partial product.
 The model is rounding an approximation, not running the wrong algorithm.
 
-**Seven edits, all null on held-out problems.**
+**Seven arithmetic edits, all null on held-out problems.**
 
 | edit | what changes | held-out |
 |---|---|---|
@@ -262,6 +262,13 @@ The model is rounding an approximation, not running the wrong algorithm.
 
 Every gap is inside one standard error at n = 100. Edits big enough to move
 behaviour move it everywhere, in directions that disagree across operations.
+
+**The one edit that works is not an arithmetic edit.** Boosting the `Step` row of
+`lm_head` by a start-of-reply direction, 896 numbers, raises held-out word-problem
+accuracy from 0.23 to 0.59 (41 fixed, 5 broken, p = 4.4e-8) by making the model
+start reasoning instead of blurting a number. It costs 5x5 addition, 0.55 to
+0.05, and it is worse than the `Step 1: ` prefill, which gets 0.95. It is a
+format prior, not a capability.
 
 **What does work.** Two things, neither of them a weight edit.
 
